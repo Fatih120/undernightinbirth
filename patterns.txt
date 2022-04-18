@@ -1,0 +1,10 @@
+000 - Standing Idle
+001 - Standing Weak Attack
+002 - Standing Medium Attack
+003 - Standing Strong Attack
+004 - Crouching Weak Attack
+005 - Crouching Medium Attack
+006 - Crouching Strong Attack
+007 - Aerial Weak Attack
+008 - Aerial Medium Attack
+009 - Aerial Strong Attack
