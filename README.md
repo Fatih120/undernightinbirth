@@ -5,6 +5,12 @@ Amateur resource to understand the workings of Under Night In-Birth and other Fr
 
 This repo currently includes a build of Hanteichan labelled v2.2.1. I probably got it from Discord. I **strongly urge** you use this version, or at least not the original Hantei-chan. Some versions were made for only MBAACC in mind, which lacks the ability to do many things introduced in UNIB. There are other builds floating out there, but for the scope of UNIB this one should be functional.
 
+To unpack the game files, [please grab the executable from this repo's release](https://github.com/ucuckic/unist-unpacker/releases). Drop it into the `d` folder in the game's installation folder. Drag and drop every other file into the executable and wait for it to finish. This may take a long time and you will need another 20GB of space because this game is not-at-all optimized for disk space for reasons unknown. After, you will see an `output` directory.
+
+To mod the game, you must create a language folder such as `___English` (three underscores) in the root directory next to `UNIst.exe` and `d`, and then insert files that way copied from the `output` folder. This will "replace" the files loaded on runtime. Character files are located in `data`, and some places of interest are `scripts` and `system`. There will be plenty to explore on your own.
+
+To create a new character, try copying another to edit or set up the file structures the same way, using `data/BaseData.HA6` as a base.
+
 # HA6 Editing
 
 ![Screenshot_20220418_222805](https://user-images.githubusercontent.com/18276369/163865043-1bcfe3e4-d31f-4de2-a9db-e3bf79efac7f.png)
@@ -29,7 +35,7 @@ When you open Hantei-chan, you're also free to use **Preferences** to change the
 
 # Patterns
 
-Patterns are individual animations that are used for every single action a character may make, such as standing still, walking, jumping, blocking, and their entire attack library including projectiles and effects. The names within the original characters are in Japanese, though you can inspect what does what by referencing a vanilla character (with their graphics if need be). But since the characters will share a majority of their default functions also based on data/BaseData.HA6, you can also refer to script/btl_Define.txt to view some defined constants starting at Line 990. For example you will see that all characters will use pattern 0 for their idle standing animation and 1 for their standing A attack animation.
+Patterns are individual animations that are used for every single action a character may make, such as standing still, walking, jumping, blocking, and their entire attack library including projectiles and effects. The names within the original characters are in Japanese, though you can inspect what does what by referencing a vanilla character (with their graphics if need be). But since the characters will share a majority of their default functions also based on `data/BaseData.HA6`, you can also refer to script/btl_Define.txt to view some defined constants starting at Line 990. For example you will see that all characters will use pattern 0 for their idle standing animation and 1 for their standing A attack animation.
 
 **For a list of all the patterns' uses in UNIB, please refer to [this file on the repo](https://github.com/Fatih120/unib-data/blob/master/patterns.txt).**
 
