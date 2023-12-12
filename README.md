@@ -1,7 +1,8 @@
 # unib-data (formerly unib-data)
-Amateur resource to understand the workings of Under Night In-Birth and other French Bread games. 
 
-~~Please look forward to the [Wiki Tab](https://github.com/Fatih120/unib-data/wiki/) for information. Files in the repo are solely for specific documentation on things like values, and maybe offsets if that ends up being a thing.~~ Nah I'll probably just make readmes.
+https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb-8385-b3af4233a222
+
+Amateur resource to understand the workings of Under Night In-Birth and other French Bread games. 
 
 This repo currently includes a build of Hanteichan labelled v2.2.1. I probably got it from Discord. I **strongly urge** you use this version, or at least not the original Hantei-chan. Some versions were made for only MBAACC in mind, which lacks the ability to do many things introduced in UNIB. There are other builds floating out there, but for the scope of UNIB this one should be functional.
 
