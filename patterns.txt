@@ -1,4 +1,4 @@
-000 - Standing Idle
+000 - StandingIdle
 001 - Standing Weak Attack
 002 - Standing Medium Attack
 003 - Standing Strong Attack
