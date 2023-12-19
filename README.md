@@ -1,4 +1,6 @@
-# unib-data (formerly unib-data)
+# [Moved to Gitlab unless Github decides not to be shit](https://gitlab.com/mofatih/undernightinbirth)
+
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb-8385-b3af4233a222
 
