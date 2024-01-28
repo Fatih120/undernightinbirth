@@ -1,0 +1,19 @@
+//------ specifications -------
+
+//ViewNo: The color to be used for the color sample displayed on the color customization screen. Use the one that stands out among the parts.
+//Position0~4: Coordinates to draw arrows to poses registered in edit_chara000, etc. If this is not registered, it will not be reflected even if the pose is registered in the judgment tool. If this is not registered, it will not be reflected even if the pose is registered in the judgment tool.
+//List, List_p0~3: Assign color palette numbers to parts to be customized. p0~p3 correspond to each palette file.
+List and List_p0 are the same. // For tag team characters, create a List with the original character. Specify only the arrow coordinates for the tag character.
+
+
+//Coordinate standard for -----Position -----
+
+//Draw a line on the parts where there are multiple places where the color changes. It is easy to paste the coordinates obtained by wheel-clicking with the judgment tool.
+// Make sure that the line does not overlap the character as much as possible. If the line is too far from a part, you can overlap it with the character. (To avoid confusion as to which part you are referring to.)
+//If there are multiple change points, limit the number of lines to a maximum of four (upper limit in the specification).
+//If there are multiple change points, make sure that the lines are not close together. If the lines are too close together, reduce the number of lines.
+//It is difficult to tell whether a small object has changed or not, so draw a line as much as possible.
+//Do not draw two lines on the same object (e.g. collar and sleeves of innerwear, which are far apart but the same)
+//No X coordinate should be left of -120, otherwise the line cannot be drawn.
+
+//PositionX : X=each pose [x1,y1, x2,y2, ... ] and define
