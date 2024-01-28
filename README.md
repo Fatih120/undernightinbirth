@@ -1,5 +1,19 @@
 # [Gitlab mirror](https://gitlab.com/mofatih/undernightinbirth)
 
+# IMPORTANT! UNI2 INFO
+
+You may use https://github.com/Ekey/UNIB.Data.Tool to unpack the game successfully! It's way faster than unistunpacker too. Use [CSC.exe included with .NET 4](https://stackoverflow.com/questions/18286855/how-can-i-compile-and-run-c-sharp-program-without-using-visual-studio) and [some elbow grease if you're new to it](https://stackoverflow.com/questions/46320080/c-sharp-unable-to-compile-cs0103-the-name-gutils-does-not-exist-in-the-curre).
+
+If you trust this repo, you may avoid this and just [download it from here, pre-built](https://github.com/Fatih120/undernightinbirth/raw/master/uni2unpacker.exe) (or included with the rest of the files). Run the program in a shell with `<input> <output>` arguments, with input being the `d` folder and output being something like `d/output` or wherever you wish.
+
+The game is mostly the same with some expansion of data, though some internals are more based off of UNI2. Currently sifting through it and hopefully some others will come to help out this repo.
+
+File replacement seems to be very much the same (so far). Please spread the word!
+
+![uni2_2024_0127-200011](https://github.com/Fatih120/undernightinbirth/assets/18276369/d2fa644b-581b-4dd1-9ac7-ebc2b56caa4e)
+
+<hr>
+
 https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb-8385-b3af4233a222
 
 Amateur resource to understand the workings of Under Night In-Birth and other French Bread games. 
