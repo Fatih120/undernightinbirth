@@ -2,18 +2,24 @@
 
 # IMPORTANT! UNI2 INFO
 
+- Unpacker exists thanks to the repo posted below, no need for unistunpacker
+- Files can be easily replaced with the same language `___English` trick
+- At least, some of them. CSEL screen is visible as shown below with replacements, however
+- - `data` replacements don't entirely work per character even when defines are made (crashes on new slot)? Even replacing `chr000` assets doesn't seem to have an effect ingame. Must something be switched around first?
+- Things to study - the rest of any txt scripts, graphics, audio, story, ESPECIALLY data hotswapping
+
 You may use https://github.com/Ekey/UNIB.Data.Tool to unpack the game successfully! It's way faster than unistunpacker too. Use [CSC.exe included with .NET 4](https://stackoverflow.com/questions/18286855/how-can-i-compile-and-run-c-sharp-program-without-using-visual-studio) and [some elbow grease if you're new to it](https://stackoverflow.com/questions/46320080/c-sharp-unable-to-compile-cs0103-the-name-gutils-does-not-exist-in-the-curre).
 
 If you trust this repo, you may avoid this and just [download it from here, pre-built](https://github.com/Fatih120/undernightinbirth/raw/master/uni2unpacker.exe) (or included with the rest of the files). Run the program in a shell with `<input> <output>` arguments, with input being the `d` folder and output being something like `d/output` or wherever you wish.
 
 The game is mostly the same with some expansion of data, though some internals are more based off of UNI2. Currently sifting through it and hopefully some others will come to help out this repo.
 
-File replacement seems to be very much the same (so far). Please spread the word!
+File replacement seems to be very much the same (for a bunch of things but not all...). Please spread the word!
 
 - CSS now easily lets you place a slot for a character. Anywhere at all. `grpdat\CSel\CSelAnim.ini`
-- Trying to figure out az current crash after the loading screen. `script/btl_Define_Chara.txt` Even when duplicating a character and their assets to a new slot there seems to be an error.
+- `script/btl_Define_Chara.txt` Even when duplicating a character and their assets to a new slot there seems to be an error.
 
-![uni2_2024_0127-200011](https://github.com/Fatih120/undernightinbirth/assets/18276369/d2fa644b-581b-4dd1-9ac7-ebc2b56caa4e)
+![uni2_2024_0127-212036](https://github.com/Fatih120/undernightinbirth/assets/18276369/9819b40b-08fc-4184-a9d0-c0d9577f5649)
 
 <hr>
 
