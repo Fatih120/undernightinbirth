@@ -10,6 +10,9 @@ The game is mostly the same with some expansion of data, though some internals a
 
 File replacement seems to be very much the same (so far). Please spread the word!
 
+- CSS now easily lets you place a slot for a character. Anywhere at all. `grpdat\CSel\CSelAnim.ini`
+- Trying to figure out az current crash after the loading screen. `script/btl_Define_Chara.txt` Even when duplicating a character and their assets to a new slot there seems to be an error.
+
 ![uni2_2024_0127-200011](https://github.com/Fatih120/undernightinbirth/assets/18276369/d2fa644b-581b-4dd1-9ac7-ebc2b56caa4e)
 
 <hr>
