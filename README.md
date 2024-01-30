@@ -23,8 +23,10 @@ File replacement seems to be very much the same (for a bunch of things but not a
 
 To add or replace a song (for battle) in UNI2, you must grab:
 - `Bgm/bgm.txt` (The file that defines the music the game will load)
-- `grpdat\CSel\bgmselect.txt` (The file for changing the available songs in CSS or Training)
+- `grpdat/CSel/bgmselect.txt` (The file for changing the available songs in CSS or Training)
 Copy these to your `___English` folder keeping the directory structure.
+
+**[You can just grab this preassembled 7z from the repo if you didn't want to unpack the game, and just edit songs.](https://github.com/Fatih120/undernightinbirth/raw/master/tools/CustomBGM.7z)** Just place the `___English` folder into your game's install folder, next to uni2.exe.
 
 1. To add a new song, add your [OGG file](https://xiph.org/vorbis/) (use [foobar2000](https://www.foobar2000.org/) or [Audacity v3.0.2 pre-telemetry](https://www.fosshub.com/Audacity-old.html?dwl=audacity-win-3.0.2.exe) to convert your own music) to the `Bgm` directory with your `bgm.txt`.
 2. Open `Bgm/bgm.txt` with your text editor (it will be gibberish if you use notepad, but it may not matter, but for the best scroll up and use something like NotepadNext).
