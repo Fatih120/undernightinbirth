@@ -1,0 +1,6 @@
+hexeojmpimrjs - data listing
+
+sort by size ~50kb range has dfile references to remove
+
+dcmbsz - BATTLE DEFINES AND SYSTEM FUNCTION
+joiIuc - character/system defines n info
