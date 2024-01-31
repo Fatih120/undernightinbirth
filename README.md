@@ -14,10 +14,28 @@ The game is mostly the same with some expansion of data, though some internals a
 
 Note that it's still best to edit txt files with Japanese using an editor that can properly read and save in the Japanese SHIFT-JIS format, [such as NotepadNext](https://github.com/dail8859/NotepadNext/releases/tag/v0.6.4).
 
-File replacement seems to be very much the same (for a bunch of things but not all...). Please spread the word!
-
 - CSS now easily lets you place a slot for a character. Anywhere at all. `grpdat\CSel\CSelAnim.ini`
-- `script/btl_Define_Chara.txt` Even when duplicating a character and their assets to a new slot there seems to be an error.
+- ~~`script/btl_Define_Chara.txt` Even when duplicating a character and their assets to a new slot there seems to be an error.~~
+
+# Current Roadblock
+
+It seemed that UNICLR was easier to set up and go in terms of adding characters, unless I'm dead wrong. Usually, to add characters, one would go to `System\BtlCharaTbl.txt` and add a definition at the bottom which gives the game an internal ID for them. Then, adding more defines in the first set of values in `script\btl_Define_Chara.txt` (does `script\btl_Define_CharaNew.txt` work too?). Newly added, one can also finally add slots on the CSS using `grpdat\CSel\CSelAnim.ini` (also in `Customize`). Finally, the data would have to be set up for the new character in `data\chr<ID>`, or replacing another character's folder.
+
+But Despite that, the game will seemingly crash if you try to load this new slot that DOES appear in-game. Why? I'm not sure.
+
+From what I've tried to look into, the culprit may be that the `d` [directory has files](https://github.com/Fatih120/undernightinbirth/blob/master/dfile.txt) that cause hard-coded references to other files in the game. Some of the smaller files have binary listings for respective directories, such as `data`. This can be viewed [using a hex editor of any choosing](https://mh-nexus.de/en/downloads.php?product=HxD). 
+
+![HxD64_2024_0130-173603](https://github.com/Fatih120/undernightinbirth/assets/18276369/25e7eaf0-1074-499b-9be7-f54588d28fec)
+
+In the case of `data` / `hexeojmpimrjs`, the references are listed sequentially, so going deeper into the file will show the `chr<ID>` folders. Supposedly, to trick the game into forcibly reading `___English` files (in which the files should exist or else there's a crash), you could edit the data within the `d` files to give an incorrect name (or is it replacing to use your own file with a seperate name? I genuinely can't tell)...
+
+![HxD64_2024_0130-173929](https://github.com/Fatih120/undernightinbirth/assets/18276369/9c2d1212-50a4-4c5b-bc96-57fb660b68d9)
+
+...and supposedly you can arbitrarily allow overwriting of files this way.
+
+Unfortunately, in my attempts, I have yet to see this in effect when it comes to character data. I'm sure I'm doing something plainly wrong, but I've attempted changing the folder name, all file names, even seeing if I can append entries to the file (except I don't understand some leading hex - offset numbers?), but even though I've placed all the outputted character data into `data`, my game crashes whenever these edits are made.
+
+So as it stands, I do not personally know how to do character modding. It would be wonderful if someone else would be able to point out the actual trick to this, especially if it does use a `d` file edit, but that isn't the case so far. Needs investigation. I swear this feels harder than ROM hacking at times.
 
 ## BGM Editing
 
@@ -74,11 +92,12 @@ That should be all. Open your game and check to see your new cool song that's re
 ###### [Gitlab mirror (2FA was easy to bypass on Github so maybe it won't be updated](https://gitlab.com/mofatih/undernightinbirth)
 
 ### Everything below is "old". I believe it will still be relevant and correct and unchanged for when we can finally mod characters. But the only roadblock until then that's preventing this file from being updated is the mysterious issue of characters not loading in differently.
-
+<br>
 <hr>
 <hr>
 <hr>
-
+<hr>
+<br>
 ![uni2_2024_0127-212036](https://github.com/Fatih120/undernightinbirth/assets/18276369/9819b40b-08fc-4184-a9d0-c0d9577f5649)
 
 <hr>
