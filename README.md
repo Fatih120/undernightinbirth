@@ -1,41 +1,34 @@
-# IMPORTANT! UNI2 INFO
+# Primer on Modding UNI2
 
-- Unpacker exists thanks to the repo posted below, no need for unistunpacker
-- Files can be easily replaced with the same language `___English` trick
-- At least, some of them. CSEL screen is visible as shown below with replacements, however
-- - `data` replacements don't entirely work per character even when defines are made (crashes on new slot)? Even replacing `chr000` assets doesn't seem to have an effect ingame. Must something be switched around first?
-- Things to study - the rest of any txt scripts, graphics, audio, story, ESPECIALLY data hotswapping
+For starters, you may use https://github.com/Ekey/UNIB.Data.Tool to unpack the game successfully. Either build it yourself with [CSC.exe included with .NET 4](https://stackoverflow.com/questions/18286855/how-can-i-compile-and-run-c-sharp-program-without-using-visual-studio) and [some elbow grease](https://stackoverflow.com/questions/46320080/c-sharp-unable-to-compile-cs0103-the-name-gutils-does-not-exist-in-the-curre), or download it straight from this repo [right here, pre-built](https://github.com/Fatih120/undernightinbirth/raw/master/uni2unpacker.exe) (or after cloning). Run the program in a shell with `<input> <output>` arguments, with input being the `d` folder and output being something like `d/output` or wherever you wish. Don't know what the `d` folder is? Well, that's where the base game folder is, next to uni2.exe. Open it via Steam's game Properties -> Local Files -> Browse Local Files. 
 
-You may use https://github.com/Ekey/UNIB.Data.Tool to unpack the game successfully! It's way faster than unistunpacker too. Use [CSC.exe included with .NET 4](https://stackoverflow.com/questions/18286855/how-can-i-compile-and-run-c-sharp-program-without-using-visual-studio) and [some elbow grease if you're new to it](https://stackoverflow.com/questions/46320080/c-sharp-unable-to-compile-cs0103-the-name-gutils-does-not-exist-in-the-curre).
+After you have unpacked everything, you are ready to sift through and start modding in whatever ways you want.
 
-If you trust this repo, you may avoid this and just [download it from here, pre-built](https://github.com/Fatih120/undernightinbirth/raw/master/uni2unpacker.exe) (or included with the rest of the files). Run the program in a shell with `<input> <output>` arguments, with input being the `d` folder and output being something like `d/output` or wherever you wish.
+### Resources
 
-The game is mostly the same with some expansion of data, though some internals are more based off of UNI2. Currently sifting through it and hopefully some others will come to help out this repo.
+- To .txt files without potential issues, use an editor that can properly read and save in the Japanese SHIFT-JIS format, [such as NotepadNext](https://github.com/dail8859/NotepadNext/releases/tag/v0.6.4).
+- To be able to edit quite a few files, you should get a hex editor of your choosing, [such as this one](https://mh-nexus.de/en/downloads.php?product=HxD). [ImHex](https://github.com/WerWolv/ImHex) may also suffice, among others depending on your preference.
+- [Audacity v3.0.2 pre-telemetry](https://www.fosshub.com/Audacity-old.html?dwl=audacity-win-3.0.2.exe) for audio editing and getting sample times down.
+- Some tools for graphics and editing data are bundled in this repo. They will be brought up per-basis.
+- This entire repo! Since French Bread and ArcSys explicitly placed taboo on modding the former's games, online circles are typically avoidant of this and information is staggered. By adding findings and opening up issues and discussions on here, hopefully there can be a more accessible and helpful resource to help newcomers.
 
-Note that it's still best to edit txt files with Japanese using an editor that can properly read and save in the Japanese SHIFT-JIS format, [such as NotepadNext](https://github.com/dail8859/NotepadNext/releases/tag/v0.6.4).
+# To Edit or Add Characters
 
-- CSS now easily lets you place a slot for a character. Anywhere at all. `grpdat\CSel\CSelAnim.ini`
-- ~~`script/btl_Define_Chara.txt` Even when duplicating a character and their assets to a new slot there seems to be an error.~~
+Coming from UNICLR, things are a bit different. After you've dumped all the game assets, you are able to do modifications as a "layered file system" by copying assets to the base directory, next to `uni2.exe`. Common practice in UNICLR was to put everything into an `___English` folder which housed these system folders. For the case of characters, the `data` folder housing all character data simply needs to be moved to the base directory - again, next to `d` and the game executable.
 
-# Current Roadblock
-
-It seemed that UNICLR was easier to set up and go in terms of adding characters, unless I'm dead wrong. Usually, to add characters, one would go to `System\BtlCharaTbl.txt` and add a definition at the bottom which gives the game an internal ID for them. Then, adding more defines in the first set of values in `script\btl_Define_Chara.txt` (does `script\btl_Define_CharaNew.txt` work too?). Newly added, one can also finally add slots on the CSS using `grpdat\CSel\CSelAnim.ini` (also in `Customize`). Finally, the data would have to be set up for the new character in `data\chr<ID>`, or replacing another character's folder.
-
-But Despite that, the game will seemingly crash if you try to load this new slot that DOES appear in-game. Why? I'm not sure.
-
-From what I've tried to look into, the culprit may be that the `d` [directory has files](https://github.com/Fatih120/undernightinbirth/blob/master/dfile.txt) that cause hard-coded references to other files in the game. Some of the smaller files have binary listings for respective directories, such as `data`. This can be viewed [using a hex editor of any choosing](https://mh-nexus.de/en/downloads.php?product=HxD). 
+Now, simply trying to edit these copied assets will not result in the game loading these files. Hex edits to certain files in `d` are required to be "dereferenced" or dummied out, since these files tell the game where to look for assets. Within `d`, the file `hexeojmpimrjs` houses links to all the character files and folders within `data`. **Back up this file before you do anything with it.** If your hand needs to be held, you can [get this repo's copy of the dummied file](https://github.com/Fatih120/undernightinbirth/raw/master/tools/GAME/d/hexeojmpimrjs) and replace your copy with it. But for the sake of other `d` files and for reference, open up your hex editor and open the file with it.
 
 ![HxD64_2024_0130-173603](https://github.com/Fatih120/undernightinbirth/assets/18276369/25e7eaf0-1074-499b-9be7-f54588d28fec)
 
-In the case of `data` / `hexeojmpimrjs`, the references are listed sequentially, so going deeper into the file will show the `chr<ID>` folders. Supposedly, to trick the game into forcibly reading `___English` files (in which the files should exist or else there's a crash), you could edit the data within the `d` files to give an incorrect name (or is it replacing to use your own file with a seperate name? I genuinely can't tell)...
+You will come across a view like this in your main window. Depending on your knowledge with hex, you will at least see that the ASCII pane to the right shows the names of certain folders within `data`, and scrolling down will sequentially list every file within that directory. As long as the files are properly referenced here, the game will always load the original ingame files. We must break this by simply renaming all references to these files.
 
 ![HxD64_2024_0130-173929](https://github.com/Fatih120/undernightinbirth/assets/18276369/9c2d1212-50a4-4c5b-bc96-57fb660b68d9)
 
-...and supposedly you can arbitrarily allow overwriting of files this way.
+In the case of HxD, you should _type to overwrite_, **NOT** delete data. If a prompt warns you're going to change the filesize, cancel and try again. You may now proceed and do this for every file and folder you see, though you _can_ just remove certain files or folders from loading if you want to be selective about it. You may save once finished and proceed to copy any remaining files from your `output` into your workspace `data` folder. If you've applied the file from the repo above, this dummies out **all** of `data`, so you **must** copy/move over all of the outputted `data` folder or the game will crash.
 
-Unfortunately, in my attempts, I have yet to see this in effect when it comes to character data. I'm sure I'm doing something plainly wrong, but I've attempted changing the folder name, all file names, even seeing if I can append entries to the file (except I don't understand some leading hex - offset numbers?), but even though I've placed all the outputted character data into `data`, my game crashes whenever these edits are made.
+Usually, to add characters, one would go to `System\BtlCharaTbl.txt` and add a definition at the bottom which gives the game an internal ID for them. Then, adding more defines in the first set of values in `script\btl_Define_Chara.txt` (does `script\btl_Define_CharaNew.txt` work too?). Newly added, one can also finally add slots on the CSS using `grpdat\CSel\CSelAnim.ini` (also in `Customize`). Finally, the data would have to be set up for the new character in `data\chr<ID>`, or replacing another character's folder.
 
-So as it stands, I do not personally know how to do character modding. It would be wonderful if someone else would be able to point out the actual trick to this, especially if it does use a `d` file edit, but that isn't the case so far. Needs investigation. I swear this feels harder than ROM hacking at times.
+As for now, it's hard to test if your changes work when you've copied only vanilla data, so you could try and do things like copy `chr001.cg` and overwrite `chr000.cg` with it and playtest as Hyde to see if anything is wrong. Scroll down towards HA6 Editing to get started on character edits and the like.
 
 ## BGM Editing
 
@@ -89,14 +82,7 @@ That should be all. Open your game and check to see your new cool song that's re
 024 = Phonon
 ```
 
-###### [Gitlab mirror (2FA was easy to bypass on Github so maybe it won't be updated](https://gitlab.com/mofatih/undernightinbirth)
-
-### Everything below is "old". I believe it will still be relevant and correct and unchanged for when we can finally mod characters. But the only roadblock until then that's preventing this file from being updated is the mysterious issue of characters not loading in differently.
-<br>
-<hr>
-<hr>
-<hr>
-<hr>
+# HA6 Editing
 <br>
 ![uni2_2024_0127-212036](https://github.com/Fatih120/undernightinbirth/assets/18276369/9819b40b-08fc-4184-a9d0-c0d9577f5649)
 
