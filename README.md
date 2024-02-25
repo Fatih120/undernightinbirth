@@ -1,3 +1,5 @@
+https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb-8385-b3af4233a222
+
 # Primer on Modding UNI2
 
 For starters, you may use https://github.com/Ekey/UNIB.Data.Tool to unpack the game successfully. Either build it yourself with [CSC.exe included with .NET 4](https://stackoverflow.com/questions/18286855/how-can-i-compile-and-run-c-sharp-program-without-using-visual-studio) and [some elbow grease](https://stackoverflow.com/questions/46320080/c-sharp-unable-to-compile-cs0103-the-name-gutils-does-not-exist-in-the-curre), or download it straight from this repo [right here, pre-built](https://github.com/Fatih120/undernightinbirth/raw/master/uni2unpacker.exe) (or after cloning). Run the program in a shell with `<input> <output>` arguments, with input being the `d` folder and output being something like `d/output` or wherever you wish. Don't know what the `d` folder is? Well, that's where the base game folder is, next to uni2.exe. Open it via Steam's game Properties -> Local Files -> Browse Local Files. 
@@ -81,24 +83,6 @@ That should be all. Open your game and check to see your new cool song that's re
 023 = Kuon
 024 = Phonon
 ```
-
-# HA6 Editing
-<br>
-![uni2_2024_0127-212036](https://github.com/Fatih120/undernightinbirth/assets/18276369/9819b40b-08fc-4184-a9d0-c0d9577f5649)
-
-<hr>
-
-https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb-8385-b3af4233a222
-
-Amateur resource to understand the workings of Under Night In-Birth and other French Bread games. 
-
-This repo currently includes a build of Hanteichan labelled v2.2.1. I probably got it from Discord. I **strongly urge** you use this version, or at least not the original Hantei-chan. Some versions were made for only MBAACC in mind, which lacks the ability to do many things introduced in UNIB. There are other builds floating out there, but for the scope of UNIB this one should be functional.
-
-To unpack the game files, [please grab the executable from this repo's release](https://github.com/ucuckic/unist-unpacker/releases). Drop it into the `d` folder in the game's installation folder. Drag and drop every other file into the executable and wait for it to finish. This may take a long time and you will need another 20GB of space because this game is not-at-all optimized for disk space for reasons unknown. After, you will see an `output` directory.
-
-To mod the game, you must create a language folder such as `___English` (three underscores) in the root directory next to `UNIst.exe` and `d`, and then insert files that way copied from the `output` folder. This will "replace" the files loaded on runtime. Character files are located in `data`, and some places of interest are `scripts` and `system`. There will be plenty to explore on your own.
-
-To create a new character, try copying another to edit or set up the file structures the same way, using `data/BaseData.HA6` as a base.
 
 # HA6 Editing
 
