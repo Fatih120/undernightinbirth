@@ -1,0 +1,31 @@
+Available in HA6 files using Hantei-chan.
+Allows for several applicable effects that may also be done via *_mv.txt.
+
+NONE(?)
+0
+
+SPAWN PATTERN
+1, patternID
+X, Y, ?, 0, 0, 0
+0, 0, 0, 0, 0, 0
+
+//TODO UNK 2 3 4 5
+
+UNK
+6 12
+69 0 0 0 0 0
+0 0 0 0 1 0
+
+//7 8
+
+PLAY SFX
+9, 0
+X, 0 0 0 0 0
+0, 0 0 0 0 0
+
+//10 11 12 13
+
+SET OPPONENT TRANSFORM
+14, patternID
+X, Y, 0 0 ? 0
+0, 0, 0 0 0 0
