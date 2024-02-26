@@ -276,9 +276,24 @@ Delete Frame
 
 ![image](https://github.com/Fatih120/undernightinbirth/assets/18276369/a1286459-a159-4d09-908c-85a8c51e927f)
 
+To register an attack, you must fill out:
+
+- "**Number of Hits**" in State data to be 1
+- An **Attack Box** using the box window
+- Technically optional, but of course you would fill out the **Attack Data**.
+
+A single attack frame will cause 1 hit with its specifications for the length of that frame - it will not attack with the same frame data twice unless you duplicate the frame.
+
+If you need to make a move that has animating attack frames spread across multiple frames, but _don't_ want to have multiple hits to happen, you would set all the **Number of hits** for the frames with attack boxes to **0**. The frame before your first attack frame should have Number of hits set to **1**. Meaning that if you had three attack frames in a row, all their Hit counts would be 0, but the frame right before all of them would be 1. This will make sure that all subsequent attack frames next to each other will count as one hit and won't activate again.
 
 ### Attack
 
+Dictate information about an attack for that frame including all active boxes.
+
 ### Effects
 
+These cause additional effects to occur, which may also be done in the character's mv file. These can range from playing sounds, modifying the battlers, etc. Refer to https://github.com/Fatih120/undernightinbirth/blob/master/doc/effects.txt for now.
+
 ### Conditions
+
+Probably unused.
