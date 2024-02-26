@@ -1,0 +1,19 @@
+Plenty of flags and declarations are only marked within HA6 files as needed. For example, AFZM, which declares X and Y scale of a frame, will not appear if originally set to be 1. Using the "scale all frames" feature in Hantei-chan will result in an increased filesize.
+
+PSTR XXXX
+Start of pattern with uint32 ID .
+
+PTT2 {24Byte}
+Name of pattern.
+PDS2 {24Byte}
+Code of pattern.
+
+FSTR
+Frame start.
+
+AFST AFGX
+
+FEND
+Frame end.
+PEND
+Pattern end.
