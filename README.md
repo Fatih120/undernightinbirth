@@ -20,16 +20,17 @@ After you have unpacked everything, you are ready to sift through and start modd
 ### The very short of it for adding a character to a new slot:
 
 1. Copy a `chrXXX` character from `./output/data/`. Move it into `./data/` (or create the same folder structure as seems fit).
-2. Rename the folder to a new slot greater than 024, such as `025`. Do the same with the majority of the files inside using that same number, including the `lst`, `pal`, `txt`s, etc.†
+2. Rename the folder to a new slot greater than 024, such as `025`. Do the same with the files inside using that same number, including the `lst`, `pal`, `txt`s, etc.†
 4. Open `chrXXX_mv_0.txt` in your specialized editor. Jump to the end and find the two last written lines - `CHRXXX_MoveTable <- Battle_Std.MakeMoveTable( t, CHRXXX_CommandTable, Def_ChrNo_YYY );` and `__dofile__("./chrXXX_se_category.txt");`. Edit these lines to have your IDs accordingly.
-5. Find `./output/script/btl_Define_CharaNew.txt`. Copy it to `./___English/script` or `./script`.
-6. Open your copy and append the line `const Def_ChrNo_ChrXXX = XX;` using the same number you chose. Also add the line `const Def_ChrNo_YYY = XX;`, with Y preferably being a 3-letter identifier for the character.
-7. Find `./output/System/BtlCharaTbl.txt`. Copy it to `./___English/script` or `./script`.
-8. Scroll to the bottom and append a `chara_no[XXX]` by templating one of the previous entries, making sure to have `name_short = "chrXXX";` and a unique `order`.
+5. Open `chrXXX_0.txt`, and change the references to XXX in the same way. Open `chrXXX_cmd_0.txt`,  and change the references to XXX in the same way. _(Optionally for quick-start?)_ Open the two `chr025_se_*` files and change the references accordingly.
+6. Find `./output/script/btl_Define_CharaNew.txt`. Copy it to `./___English/script` or `./script`.
+7. Open your copy and append the line `const Def_ChrNo_ChrXXX = XX;` using the same number you chose. Also add the line `const Def_ChrNo_YYY = XX;`, with Y preferably being a 3-letter identifier for the character.
+8. Find `./output/System/BtlCharaTbl.txt`. Copy it to `./___English/script` or `./script`.
+9. Scroll to the bottom and append a `chara_no[XXX]` by templating one of the previous entries, making sure to have `name_short = "chrXXX";` and a unique `order`.
 
 † _You _are_ able to use different naming conventions for certain files to make them easily readable, such as whatever is defined in `chrXXX_0.txt`, but be sure your character loads this way first as I haven't fully figured out what can be changed._
 
-You should now be able to go to training mode and see a new slot, which should be playable with your setup without internal edits. You can make the character accessible on the CSS and in other areas through folders such as `grpdat`'s `CharaColorBar`, `CSel`, `Cockpit`, etc. 
+You should now be able to go to training mode and see a new slot, which should be playable with your setup without internal edits. You can make the character accessible on the CSS and in other areas through folders such as `grpdat`'s `CharaColorBar`, `CSel`, `Cockpit`, etc. If you just want to edit this extra slot without the baggage of touching vanilla characters, skip the next section and head down for the primer on character edits.
 
 ### Dereferencing for edits
 
@@ -52,6 +53,24 @@ As for now, it's hard to test if your changes work when you've copied only vanil
 # Audio
 
 https://github.com/Fatih120/undernightinbirth/blob/master/AUDIO.md
+
+# Character Structure
+
+     File | Use | Notes
+-- | - | -
+chrXXX_0.TXT | "Header" File (0) | Declare the name of certain files with this. Allows renaming the HA6, CG and PAT file. Unknown if multiple included files will work. Renamable(?)
+chrXXX.HA6 | Hantei6 Pattern (ha6) | Includes all of the basic character data in collections of "patterns", elaborated in the section below - hitboxes, frame data, movement, attack info - lots can be done with this single file and it will have most of your edits. **Renamable.**
+chrXXX_mv_0.TXT | "Move" Code File (mv) | Includes technical functions that get hooked onto patterns/moves, allowing for elaborate attacks and complex mechanics. The butter to the **HA6**'s bread. UNI2 uses [Squirrel lang](http://squirrel-lang.org/), which is C-like.
+chrXXX_cmd_0.TXT | "Command" File (cmd) | Defines what inputs/moves the character can do, along with the Smart Steer definition. Can also have some code that wouldn't belong in mv.
+chrXXX_sc_0.TXT | Battle Stats | Defines specific stats like attack/GRD modifiers, and HP.
+chrXXX.CG | Character Graphics (cg) | The package holding all of the character's own sprites. Can be extracted or built using the included `cgtool` library in the repo. **Renamable.**
+chrXXX.PAL | Palette File (pal) | Colour information for palette selection. Sprites are [Indexed](https://en.wikipedia.org/wiki/Indexed_color) so they must use this for colours. TODO: how to palette
+chrXXX.PAT | Pattern File (pat) | Includes all of the character effect graphics and definitions. Must be hex edited to inject, but a modded Hantei-chan can change the "patterns".
+chrXXX_com_0.txt, chrXXX_com_ranking_0.txt | COM AI Files |
+chrXXX_se_category.txt, chrXXX_se_list.txt | Sound Effect Definitions | `./se` |
+chrXXX.lst | List File | Useless |
+_temp.ha6, _temp.lst | Temp | Useless |
+BaseData.lst | Base Data List | `../BaseData.ha6` |
 
 # HA6 Editing
 
