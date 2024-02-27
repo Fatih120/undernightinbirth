@@ -12,9 +12,26 @@ After you have unpacked everything, you are ready to sift through and start modd
 - To be able to edit quite a few files, you should get a hex editor of your choosing, [such as this one](https://mh-nexus.de/en/downloads.php?product=HxD). [ImHex](https://github.com/WerWolv/ImHex) may also suffice, among others depending on your preference.
 - [Audacity v3.0.2 pre-telemetry](https://www.fosshub.com/Audacity-old.html?dwl=audacity-win-3.0.2.exe) for audio editing and getting sample times down.
 - Some tools for graphics and editing data are bundled in this repo. They will be brought up per-basis.
-- This entire repo! Since French Bread and ArcSys explicitly placed taboo on modding the former's games, online circles are typically avoidant of this and information is staggered. By adding findings and opening up issues and discussions on here, hopefully there can be a more accessible and helpful resource to help newcomers.
+- This entire repo! **Specifically Hantei-chan in the tools directory.**
+- - Since French Bread and ArcSys explicitly placed taboo on modding the former's games, online circles are typically avoidant of this and information is staggered. By adding findings and opening up issues and discussions on here, hopefully there can be a more accessible and helpful resource to help newcomers.
 
 # To Edit or Add Characters
+
+### The very short of it for adding a character to a new slot:
+
+1. Copy a `chrXXX` character from `./output/data/`. Move it into `./data/` (or create the same folder structure as seems fit).
+2. Rename the folder to a new slot greater than 024, such as `025`. Do the same with the majority of the files inside using that same number, including the `lst`, `pal`, `txt`s, etc.†
+4. Open `chrXXX_mv_0.txt` in your specialized editor. Jump to the end and find the two last written lines - `CHRXXX_MoveTable <- Battle_Std.MakeMoveTable( t, CHRXXX_CommandTable, Def_ChrNo_YYY );` and `__dofile__("./chrXXX_se_category.txt");`. Edit these lines to have your IDs accordingly.
+5. Find `./output/script/btl_Define_CharaNew.txt`. Copy it to `./___English/script` or `./script`.
+6. Open your copy and append the line `const Def_ChrNo_ChrXXX = XX;` using the same number you chose. Also add the line `const Def_ChrNo_YYY = XX;`, with Y preferably being a 3-letter identifier for the character.
+7. Find `./output/System/BtlCharaTbl.txt`. Copy it to `./___English/script` or `./script`.
+8. Scroll to the bottom and append a `chara_no[XXX]` by templating one of the previous entries, making sure to have `name_short = "chrXXX";` and a unique `order`.
+
+† _You _are_ able to use different naming conventions for certain files to make them easily readable, such as whatever is defined in `chrXXX_0.txt`, but be sure your character loads this way first as I haven't fully figured out what can be changed._
+
+You should now be able to go to training mode and see a new slot, which should be playable with your setup without internal edits. You can make the character accessible on the CSS and in other areas through folders such as `grpdat`'s `CharaColorBar`, `CSel`, `Cockpit`, etc. 
+
+### Dereferencing for edits
 
 Coming from UNICLR, things are a bit different. After you've dumped all the game assets, you are able to do modifications as a "layered file system" by copying assets to the base directory, next to `uni2.exe`. Common practice in UNICLR was to put everything into an `___English` folder which housed these system folders. For the case of characters, the `data` folder housing all character data simply needs to be moved to the base directory - again, next to `d` and the game executable.
 
@@ -32,57 +49,9 @@ Usually, to add characters, one would go to `System\BtlCharaTbl.txt` and add a d
 
 As for now, it's hard to test if your changes work when you've copied only vanilla data, so you could try and do things like copy `chr001.cg` and overwrite `chr000.cg` with it and playtest as Hyde to see if anything is wrong. Scroll down towards HA6 Editing to get started on character edits and the like.
 
-## BGM Editing
+# Audio
 
-To add or replace a song (for battle) in UNI2, you must grab:
-- `Bgm/bgm.txt` (The file that defines the music the game will load)
-- `grpdat/CSel/bgmselect.txt` (The file for changing the available songs in CSS or Training)
-Copy these to your `___English` folder keeping the directory structure.
-
-**[You can just grab this preassembled 7z from the repo if you didn't want to unpack the game, and just edit songs.](https://github.com/Fatih120/undernightinbirth/raw/master/tools/CustomBGM.7z)** Just place the `___English` folder into your game's install folder, next to uni2.exe.
-
-1. To add a new song, add your [OGG file](https://xiph.org/vorbis/) (use [foobar2000](https://www.foobar2000.org/) or [Audacity v3.0.2 pre-telemetry](https://www.fosshub.com/Audacity-old.html?dwl=audacity-win-3.0.2.exe) to convert your own music) to the `Bgm` directory with your `bgm.txt`.
-2. Open `Bgm/bgm.txt` with your text editor (it will be gibberish if you use notepad, but it may not matter, but for the best scroll up and use something like NotepadNext).
-   - If you just want to replace a character's theme entirely, just find their entry among the first 25 BGMs using the table below this guide as correspondance, without doing the copypasting in the next bullet.
-   - You will come across sections in the format of `[BGM_001]`, followed by File, IsLoop, and LoopPos. Copy an entire block of these four lines and append it somewhere. For battle, it's best to rename BGM_XXX starting from ID 30 - so `[BGM_030]`.
-   - The `File =` line dictates which OGG to use. If your file was `my_song.ogg` in the folder, put `File = my_song` - do NOT include the `.ogg` extension or it won't work!
-   - `IsLoop` defines if the song is looping or not. You will definitely want to keep this to `1` or else the song will play only once.
-   - `LoopPos` defines the position in the song that the song will loop back towards once it's done, so that means your song should've NOT had an outtro and just cuts off. The point here is in Seconds with decimal values being milliseconds (Audacity can show you this position along the bottom rack).
-   - Save the file. Your song will be registered in the game next time it is run. If you just wanted to replace a character's song, you can skip step 3 unless you want to rename it nonetheless.
-3. Open `grpdat\CSel\bgmselect.txt`. You will see a series of: `[ID]`, `num`, and `name`. Copy and append one of these to the bottom like last time.
-   - `[ID]` is the slot number in which the song appears in the Character Select Screen or in Training Mode. It's best to set it to the next last number (`[26]` in our newly-made case) as you'd have to edit all the other IDs to rearrange your song into the middle.
-   - `num` is which BGM number this song uses. From Step 2, you've seen the `BGM_XXX` tag - XXX is the number you wish to use here (without leading 0s). For 30 example, you would put `num = 30`.
-   - `name` is the string that appears ingame - or, the name that shows when you select the song. You likely see other entries list `<x> (<y>)` values - these are variables that are defined elsewhere in vanilla for localization purposes. Don't worry about that, as you can just set the name in plain English to whatever you would like to use. For example, just use `name = My Cool Song (Character)`
-
-That should be all. Open your game and check to see your new cool song that's ready to use.
-![image](https://github.com/Fatih120/undernightinbirth/assets/18276369/6694b680-aeaf-49be-adfb-1da1c6b3673b)
-
-
-```000 = Hyde
-001 = Linne
-002 = Waldstein
-003 = Carmine
-004 = Orie
-005 = Gordeau
-006 = Merkava
-007 = Vatista
-008 = Seth
-009 = Yuzuriha
-010 = Hilda
-011 = Eltnum
-012 = Nanase
-013 = Byakuya
-014 = Akatsuki
-015 = Chaos
-016 = Wagner
-017 = Enkidu
-018 = Londrekia
-019 = Tsurugi
-021 = Mika
-022 = Kaguya
-023 = Kuon
-024 = Phonon
-```
+https://github.com/Fatih120/undernightinbirth/blob/master/AUDIO.md
 
 # HA6 Editing
 
