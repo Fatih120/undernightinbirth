@@ -9,21 +9,38 @@ SPAWN PATTERN
 X, Y, ?, 0, 0, 0
 0, 0, 0, 0, 0, 0
 
-//TODO UNK 2 3 4 5
+//TODO UNK 2
 
-UNK
+//TODO UNK 3
+
+//TODO UNK 4
+
+//TODO UNK 5
+
+MODIFY ATTACKER? (this one causes a shift back)
 6 12
-69 0 0 0 0 0
+69 0 randomRot? 0 0 0
 0 0 0 0 1 0
 
-//7 8
+//TODO UNK 7
+
+SPAWN EFFECT
+8, effect
+X, Y, ?, ?, ?, ?
+?, ?, ?, ?, ?, ?
 
 PLAY SFX
 9, 0
 X, 0 0 0 0 0
 0, 0 0 0 0 0
 
-//10 11 12 13
+//TODO UNK 10
+
+//TODO UNK 11
+
+//TODO UNK 12
+
+//TODO UNK 13
 
 SET OPPONENT TRANSFORM
 14, patternID
