@@ -1,4 +1,6 @@
-hexeojmpimrjs - data listing
+hexeojmpimrjs - ./data/ listing
+
+iz3Nadozdgaj - ./se/ listing
 
 sort by size ~50kb range has dfile references to remove
 
