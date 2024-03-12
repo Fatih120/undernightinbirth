@@ -1,8 +1,57 @@
 hexeojmpimrjs - ./data/ listing
-
+kluioyxovozlort ./script/ listing
 iz3Nadozdgaj - ./se/ listing
+rcwWiiqjmxpmojs - ./System/ listing
+fmjisrkojmp - ./bg/ listing
+iz3Nadozdgaj - ./se/normal_se listing (announcer)
+bswGtcotwzs5 ./se/battle_se listing
+
+
+qe - .se/normal_se_list.txt
+phkUh1ogqngk - ./se/talk listing
+wnrBoxoorun9 - ./se/talk listing
+
+
+lzwp1onbeaejbkCh - grpdat listing
+
+fyLym4ozcfychziVunn - battleres listing
+Pshszb7ogFztcohwstw - battleres face listing
+
+VycozuyzchnLimfnf3y - default (jp) battleres talk listing 
+oMtaqooqotvvonnpwmq - english
+Ywjfsooxawfaoxgode - german
+olotkxLluoootokrin - french
+ojombmooogjopfjJugb - italian
+oagyeLboblhoyoitxbg - spanish
+eohGonbwaokebajjok - korean
+oooFoOtuzqeqoruxquzra - traditional chinese
+ooxoosCsoxporpsooyvcM - simplified chinese
+
+7osxauxctdVgeupi - gallery listing
 
 sort by size ~50kb range has dfile references to remove
 
 dcmbsz - BATTLE DEFINES AND SYSTEM FUNCTION
 joiIuc - character/system defines n info
+
+veIxqtuhovybuyd - ./Shader/ listing
+pgtwHs - ./Shader/ txts
+joiIuc - ./System/ txts
+fsoWy - movie txt
+rhmekdhnoed - normal_se_list define
+cfopiyiGczyzhc - movie define
+bswPtcotwzua - bgm define
+IQHoknqjnskt - dlc csv define
+FNE - round call variable define
+
+
+OGGS
+yelldlklgJko3lo6ooyTsu0jwosdkcwkqooygt - story amb
+Tyeokqkoysewgnwjogyy
+Nsyoekeooazfuzgqoass
+maggmsiopVxyoiomaa - vs
+Faskqmoqooskhkwcriw
+Pgcoaygsuubcouhoi
+Nsyoekeozqfiadwoqjqoass
+5soxgHmunmzyogoofoms
+qByoycowuomqc7clbk5Lcddokoooovdiq8ddvo
