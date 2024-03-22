@@ -13,6 +13,10 @@ Frame start.
 
 AFST AFGX
 
+AFOF {4Byte X} {4Byte Y}
+Sprite Offset.
+
+
 FEND
 Frame end.
 PEND
