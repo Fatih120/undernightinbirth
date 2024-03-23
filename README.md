@@ -2,7 +2,7 @@ https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb
 
 # Primer on Modding UNI2
 
-For starters, you may use https://github.com/Ekey/UNIB.Data.Tool to unpack the game successfully. Either build it yourself with [CSC.exe included with .NET 4](https://stackoverflow.com/questions/18286855/how-can-i-compile-and-run-c-sharp-program-without-using-visual-studio) and [some elbow grease](https://stackoverflow.com/questions/46320080/c-sharp-unable-to-compile-cs0103-the-name-gutils-does-not-exist-in-the-curre), or download it straight from this repo [right here, pre-built](https://github.com/Fatih120/undernightinbirth/raw/master/uni2unpacker.exe) (or after cloning).
+For starters, you may use https://github.com/Ekey/UNIB.Data.Tool to unpack the game successfully. Either build it yourself with [CSC.exe included with .NET 4](https://stackoverflow.com/questions/18286855/how-can-i-compile-and-run-c-sharp-program-without-using-visual-studio) and [some elbow grease](https://stackoverflow.com/questions/46320080/c-sharp-unable-to-compile-cs0103-the-name-gutils-does-not-exist-in-the-curre), or download it straight from this repo [right here, pre-built](uni2unpacker.exe) (or after cloning).
 
 Run the program in a shell ([Command Prompt on Windows](https://www.wikihow.com/Run-a-Program-on-Command-Prompt#Run-Other-Programs)) with `<input> <output>` arguments: Input being the `d` folder, and output being somewhere accessible such as `./d/output`. Don't know what the `d` folder is? Well, that's where the base game folder is, next to `uni2.exe`. Open it via Steam's game Properties -> Local Files -> Browse Local Files. 
 
@@ -10,9 +10,10 @@ After you have unpacked everything, you are ready to sift through and start modd
 
 ### Resources
 
-- Tools for graphics and editing data are bundled in this repo, specifically in the [tools directory](https://github.com/Fatih120/undernightinbirth/tree/master/tools). They will be brought up per-basis, but **you should want to get hanteichan_2.1.666.exe** (ignore the scary name).
+- Tools for graphics and editing data are bundled in this repo, specifically in the [tools directory](tools). They will be brought up per-basis, but **you should want to get hanteichan_2.1.666.exe** (ignore the scary name).
 - To edit `.txt` files without potential issues, use an editor that can properly read and save in the Japanese **SHIFT-JIS** format, [such as NotepadNext](https://github.com/dail8859/NotepadNext/releases/tag/v0.6.4).
 - To be able to edit certain files, you should get a hex editor of your choosing, [such as HxD](https://mh-nexus.de/en/downloads.php?product=HxD). [ImHex](https://github.com/WerWolv/ImHex) may also suffice, among others depending on your preference.
+- For editing certain graphics, [Paint.NET](https://getpaint.net) is a fine general-use editor for graphics, in our case, DDS files. It may also keep indexed colour tables. For sprites, the popular [Aseprite](https://github.com/aseprite/aseprite)/[LibreSprite](https://github.com/LibreSprite/LibreSprite) will be useful for editing sprites and their palettes. Tools like [GIMP](https://www.gimp.org/), though more complex, may be used.
 - [Audacity v3.0.2 pre-telemetry](https://www.fosshub.com/Audacity-old.html?dwl=audacity-win-3.0.2.exe) for audio editing and getting sample times down.
 - This entire repo!
 - - Since French Bread and ArcSys explicitly placed taboo on modding the former's games, online circles are typically avoidant of this and information is staggered. By adding findings and opening up issues and discussions on here, hopefully there can be a more accessible and helpful resource to help newcomers.
@@ -40,7 +41,7 @@ You should now be able to go to training mode and see a new slot, which should b
 
 Coming from UNICLR, things are a bit different. After you've dumped all the game assets, you are able to do modifications as a "layered file system" by copying assets to the base directory, next to `uni2.exe`. Common practice in UNICLR was to put everything into an `___English` folder which housed these system folders. For the case of characters, the `data` folder housing all character data simply needs to be moved to the base directory - again, next to `d` and the game executable.
 
-Now, simply trying to edit these copied assets will not result in the game loading these files. Hex edits to certain files in `d` are required to be "dereferenced" or dummied out, since these files tell the game where to look for assets. Within `d`, the file `hexeojmpimrjs` houses links to all the character files and folders within `data`. **Back up this file before you do anything with it.** If your hand needs to be held, you can [get this repo's copy of the dummied file](https://github.com/Fatih120/undernightinbirth/raw/master/tools/GAME/d/hexeojmpimrjs) and replace your copy with it. But for the sake of other `d` files and for reference, open up your hex editor and open the file with it.
+Now, simply trying to edit these copied assets will not result in the game loading these files. Hex edits to certain files in `d` are required to be "dereferenced" or dummied out, since these files tell the game where to look for assets. Within `d`, the file `hexeojmpimrjs` houses links to all the character files and folders within `data`. **Back up this file before you do anything with it.** If your hand needs to be held, you can [get this repo's copy of the dummied file](tools/GAME/d/hexeojmpimrjs) and replace your copy with it. But for the sake of other `d` files and for reference, open up your hex editor and open the file with it.
 
 ![HxD64_2024_0130-173603](https://github.com/Fatih120/undernightinbirth/assets/18276369/25e7eaf0-1074-499b-9be7-f54588d28fec)
 
@@ -56,7 +57,7 @@ As for now, it's hard to test if your changes work when you've copied only vanil
 
 # Audio
 
-https://github.com/Fatih120/undernightinbirth/blob/master/AUDIO.md
+See: [AUDIO.md](AUDIO.md)
 
 # Character Structure
 
@@ -71,10 +72,46 @@ chrXXX.CG | Character Graphics (cg) | The package holding all of the character's
 chrXXX.PAL | Palette File (pal) | Colour information for palette selection. Sprites are [Indexed](https://en.wikipedia.org/wiki/Indexed_color) so they must use this for colours. TODO: how to palette
 chrXXX.PAT | Pattern File (pat) | Includes all of the character effect graphics and definitions. Must be hex edited to inject (TODO: GUIDE), but use of **ha6chan_pat_editor** can change the "patterns" somewhat.
 chrXXX_com_0.txt, chrXXX_com_ranking_0.txt | COM AI Files |
-chrXXX_se_category.txt, chrXXX_se_list.txt | Sound Effect Definitions | `./se` |
+chrXXX_se_category.txt, chrXXX_se_list.txt | [Sound Effect Definitions](AUDIO.md) | `./se` |
 chrXXX.lst | List File | Useless |
 _temp.ha6, _temp.lst | Temp | Useless |
 BaseData.lst | Base Data List | `../BaseData.ha6` |
+
+# Character Graphics
+
+If you are making a custom character, adding sprites is obviously essential to being able to put a face to a name. In UNI2, importing sprites to turn them into a **CG file** can either be very simple, or a bit of a pain, depending on things such as if your character already comes from a fighting game, if the sprites are all indexed the same way, and how much you have to modify the sprites without relying on HA6 transformations (it might be a lot, because batch-editing tools like [ImageMagick do NOT seem to do a good job handling sprites and palettes](https://github.com/ImageMagick/ImageMagick/discussions/6705).
+
+### Creating a CG File
+
+For now, this guide will assume you are porting a character from another game and that you have obtained their sprites, all indexed correctly _within a folder_. One important thing to note is that **you should probably not include any "effect" files within this folder**. Things such as fireballs, explosions, trails, glows - anything that doesn't seem to be directly attached to the character (and that may be higher-quality than the regular sprites) - should be isolated for use in **.PAT files**. That is because you will typically be unable to use these sprites within your CG file and they will usually appear very wrong - especially because they tend to not use the palette information in the rest of the sprites. Therefore, they may as well be a waste of space and clutter your sprites.
+
+Sprites will be processed by increasing alphabetical order, and will be ordered as such in the CG file whenever you go to edit them. Because of that, if your sprites aren't already named somehow by number (`Name_000` going up is fine), it may be wise to number them as such, perhaps with [Bulk Rename Utility](https://www.majorgeeks.com/files/details/bulk_rename_utility.html).
+
+If you know that your sprites are smaller than the ones normally found in UNI2, you may want to hold off from doing any pre-processing as stated in the note above. UNI2 can internally scale and turn sprites with HA6 editing. ***However, if you prefer and have been able to find a good method to batch-edit images while keeping their palette info intact, please feel free to share your methods with this repo.***
+
+With that out of the way, you may now grab [the cgtool pack](tools/cgtool.7z) and extract it somewhere. To immediately make a .CG file, simply _drag and drop_ your **folder full of sprites** into the `cgtool_make_cg.bat` file, which should open a command line and process all the images, in turn creating a .CG file in the same directory named after the folder you inputted. You may prefer to open a command line yourself and enter `cgtool -input "FOLDER" -output FOLDER.cg` for the same result. Any errors may result out of non-PNG files being in the folder or some other inconsistency.
+
+If you're familiar with HA6 editing down below, you may test your new CG file within your project and see if it displays using Hantei-chan. If you need to make changes within your folder, do so, and run the tool again to update the CG. However, assuming things have been smooth so far, you'll actually see that the sprites look **grayscale**. This is fine, though it means that you will have to now create a matching palette file (`.pal` file seen in other character folders) to go with your sprites - cgtool does not cause the "default" colour information to be normal by default.
+
+### Modifying a CG File
+
+This section is specifically for editing existing CG packages, such as if you wish to add or edit sprites to an existing character's set. Skip this if you aren't editing them.
+
+Vanilla characters will have their CG files within their respective `data/chrXXX` folders. You're free to copy it over to where you have cgtool or process it right there, where you will now use `cgtool_extract_cg.bat` by dragging and dropping the file, resulting in a new `extracted` folder beside cgtool (you may also do `cgtool -input "chrXXX.cg" -output "extracted"`, optionally setting the output directory).
+
+You will now have access to indexed sprites for your UNI2 character. You are able to reorder or add sprites, and can even remove them if that tickles your fancy. However, do note that as it applies to the previous section, "gaps" in names of sprites will not reflect in HA6 editing - there are no "empty slots" in a CG file, so if you have a "200.png" sprite and the next is "205.png", the file will have "205.png" be registered as ID 201. If you are adding sprites and are scared about messing up the order, simply make sure that your new sprites are last in the folder list. For example, if you've been using nothing but numbers, your "new" sprites could have a leading character - so you can use names such as "New_800", "z_1000", et cetera, and they should always be last in the file, without making changes to the previous sprites.
+
+### Palettes
+
+To create a .pal file for your character, I would recommend [getting these files here](tools/palette) and putting them in a new folder _within_ cgtool's folder - specifically because of `palettehelper.exe`, which will do some work for you. Inside that folder, add a copy of one of your character's sprites and name it "0.png". You can use any sprite you want that is indexed, and you can actually go as far as to make a "sprite sheet" that keeps the colour map for references to make custom paletting easier to visualize. Again, I would recommend LibreSprite for editing these images and for paletting.
+
+![0](https://github.com/Fatih120/undernightinbirth/assets/18276369/0ee32bdd-4e23-496f-91bd-dc354a9fd4e9)
+
+But for now, to make sure that your palettes can load and work to begin with, let's make your job easier by running `pal_dupe_images.py`. This will duplicate 0.png so you have your 41 base colour slots available in the game, which are all referred to with the txt file `TODO: can we pass with less colours? why did they do 41 colours, does 0 = 1?...`. Finally, execute `makePal.bat`, which will run palettehelper and pass the arguments needed where the TXT file lists all the image files to make a .pal for. Your shiny palette file should now come up, so put it into your project, test it out, and you should no longer see any grayscale - just your character in their normal colours.
+
+If you want to already get to filling out the palette information for all the slots, there are several ways to do this. The slowest way is using your palette-editing tool to manually change all the colours. You might be able to cut corners and import the palette information from a sprite with different colours if the structure is the same. Some sprite dumps for other fighting game characters might have palettes laid out for you as seperate PNG files, which will make things very easy for you since you can just copy them to your palette folder and use them.
+
+If you are trying to copy over an old Melty Blood character, you will notice that just using the original pal file will make the character's colour change when they switch sides, due to palettes being "half" or something like that. I have included the [riff2png script](tools/palette/riff2png.py) which will be able to convert the individual pal files [from online sprite rips](https://www.spriters-resource.com/playstation_2/mbaa/), making it easy to copy the output files over to your palette images. Just run the script within those palette directories and it will spit out the images in working order, allowing you to make a true palette, though the last few slots will have to be done by you.
 
 # HA6 Editing
 
@@ -106,7 +143,7 @@ When you open Hantei-chan, you're also free to use **Preferences** to change the
 
 Patterns are individual animations that are used for every single action a character may make, such as standing still, walking, jumping, blocking, along with their arsenal of attacks - including seperated projectiles and effects. The pattern names within the vanilla characters are in Japanese, though you can inspect what does what by simply examining the frames along with their graphics. Since the characters will share a majority of their default functions also based on `./data/BaseData.HA6`, you can therefore refer to `./script/btl_Define.txt` to view some defined constants starting at Line 1150. For example, you will see that all characters will use Pattern #0 for their idle standing animation, and #1 for their standing A attack animation.
 
-**For a list of all the patterns' uses in UNIB, please refer to [this file on the repo](https://github.com/Fatih120/unib-data/blob/master/patterns.txt).**
+**For a list of all the patterns' uses in UNIB, please refer to [this file on the repo](docs/patterns.txt).**
 
 When you view or create a pattern, you will see a horizontal slider with arrows to the right of it, indicating the chronological order of the pattern going left to right. This is made up of individual "frames", which you should be familiar with as the fighting game concept (though each frame can have varied lengths of time). It will be important to note that each frame mostly exists in a vacuum, and that every frame will have its own set of parameters. Switching the frame (which you can use the L/R arrow keys for) will change the one that you are editing, and you must account for all the differences between frames. You may click the **Animate** button to preview how the pattern would look in-game, including loops.
 
