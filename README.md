@@ -22,15 +22,17 @@ After you have unpacked everything, you are ready to sift through and start modd
 
 We are able to set up new characters without modifying the base game's data. You could do this from scratch, but if you're new, you should copy an existing character so you don't have to be worried about requirements and oddities you're unaware of. Alternatively, you can modify existing characters or write over their slots - however, this will require internal edits and copying over mass data. If you'd like the former, read the following - if you'd like the latter, skip below to the "Dereferencing" section.
 
+* _For the following, be SURE to differentiate between your "output" foler and your "working" folder. You COULD use the unpacker to output the files beside the exe, but for the sake of isolating your edited files, I strongly recommend seperating the output data._
+
 ### The very short of it for copying a character to a new slot:
 
-1. Copy a `chrXXX` character from `./output/data/`. Move it into `./data/` (or create the same folder structure as seems fit).
+1. Copy a `chrXXX` character from `./output/data/`. Move it into `./data/`, creating that folder.
 2. Rename the folder to a new slot greater than 024, such as `025`. Do the same with the files inside using that same number, including the `lst`, `pal`, `txt`s, etc.†
 4. Open `chrXXX_mv_0.txt` in your specialized editor. Jump to the end and find the two last written lines - `CHRXXX_MoveTable <- Battle_Std.MakeMoveTable( t, CHRXXX_CommandTable, Def_ChrNo_YYY );` and `__dofile__("./chrXXX_se_category.txt");`. Edit these lines to have your IDs accordingly.
 5. Open `chrXXX_0.txt`, and change the references to XXX in the same way. Open `chrXXX_cmd_0.txt`,  and change the references to XXX in the same way. _(Optionally for quick-start?)_ Open the two `chr025_se_*` files and change the references accordingly.
-6. Find `./output/script/btl_Define_CharaNew.txt`. Copy it to `./___English/script` or `./script`.
+6. Find `./output/script/btl_Define_CharaNew.txt`. Copy it to `./___English/script`.
 7. Open your copy and append the line `const Def_ChrNo_ChrXXX = XXX;` using the same number you chose. Also add the line `const Def_ChrNo_YYY = XXX;`, with Y preferably being a 3-letter identifier for the character.
-8. Find `./output/System/BtlCharaTbl.txt`. Copy it to `./___English/script` or `./script`.
+8. Find `./output/System/BtlCharaTbl.txt`. Copy it to `./___English/script`.
 9. Scroll to the bottom and append a `chara_no[XXX]` by templating one of the previous entries, making sure to have `name_short = "chrXXX";` and a unique `order`.
 
 † _You _are_ able to use different naming conventions for certain files to make them easily readable, such as whatever is defined in `chrXXX_0.txt`, but be sure your character loads this way first as I haven't fully figured out what can be changed._
