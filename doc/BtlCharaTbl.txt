@@ -1,0 +1,443 @@
+/******************************************************************************
+ * リリース用の定義ファイルです 開発中の定義は行わないでください
+ * ※必ず動作確認を行ってください
+ ******************************************************************************/
+
+Chara_Table <-
+{
+	// キャラセレクト用配置 99 がランダム、必ず２次元配列になるように
+	// ・配列は内部の値です、アイコンの位置が移動したりはしません。
+	// ・同じキャラ番号が配置されているとたぶん正常に動作しない
+	// ・長さ０の配列があると落ちる
+	// ・配列数は縦x横が100未満になるように
+	SelectTable = 
+	[
+		[ 23,24,12,08,02,00,01,03,09,13,21,22,99 ],  // この列が初期位置
+		[ 11,19,10,06,04,16,17,05,07,15,18,14,99 ],
+        [ 25,25,25,25,25,25,26,26,25,25,25,25,99 ],
+	],
+	SelectDefault = [ 25, 1 ],  // 初期位置 1P 2P
+
+	// 強制でフラグを立てる仕様 ※セーブデータが上書きされる
+	_FileType = 0, //
+	//_SecretFlag = 0, // クリア
+	// _SecretFlag = (1<<0), // エルトナムが使える
+
+	// 画面上部メッセージ、全角16文字まで
+	AcVsMes0 = "初心者練習中！",
+	AcVsMes1 = "乱入歓迎！ 挑戦者求む！",
+	AcVsMes2 = "ライバル募集中！",
+
+	Status = [],
+};
+
+Chara_Table.Status.resize(100); // てきとう
+local chara_no = Chara_Table.Status; // 登録しやすいように
+
+/*
+	※ name_short, name_long, の文字列がないと失敗
+	※ name_short は読み込み時に内部で全て小文字にされる
+	※ name_master はプログラム側から日本語キャラ名を使用したい場合とそのデータで使用される(主に勝利メッセージ抽選で使用される)
+	norandom : ランダムの抽選で選ばれなくなる（デモ抽選、キャラセレランダム）
+	
+	SecretFlag : 隠しキャラ 1:隠しキャラ（昔の仕様で今は未使用）
+	isAlive : 定義が有効か 1:有効
+	hide : 隠しキャラ　-1:隠しキャラではない
+	DLCCharaFlag : DLCキャラ扱いにして非所持で選択不可にする
+	
+	unselect = 1, //カーソルが合わなくなりランダム抽選もされない
+	
+	hideScenario : Aシナリオをクリアすると開放するBシナリオのID
+	releaseScenario : Bシナリオの開放条件になっているＡシナリオのキャラID
+	init : 初期キャラかどうか　1:初期キャラ(=アプデ後の解放条件など用)
+*/
+
+// 
+chara_no[0] =
+{
+	name_short = "chr000",
+	name_long = "Hyde",
+	name_str = "ハイド",
+	name_master = "ハイド",
+	isAlive = 1,
+
+	stage = 1, // 市街地中枢・交差点
+	bgm = 1, // Scraper Sky High（ハイド）
+
+	order = 0,
+}; // 
+
+// 
+chara_no[1] = 
+{
+	name_short = "chr001",
+	
+	name_long = "Linne",
+	name_str = "リンネ",
+	name_master = "リンネ",
+	isAlive = 1,
+	drawtype = 1,
+
+	stage = 2, // 高層建築・屋上
+	bgm = 2, // Night Walker（リンネ）
+
+	order = 1,
+}; // 
+
+// 
+chara_no[2] = 
+{
+	name_short = "chr002",
+	name_long = "Waldstein",
+	name_str = "ワレンシュタイン",
+	name_master = "ワレンシュタイン",
+	isAlive = 1,
+
+	stage = 3, // 静寂の公園
+	bgm = 3, // Maximize Power!（ワレンシュタイン）
+
+	order = 2,
+}; // 
+
+// 
+chara_no[3] = 
+{
+	name_short = "chr003",
+	name_long = "Carmine",
+	name_str = "カーマイン",
+	name_master = "カーマイン",
+	isAlive = 1,
+
+	stage = 10, // 紅く染まる駐車場
+	bgm = 4, // Bad Surface（カーマイン）
+
+	order = 3,
+}; // 
+
+// 
+chara_no[4] = 
+{
+	name_short = "chr004",
+	name_long = "Orie",
+	name_str = "オリエ",
+	name_master = "オリエ",
+	isAlive = 1,
+
+	stage = 5, // 高速道路・下層部
+	bgm = 5, // Purity & Strictly（オリエ）
+
+	order = 4,
+}; // 
+
+// 
+chara_no[5] = 
+{
+	name_short = "chr005",
+	name_long = "Gordeau",
+	name_str = "ゴルドー",
+	name_master = "ゴルドー",
+	isAlive = 1,
+
+	stage = 4, // 川沿いの広場
+	bgm = 6, // Rushing Heart（ゴルドー）
+
+	order = 5,
+}; // 
+
+// 
+chara_no[6] = 
+{
+	name_short = "chr006",
+	name_long = "Merkava",
+	name_str = "メルカヴァ",
+	name_master = "メルカヴァ",
+	isAlive = 1,
+	drawtype = 1,
+
+	stage = 6,
+	bgm = 7, // Unseen Entities（メルカヴァ）
+
+	order = 6,
+}; // 
+
+// 
+chara_no[7] = 
+{
+	name_short = "chr007",
+	name_long = "Vatista",
+	name_str = "バティスタ",
+	name_master = "バティスタ",
+	isAlive = 1,
+	drawtype = 1,
+
+	stage = 7, // 明灯の商業施設
+	bgm = 8, // Snow Sisters（バティスタ）
+
+	order = 7,
+}; // 
+
+// 
+chara_no[8] = 
+{
+	name_short = "chr008",
+	name_long = "Seth",
+	name_str = "セト",
+	name_master = "セト",
+	isAlive = 1,
+
+	stage = 5,
+	bgm = 9, // Monochrome Memory（セト）
+
+	order = 8,
+}; // 
+
+// 
+chara_no[9] = 
+{
+	name_short = "chr009",
+	name_long = "Yuzuriha",
+	name_str = "ユズリハ",
+	name_master = "ユズリハ",
+	isAlive = 1,
+
+	stage = 8, // 守人の社
+	bgm = 10, // 歩く姿は百合の花♪（ユズリハ）
+
+	order = 9
+}; // 
+
+// 
+chara_no[10] = 
+{
+	name_short = "chr010",
+	name_long = "Hilda",
+	name_str = "ヒルダ",
+	name_master = "ヒルダ",
+	isAlive = 1,
+
+	stage = 9, // 煌朧の祭壇
+	bgm = 11, // Overwhelm Despair（ヒルダ）
+
+	order = 10,
+}; // 
+
+// 
+chara_no[11] = 
+{
+	name_short = "chr011",
+	name_long = "Eltnum",
+	name_str = "エルトナム",
+	name_master = "エルトナム",
+	isAlive = 1,
+
+	stage = 6, // 琥珀色の高架下
+	bgm = 12, // Blood Drain -Again-（エルトナム）
+
+	order = 22,
+}; // 
+
+chara_no[12] = 
+{
+	name_short = "chr012",
+	name_long = "Nanase",
+	name_str = "ナナセ",
+	name_master = "ナナセ",
+	isAlive = 1,
+
+	stage = 13, // 眠りの噴水広場
+	bgm = 13, // Gallant Girl "Sora yori Nagare, Hasiru Kaze"（ナナセ）
+
+	order = 12,
+}; // 
+
+chara_no[13] = 
+{
+	name_short = "chr013",
+	name_long = "Byakuya",
+	name_str = "ビャクヤ",
+	name_master = "ビャクヤ",
+	isAlive = 1,
+
+	stage = 14, // 桜咲き散る旧校舎
+	bgm = 14, // Beat Eat Nest（ビャクヤ）
+
+	order = 13,
+}; // 
+
+chara_no[14] = 
+{
+	name_short = "chr014",
+	name_long = "Akatsuki",
+	name_str = "アカツキ",
+	name_master = "アカツキ",
+	isAlive = 1,
+
+	stage = 12, // 鳴動の工業施設
+	bgm = 15, // 開戰 -Again-（アカツキ）
+
+	order = 23,
+	//norandom=1, //キャラセレ・デモのランダム抽選に入れない
+	//SecretFlag = (1<<1), // このフラグを使って出す予定はない
+}; // 
+
+chara_no[15] = 
+{
+	name_short = "chr015",
+	name_long = "Chaos",
+	name_str = "ケイアス",
+	name_master = "ケイアス",
+	isAlive = 1,
+
+	stage = 11, // 朽ち荒れた廃墟
+	bgm = 16, // Erudite Eyes（ケイアス）
+
+	order = 11,
+
+}; // 
+
+chara_no[16] = 
+{
+	name_short = "chr016",
+	name_long = "Wagner",
+	name_str = "ワーグナー",
+	name_master = "ワーグナー",
+	isAlive = 1,
+
+	stage = 18, //
+	bgm = 17, // （ワーグナー）
+	
+	order = 16,
+}; // 
+
+chara_no[17] = 
+{
+	name_short = "chr017",
+	name_long = "Enkidu",
+	name_str = "エンキドゥ",
+	name_master = "エンキドゥ",
+	isAlive = 1,
+	
+	stage = 16, //もみじ横町前通り
+	bgm = 18, // （エンキドゥ）
+	
+	order = 17,
+}; // 
+
+chara_no[18] = 
+{
+	name_short = "chr018",
+	name_long = "Londrekia",
+	name_str = "ロンドレキア",
+	name_master = "ロンドレキア",
+	isAlive = 1,
+
+	CPartFlag=1, //シナリオのCパートがあるか
+
+	stage = 19, //光と水のアートミュージアム
+	bgm = 19, // （ロンドレキア）
+	
+	order = 18,
+}; // 
+
+chara_no[19] = 
+{
+	name_short = "chr019",
+	name_long = "Tsurugi",
+	name_str = "ツルギ",
+	name_master = "ツルギ",
+	isAlive = 1,
+	
+	stage = 21, // ツルギステージ
+	bgm = 20, // （ツルギ）	
+	
+	order = 19,
+}; // 
+
+chara_no[21] = 
+{
+	name_short = "chr021",
+	name_long = "Mika",
+	name_str = "ミカ",
+	name_master = "ミカ",
+	isAlive = 1,
+
+	stage = 17, // 環堺東・児童遊園
+	bgm = 22, // （ミカ）
+
+	order = 15,
+}; // 
+
+chara_no[22] = 
+{
+	name_short = "chr022",
+	name_long = "Kaguya",
+	name_str = "カグヤ",
+	name_master = "カグヤ",
+	isAlive = 1,
+	
+	stage = 20, // カグヤステージ
+	bgm = 23, // （カグヤ）
+	
+	order = 20,
+}; // 
+
+chara_no[23] = 
+{
+	name_short = "chr023",
+	name_long = "Kuon",
+	name_str = "クオン",
+	name_master = "クオン",
+	isAlive = 1,
+	drawtype = 1,
+	
+	stage = 22, // クオンステージ
+	bgm = 24, // （クオン）
+
+	order = 21,
+
+	DLCCharaFlag=1, //DLCキャラ扱いにして非所持で選択不可にする
+}; // 
+
+chara_no[24] = 
+{
+	name_short = "chr024",
+	name_long = "Phonon",
+	name_str = "フォノン",
+	name_master = "フォノン",
+	isAlive = 1,
+	
+	stage = 15, // 電影のカフェテリア
+	bgm = 25, // （フォノン）
+	
+	order = 14,
+}; // 
+
+chara_no[25] = 
+{
+	name_short = "chr025",
+	name_long = "Riesbyfe",
+	name_str = "リーズバイフェ",
+	name_master = "リーズバイフェ",
+	isAlive = 1,
+	
+	stage = 15, // 電影のカフェテリア
+	bgm = 25, // （フォノン）
+	
+	order = 24,
+}; // 
+
+chara_no[26] = 
+{
+	name_short = "chr026",
+	name_long = "Ingrid",
+	name_str = "イングリッド",
+	name_master = "イングリッド",
+	isAlive = 1,
+	
+	stage = 15, // 電影のカフェテリア
+	bgm = 28, // （フォノン）
+	
+	order = 25,
+};
+
+//print("\n>>> BtlCharaTbl Running");
