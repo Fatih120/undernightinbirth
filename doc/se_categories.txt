@@ -1,0 +1,76 @@
+Entries are in the format:
+se["SE_ID"] <- {
+    selist = {
+        common = [100,101,102,103],
+        [Def_ChrNo_Hyd] = [100],
+    },
+};
+Where:
+- SE_ID is one of the Japanese names listed further below. The Japanese names must be used as they are referred to this internally, within the closed " ".
+- common = are an array of applicable sound effects to be randomly chosen for the SE category.
+- (Optional) [Def_ChrNo_XXX] = the array of sound effects depending on which character XXX the opponent is.
+
+se["SE_ID"] <- {
+[
+    {    Param0=10,    selist = { common = [100], }    },
+    {    Param0=20,    selist = { common = [200], }    },
+];
+
+- (Optional) Param0 = The triggering AF Frame ID to play on for associated moves, where applicable. Allows multiple sound effects in a single move to be played.
+- (Optional) average = Odds of playback.
+
+
+
+ラウンド勝利 / Round Victory
+決着勝利_圧勝 / Full Victory (Strong?)
+決着勝利_通常 / Full Victory
+決着勝利_辛勝 / Full Victory (Weak?)
+決着勝利_タイムアップ / Full Victory (Time Up)
+タイムアップ敗北 / Time Up
+立ち弱攻撃 / Standing Weak
+立ち中攻撃 / Standing Medium
+立ち強攻撃 / Standing Heavy
+しゃがみ弱攻撃 / Crouching Weak
+しゃがみ中攻撃 / Crouching Med
+しゃがみ強攻撃 / Crouching Strong
+ジャンプ弱攻撃 / Jumping Weak
+ジャンプ中攻撃 / Jumping Medium
+ジャンプ強攻撃 / Jumping Heavy
+ダッシュ中攻撃 / Dash Attack
+ダッシュ強攻撃 / Heavy Dash Attack
+投げ成功 / Throw (Hit)
+投げスカり / Throw (Whiff)
+投げ抜け / Throw (Release)
+ガーキャン / Guard Cancel/Thrust?
+振り向き / Turning Around (SideSwitch)
+挑発 / Taunt (Idle)
+前方回避 / Creeping Edge?
+アサルト / Assault
+前ダッシュ / Front Dash
+後ろダッシュ / Back Dask
+ガード弱 / Guard Weak
+ガード中 / Guard Medium
+ガード強 / Guard Heavy
+中段ガード成功 / Medium Guard Success?
+ガード失敗 / Guard Failure?
+ＧＲＤブレイク / GRD Break
+受け身 / Ukemi
+シールド発動 / Shield On
+シールド成功 / Shield Success
+やられ弱 / Hit Weak
+やられ中 / Hit Medium
+やられ強 / Hit Strong
+ラウンドＫＯ_通常 / Round KO
+ラウンドＫＯ_膝崩れ / Round KO, Fall on knees
+ラウンド敗北 / Round Lose
+決着ＫＯ_通常 / Final KO
+決着ＫＯ_膝崩れ / Final KO, Fall on knees
+起き上がり / Wakeup
+重傷起き上がり / Wakeup, Heavy
+ヴェールオフ / Veil Off
+チェインシフト / Chain Shift
+ノーマルチェインシフト Normal Chain Shift
+キャンセルチェインシフト / Cancel Chain Shift
+コンセントレーション / Concentration
+ヴォーパル / Vorpal
+ヴォーパル_瀕死 / Vorpal Dying?

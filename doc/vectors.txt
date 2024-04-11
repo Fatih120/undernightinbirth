@@ -43,7 +43,7 @@
 42 . Like 40, Vertical Spike
 43 . Like 40?
 44 . ------
-45 . Like 40, Cubic Horizontal Shove before Vertical fall
+45 . Cubic Aerial Horizontal Shove before Vertical fall
 46 . Like 46, almost Fullscreen
 47 . Incredibly High Vertical Launch
 48 . Like 42?
@@ -174,10 +174,10 @@
 232. Sliding Crouching Guard, Linear
 233. Halfscreen Arcing Launch
 
-234. Spike?
+234. Spike HKD
 235. Darkens, Freezes momentarily before small launch (Seth?)
 236. Like 236, slumps to ground
-237. Slow Spinning Small Launch
+237. Slow Spinning Small Launch, Light Wallbounce
 238. High Launch Slightly Backwards
 239. Like 238, slightly more momentum
 240. Immediately laying on ground, face-up
