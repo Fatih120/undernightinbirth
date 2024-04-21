@@ -1,13 +1,14 @@
 Available in HA6 files using Hantei-chan.
 Allows for several applicable effects that may also be done via *_mv.txt.
 
-NONE(?)
+NONE
 0
 
 SPAWN PATTERN
 1, patternID
-X, Y, ?, 0, 0, 0
+X, Y, Z, 0, 0, 0
 0, 0, 0, 0, 0, 0
+Z >=100 = do not be tethered to player - stays in place and disappears independently of player
 
 //TODO UNK 2
 
@@ -17,17 +18,68 @@ X, Y, ?, 0, 0, 0
 
 //TODO UNK 5
 
-MODIFY ATTACKER? (this one causes a shift back)
+MODIFY ATTACKER (12 = Translation)
 6 12
-69 0 randomRot? 0 0 0
-0 0 0 0 1 0
+X Y Rot? 0 0  0
+0 0 0    0 1? 0
 
 //TODO UNK 7
 
-SPAWN EFFECT
+SPAWN SYSTEM EFFECT
 8, effect
 X, Y, ?, ?, ?, ?
 ?, ?, ?, ?, ?, ?
+
+10 - Expanding Ellipse
+11 - Shield Success
+12 - Shield Success
+13 - Running Wind (Looping)
+15 - Running Dust
+16 - Big Wind Impact
+17 - Big Running Dust
+20 - Landing, Heels?
+21 - Landing, Heels?
+23 - Recovery Effect
+24 - Recovery, No SE
+25 - Increase, No SE
+26 - Increase
+27 - Tiny Glowing Particle?
+28 - Single Trail for Vorpal?
+29 - Single Trail for VO?
+30 - Single Trail for Vorpal?
+31 - Single Trail for VO?
+34 - Like 15, Mirrored
+35 - Like 13, Smaller (No Loop)
+36 - Like 35, Bigger Wind
+37 - Small Running Dust w/ Trail
+38 - Like 16, Faster
+39 - Like 37, Large
+40 - Yellow/Light Explosion with Circles
+41 - Like 40, more particles?
+43 - IW Activate
+45 - Smart Steer Relay
+51 - Ground Bounce Impact
+54 - Strong Punch effect
+55 - Grab/Throw Effect
+56 - Screen Shake Throw Effect, No SE
+58 - Yellow (Tick) Throw Effect
+62 - Small Dust Puff
+64 - Assault Dust Trail
+65 - Assault Dust Trail, Far
+66 - Air Assault Effect
+67 - Wallbounce Impact Effect
+68 - Medium Punch Effect, No SE
+72 - Shining Strobe Effect?
+73 - Shield Effect (Looping)
+74 - Green Shield Effect
+76 - Chain Shift
+77 - Chain Shift II
+78 - IWEX Pillar
+79 - Condensing White Light Effect?
+80 - Veil Off
+// To Do More
+
+
 
 PLAY SFX
 9, 0
@@ -44,5 +96,5 @@ X, 0 0 0 0 0
 
 SET OPPONENT TRANSFORM
 14, patternID
-X, Y, 0 0 ? 0
-0, 0, 0 0 0 0
+X, Y, ROT 0 ? 0
+0, 0, 0   0 0 0
