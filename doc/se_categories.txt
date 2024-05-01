@@ -22,8 +22,11 @@ se["SE_ID"] <- {
 
 
 ラウンド勝利 / Round Victory
+ラウンド勝利_圧勝 / Round Victory (Strong?)
+ラウンド勝利_通常 / Round Victory (Normal)
+ラウンド勝利_辛勝 / Round Victory (Weak?)
 決着勝利_圧勝 / Full Victory (Strong?)
-決着勝利_通常 / Full Victory
+決着勝利_通常 / Full Victory (Normal)
 決着勝利_辛勝 / Full Victory (Weak?)
 決着勝利_タイムアップ / Full Victory (Time Up)
 タイムアップ敗北 / Time Up
@@ -74,3 +77,14 @@ se["SE_ID"] <- {
 コンセントレーション / Concentration
 ヴォーパル / Vorpal
 ヴォーパル_瀕死 / Vorpal Dying?
+IWE攻撃 / IWEX Activation
+
+
+
+se[" "] <- {
+    selist = { common = [000], }
+}
+
+
+se[" "] <- [ { Param0=10, selist = { common = [010], } },
+                            { Param0=20, selist = { common = [020], } }  ];

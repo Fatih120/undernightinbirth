@@ -50,8 +50,8 @@
 049 - 
 050 - Entrance Animation
 051 - [Entrance Animation 2]
-052 - Round Win
-053 - 
+052 - Match Victory
+053 - Round Win
 054 - 
 055 - Throw Startup
 056 - Throw Hit/Confirm
@@ -246,7 +246,7 @@
 245 - 
 246 -
 247 - 
-248 - 
+248 - Time Up
 249 - 
 250 - 
 251 - 

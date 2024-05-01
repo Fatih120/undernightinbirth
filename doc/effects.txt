@@ -18,10 +18,17 @@ Z >=100 = do not be tethered to player - stays in place and disappears independe
 
 //TODO UNK 5
 
-MODIFY ATTACKER (12 = Translation)
-6 12
+MODIFY ATTACKER
+6 A
+? ? ? ? ? ?
+? ? ? ? ? ?
+
+A = Type:
+  12 - Translation
 X Y Rot? 0 0  0
 0 0 0    0 1? 0
+  255 - Designate End-of-Pattern (For things like Victory, Startup Patterns)
+
 
 //TODO UNK 7
 

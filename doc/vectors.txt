@@ -22,7 +22,7 @@
 21 . Far Arching 60Deg Launch, Techable before Wallbounce
 22 . Eased Vertical Lift
 23 . Forced Tech Hit Animation? Invul
-24 . Heavy Freezing Hitstop Anim? Invul
+24 . Heavy Blocking Freezing Hitstop Anim? Invul
 25 . Small Vertical Launch, Untechable until Ground
 26 . Like 25, Tripping / Face Down
 27 . Like 25, Spinning
@@ -44,7 +44,7 @@
 43 . Like 40?
 44 . ------
 45 . Cubic Aerial Horizontal Shove before Vertical fall
-46 . Like 46, almost Fullscreen
+46 . Like 45, almost Fullscreen
 47 . Incredibly High Vertical Launch
 48 . Like 42?
 49 . Like 42? Diff Angle?
@@ -118,7 +118,7 @@
 
 
 120. Aerial Freeze Before Small Launch
-121. Like 120
+121. Like 120, Pushback(?)
 122. Like 120
 123. ------
 

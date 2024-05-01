@@ -20,7 +20,7 @@ t.Mv_Startup <- // The code name of the intro animation
             break; // Finish
         }  
     }
-}
+} // this was working before but now it's not? did i do something on my end or...
 
 ///////////////////////////////////////////////////////////////////////
 // System Mechanics Resize Band-Aid Fix                              //
@@ -51,4 +51,16 @@ t.Mv_ComboLiberate_End <- { function Finalize_After() { BMvTbl.SetScale( { x=100
 t.Mv_Barrier_Std <- { function Init_After() { BMvTbl.SetScale( { x=60000, y=60000 } ); } function Finalize_After() { BMvTbl.SetScale( { x=10000, y=10000 } ); } }
 t.Mv_Barrier_Cro <- { function Init_After() { BMvTbl.SetScale( { x=60000, y=60000 } ); } function Finalize_After() { BMvTbl.SetScale( { x=10000, y=10000 } ); } }
 t.Mv_Barrier_Air <- { function Init_After() { BMvTbl.SetScale( { x=60000, y=60000 } ); } function Finalize_After() { BMvTbl.SetScale( { x=10000, y=10000 } ); } }
-// Not sure if Barriers do it right and I'm sure I'm missing some but I haven't experienced this anymore so I'll see if someone else brings it up again
+// t.Mv_Convert <-             { function Init_After() { BMvTbl.SetScale( { x=60000, y=60000 } ); } function Finalize_After() { BMvTbl.SetScale( { x=10000, y=10000 } ); } }
+// t.Mv_Convert_Modori <-      { function Init_After() { BMvTbl.SetScale( { x=60000, y=60000 } ); } function Finalize_After() { BMvTbl.SetScale( { x=10000, y=10000 } ); } }
+// t.Mv_Convert_Modori_Land <- { function Init_After() { BMvTbl.SetScale( { x=60000, y=60000 } ); } function Finalize_After() { BMvTbl.SetScale( { x=10000, y=10000 } ); } }
+// t.Mv_Guard <- { function Init_After() { BMvTbl.SetScale( { x=66000, y=66000 } ); } function Finalize_After() { BMvTbl.SetScale( { x=10000, y=10000 } ); } }
+// Not sure if Barriers do it right and I'm sure I'm missing some but I haven't experienced this anymore so I'll see if someone else brings it up again.
+// If you end up being bigger after certain moves (which I need to TODO), another bandaid is to include this function in t.Mv_Standby:
+t.Mv_Standby <-
+{
+	function Init_After()
+	{
+		BMvTbl.SetScale( { x=10000, y=10000 });
+	}
+}
