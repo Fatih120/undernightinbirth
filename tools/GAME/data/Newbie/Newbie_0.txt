@@ -1,0 +1,12 @@
+[System]
+ProjectName=Newbie
+[DataFile]
+FileNum= 2
+File00=Newbie.ha6
+File01=../BaseData.ha6
+[BmpcutFile]
+FileNum= 1
+File00=Newbie.cg
+[PAniFile]
+FileNum= 1
+File00=Newbie.pat

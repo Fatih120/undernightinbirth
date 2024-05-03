@@ -1,0 +1,33 @@
+local t = {}; // Collects all the move data
+
+//-----------------------------------------------------------------------------
+// Movement Code File
+//
+////	t.Mv_Atk_Name <- // Mv_Skill_Name
+////	{
+////		function Init_After()
+////		{
+////			// Things that happen when the move is called
+////		}
+////		function FrameUpdate_After()
+////		{
+////			// Things that happen every frame
+////		}
+////		function Finalize_After()
+////		{
+////			// Things that happen when the move is done
+////		}
+////		function HitInterrupt_After()
+////		{
+////			// Things that happen when the attack lands, even if blocked
+////		}
+////		function LastUpdate_After()
+////		{
+////			// Things that happen after the move is done
+////		}
+////	}
+//
+//-----------------------------------------------------------------------------
+
+NEWBIE_MoveTable <- Battle_Std.MakeMoveTable( t, NEWBIE_CommandTable, Def_ChrNo_New ); // Registers the table
+__dofile__("./data/Newbie/Newbie_se_category.txt"); // Pulls up the audio mappings

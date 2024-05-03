@@ -1,0 +1,1 @@
+__dofile__( "./data/Newbie/Newbie_com_0.txt" );

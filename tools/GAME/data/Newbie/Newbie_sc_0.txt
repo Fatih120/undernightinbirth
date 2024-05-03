@@ -1,0 +1,16 @@
+Battle_Status <-
+{
+
+	AttackRate = 100, // Attack Output Modifier (Should be 100)
+	SeedGaugeCorrectValue_Plus = 100, // SEED/GRD Gauge Gain Modifier (Default 100)
+	SeedGaugeCorrectValue_Minus = 100, // SEED/GRD Gauge Loss Modifier (Default 100)
+
+	ScratchDamageVal_Atk = 75, // Chip Damage Given Modifier (Default 75 for "Normal")
+	ScratchDamageVal_Def = 100, // Chip Damage Taken Multiplier - Higher takes more damage (Default 100)
+	ScratchDamageVal_ExDef = 100, // Chip Damage Taken ("Just" Defense?) (Default 100)
+
+	HpDivValue = [ 10000 ], // HP Value (Average 10000)
+
+}
+
+Battle_Std.InsertTable( Battle_Status, Battle_Std.GetStd_BattleStatusTable() );

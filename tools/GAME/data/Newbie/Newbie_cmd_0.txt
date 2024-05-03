@@ -1,0 +1,50 @@
+//コマンドテーブル skillは格ゲーコマンド表記
+btl_debPrint2("\n[NEW_CommandTable]");
+
+local t =
+{
+
+}
+
+local ar =
+[
+	{
+		CheckMoveName="Mv_Atk_StdA",
+		UpdateMoveName="Mv_Atk_StdB",
+	},
+	{
+		ResetTmplName="Atk_StdB",
+		CheckMoveName="Mv_Atk_StdB",
+		UpdateMoveName="Mv_Atk_StdC",
+	},
+	{
+		ResetTmplName="Atk_StdC",
+		CheckMoveName="Mv_Atk_StdC",
+		UpdateMoveName="Mv_Skill_0202A",
+	},
+	{
+		ResetTmplName="Skill_0202A",
+		CheckMoveName="Mv_Skill_0202A",
+		UpdateMoveName="Mv_Skill_SSRelayAtk",
+		CmdCheck = 
+		{
+			SkillType = "AddCommand",
+			FrameIDCheck = { Only = [110,120] },
+		}
+		CmdTmplFlags=def_CMDFlags_AnnounceSmaetSteer,
+	},
+	{
+		CheckMoveName="Mv_Skill_SSRelayAtk",
+		UpdateMoveName="Mv_Skill_41236SP",
+		CmdCheck = 
+		{
+			Cost = { ComboGauge = 20000 },
+			SkillType = "SpSpecial",
+			HitStatus="Damage",
+		}
+	},
+]
+Battle_Std.MakeStdCombo( t, ar );
+
+NEWBIE_CommandTable <- Battle_Std.MakeCommandTable( { command=t } );
+
