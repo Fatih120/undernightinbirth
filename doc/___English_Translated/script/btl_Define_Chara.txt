@@ -1,0 +1,193 @@
+//Character number (this one is unused)
+const Def_ChrNo_Chr000	= 0;
+const Def_ChrNo_Chr001	= 1;
+const Def_ChrNo_Chr002	= 2;
+const Def_ChrNo_Chr003	= 3;
+const Def_ChrNo_Chr004	= 4;
+const Def_ChrNo_Chr005	= 5;
+const Def_ChrNo_Chr006	= 6;
+const Def_ChrNo_Chr007	= 7;
+const Def_ChrNo_Chr008	= 8;
+const Def_ChrNo_Chr009	= 9;
+const Def_ChrNo_Chr010	= 10;
+const Def_ChrNo_Chr011	= 11;
+const Def_ChrNo_Chr012	= 12;
+const Def_ChrNo_Chr013	= 13;
+const Def_ChrNo_Chr014	= 14;
+const Def_ChrNo_Chr015	= 15;
+const Def_ChrNo_Chr016	= 16;
+const Def_ChrNo_Chr017	= 17;
+const Def_ChrNo_Chr018	= 18;
+const Def_ChrNo_Chr019	= 19;
+const Def_ChrNo_Chr021	= 21;
+const Def_ChrNo_Chr022	= 22;
+const Def_ChrNo_Chr023	= 23;
+const Def_ChrNo_Chr024	= 24;
+
+//Character identifier
+const Def_ChrNo_Hyd		= 0;
+const Def_ChrNo_Lin		= 1;
+const Def_ChrNo_Wal		= 2;
+const Def_ChrNo_Car		= 3;
+const Def_ChrNo_Ori		= 4;
+const Def_ChrNo_Gor		= 5;
+const Def_ChrNo_Mer		= 6;
+const Def_ChrNo_Vat		= 7;
+const Def_ChrNo_Set		= 8;
+const Def_ChrNo_Yuz		= 9;
+const Def_ChrNo_Hil		= 10;
+const Def_ChrNo_Elt		= 11;
+const Def_ChrNo_Nan		= 12;
+const Def_ChrNo_Bya		= 13;
+const Def_ChrNo_Aka		= 14;
+const Def_ChrNo_Cha		= 15;
+const Def_ChrNo_Wag		= 16;
+const Def_ChrNo_Enk		= 17;
+const Def_ChrNo_Lnd		= 18;
+const Def_ChrNo_Tsu		= 19;
+const Def_ChrNo_Mik		= 21;
+const Def_ChrNo_Kag		= 22;
+const Def_ChrNo_Kuo		= 23;
+const Def_ChrNo_Pho		= 24;
+
+//-----------------------------------------------------------------------------
+// Character-specific definition relations defc_***
+//------------------------------------------------ -----------------------------
+// Which free variable to use/character-specific constants (0 to 19)
+// Something that should only be messed with by the manipulating parent
+// Only manipulative parents should mess with it.
+
+// Hyde
+const def_PP_Hyd_236Bakuha 			= 0; //Explosion
+const def_PP_Hyd_236HitStatus 		= 1; //236 hit information receiver (used in command check)
+const def_PP_Hyd_236BakuhaPosX 		= 2; //explosion planned X coordinate
+const def_PP_Hyd_236BakuhaPosY 		= 3; //explosion planned Y coordinate
+const def_PP_Hyd_CrossBladeAddst 	= 5; //Additional status of new projectile
+
+// Yuzuriha
+const def_PP_Yuz_BattouMode 		= 0; //Battou mode or not 0: Normal 1: Battou mode -1: Cool time (state where mode cannot be changed)
+const def_PP_Yuz_BattouA 			= 1; //Whether it is battou mode 0: No stock 1: Stock available -1: Hold this button completely
+const def_PP_Yuz_BattouB 			= 2; //Whether it is battou mode 0: No stock 1: Stock available -1: Hold this button completely
+const def_PP_Yuz_BattouC 			= 3; //Whether it is battou mode 0: No stock 1: Stock available -1: Hold this button completely
+const def_PP_Yuz_BattouD 			= 4; //Whether it is battou mode 0: No stock 1: Stock available -1: Hold this button completely
+const def_PP_Yuz_BattouAutoButton 	= 5; //Even if you release the button immediately after the corresponding move, this will hold one of them 0:A 1:B 2:C
+const def_PP_Yuz_KeepBattouMv 		= 6; //
+const def_PP_Yuz_CoolTimeBattouCnt 	= 7; //How many times did you perform a normal special move during the cooldown time of sword mode?
+
+// Carmine
+const def_PP_Car_0202HS 			= 0; //0202 hit status
+const def_PP_Car_214Hold 			= 1; //214 attack installation status 0: Not installed 1: Installed at A 2: Installed at B 4: Installed at C (flag)
+const def_PP_Car_BandC_Type 		= 2; //Lever direction when B+C 0: Front 1: Back
+const def_PP_Car_BloodPoolCount 	= 3; //Number of dissolves installed (214 is not counted)
+const def_PP_Car_FreeMotionType 	= 4; // Free motion Param memory
+const def_PP_Car_BlodDrainObjID 	= 5; // ID management of recovery object
+const def_PP_Car_BlodDrainObjSt 	= 6; // 1 when recovery object is displayed
+
+// Waldstein
+const def_PP_Wal_HitCount 			= 0; //Used to determine the number of hits required to exit
+const def_PP_Wal_BandC_Type 		= 0; //Lever direction when B+C 0: Front 1: Back
+const def_PP_Wal_DoubleCircle 		= 1; //Whether one revolution was input as two revolutions
+
+// Merkava
+const def_PP_Mer_214 				= 0; //214 hit status
+
+// Vatista
+const def_PP_Vat_Bit_CheckObject 	= 0; //Whether a bit check object was issued 0: Not generated 1: Generated
+const def_PP_Vat_Bit_ComboCount 	= 1; //Number of consecutive hits or guards for bits (once for every 10, increases by 10 when guarding, increases by 10 when hit)
+const def_PP_Vat_Bit_DamageCount 	= 2; //Number of consecutive bit hits (1 in 10) Cannot be increased by guard
+const def_PP_Vat_Bit_is_Bombing 	= 3; //Whether the bit is exploding or not
+const def_PP_Vat_AUC_J214A 			= 4; //Number of times J214A was used in the air
+const def_PP_Vat_AUC_J214B 			= 5; //Number of times J2145 was used in the air
+
+// Seth
+const def_PP_Set_HitCount 			= 0; //Used to determine the number of hits required to exit
+const def_PP_Set_FrameCount 		= 1; //Used to determine the number of frames to exit
+const def_PP_Set_214Input 			= 2; //For input ahead of 214 derivation
+const def_PP_Set_214SakeStatus 		= 3; // 1 after avoiding the move with 214
+const def_PP_Set_CreateBlackHole 	= 4; //Is a black hole created?
+
+// Hilda
+const def_PP_Hil_3CCommand 			= 0; //Whether 3C was input when 2C was input
+const def_PP_Hil_HoldLv 			= 1; //Hold sword charge level 0:LV1 1:LV2
+
+// Eltnum
+const def_PP_Elt_Bullet 			= 0; //How many balls were hit (maximum value is...)
+const def_PP_Elt_PowBullet 			= 1; //Reinforced bullet stiffness
+const def_PP_Elt_ReloadTmp0 		= 2; //Temporary for reloading
+const def_PP_Elt_ReloadTmp1 		= 3; //Temporary for reloading
+const def_PP_Elt_AerialStatus 		= 5; //1 during aerial jump, 0 when landing
+const def_PP_Elt_CuttingSinkCount 	= 6; //How many times did he put 421B during the combo? When he finished the combo, it was 0
+const def_PP_Elt_FreeMotionType 	= 7; // Free motion Param memory
+
+// Akatsuki
+const def_PP_Aka_KouseiSuccess 		= 0; //KouseiSuccess flag
+const def_PP_Aka_StdBandCType 		= 1; //Kousei 0: Odd number of times 1: Even number of times
+const def_PP_Aka_Status 			= 2; // Generic status
+	const def_PPFlag_Aka_ElectDmgCreate = 1; //Whether the torn object has been generated or not
+	const def_PPFlag_Aka_KouseiHold 	= 2; //Whether Kousei B+C is on hold or not
+const def_PP_Aka_236HitStatus 		= 3; //Hit status of 236 attack
+const def_PP_Aka_Near_StdB 			= 4; //1 if near B is used, 0 if far B is used
+
+// Chaos
+const def_PP_Cha_DirectActionType 		= 4; // Chaas's Dahaka Directive Action
+const def_PP_Cha_DahMode 				= 5; // Dahaka state (0: Not appearing 1: Appearing)
+const def_PP_Cha_DahNormalCancel 		= 6; // Dahaka cancellation information (0: Failure 1: Normal C possible 255: Action possible)
+const def_PP_Cha_DahStatus 				= 7; // General status of Dahaka
+	const def_PPFlag_Cha_DS_Invisible 		= 1; // Invisible in event
+	const def_PPFlag_Cha_DS_CallVanishEff 	= 2; // Issue a vanishing effect (the flag will be erased after issuing)
+	const def_PPFlag_Cha_DS_PowerfulMode 	= 4; // Powered state
+	const def_PPFlag_Cha_DS_Hiding 			= 8; // hidden state
+	const def_PPFlag_Cha_DS_ChangeChaMv 	= 16; // Whether Chaas' Mv changed during the Dahaka attack?
+	const def_PPFlag_Cha_DS_AliveCheckObject= 32; // Whether there is a monitoring object of ?a
+	const def_PPFlag_Cha_DS_Vanishing 		= 64; // Vanishing and disappearing state
+	const def_PPFlag_Cha_DS_Rising 			= 128; // Get ready
+const def_PP_Cha_DahActList 			= 8; // Act memory used by Dahaka during combo
+const def_PP_Cha_DahActionPoint 		= 9; // Dahaka's action point (it increases when you do something and disappears when it reaches the limit)
+const def_PP_Cha_ButtonHoldFrame 		= 10; // How many frames are some buttons held down?
+const def_PP_Cha_ButtonA_HoldFrame 		= 11; //
+const def_PP_Cha_ButtonB_HoldFrame 		= 12; //
+const def_PP_Cha_ButtonC_HoldFrame 		= 13; //
+const def_PP_Cha_DahHomingOffSet 		= 14; // Dahaka tracking offset X coordinate
+const def_PP_Cha_DahFireBallSt 			= 15; // If a 214 bullet is fired, it will remain 0, and if it hits, it will remain 1
+const def_PP_Cha_DahRiseUpYoyaku 		= 16; // Get ready type-ahead
+
+// Mika
+const def_PP_Mik_FreeMotionType 	= 0; // Free motion Param memory
+const def_PP_Mik_PP_J236InputType 	= 1; // Whether to output J236 backwards
+const def_PP_Mik_MoveAtkAddCount 	= 2; // Number of additional derivations
+const def_PP_Mik_B_B_FromDamage 	= 3; // Whether after B is hit
+
+// Byakuya
+const def_PP_Bya_LastWebTrapType 			= 0; // Last placed trap 0:A 1:B 2:C 10:JA 11:JB 12:JC
+const def_TS_Bya_WebTrap 					= 0; // Projectile slot during trap setting (214)
+const def_TS_Bya_WebTrapAir 				= 3; // Projectile slot during trap installation (J214)
+const def_TS_Bya_WebTrapGround 				= 2; // Projectile slot while setting ground trap
+const def_TS_Bya_WebTrapAtk 				= 1; // Projectile slot during trap attack
+const def_TS_Bya_ThrowType 					= 1; // Additional input information for throw
+const def_TS_Bya_WebTrapAddJumpEnableInput 	= 2; // Whether addition is being accepted during 214 derived jump
+const def_PP_Bya_LastWebTrapPosX 			= 3; // X coordinate of the last trap placed
+const def_PP_Bya_LastWebTrapPosY 			= 4; // Y coordinate of the last trap placed
+const def_PP_Bya_LastWebTrapAirPosX 		= 5; // X coordinate of the last air trap placed
+const def_PP_Bya_LastWebTrapAirPosY 		= 6; // Y coordinate of the last air trap placed
+
+// Orie
+const def_PP_Ori_FFStickType 	= 0; // Orie's FF direction memory
+
+// Nanase
+const def_PP_Nan_StdBStickType 	= 0; // Nanase's B direction memory
+
+// Kaguya
+const def_PP_Kag_4Command 		= 0; // Input with 4 levers inserted (used in 4C and B_4B)
+const def_PP_Kag_Cancel3C 		= 1; // 3C issued by cancellation
+
+// Tsurugi
+const CDef_Tsu_PP_FFKeep 		= 0; // It is set to 1 while in stance and becomes 0 when you press D
+
+//------------------------------------------------ -----------------------------
+// Character specific gauge settings defcg_***
+//------------------------------------------------ -----------------------------
+
+//For training mode settings
+//const defcg_Chr003_BoundaryPeek = 0;
+
+print("\n[btl_Define_Chara loading complete]");

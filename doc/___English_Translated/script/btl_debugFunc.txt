@@ -1,0 +1,399 @@
+print("\n[btl_debug_Func]");
+//debuglog.write_r("debug_log\n"); //Every time you start
+
+/*
+function btl_debPrint( s );
+function btl_debCheckTable( tbl );
+*/
+
+// for debugging
+function btl_debPrint( s )
+{
+	//print(s);
+}
+
+//Parent for debugging (for Kamone)
+function btl_debPrint2( s )
+{
+	if( Def_Dbg_DebugMessage ) print(s);
+}
+
+
+function Output_Battle_Std_Child( tbl, cnt )
+{
+	cnt++;
+
+	local slash = "";
+	for( local n=1; n<cnt; n++ ) slash+="\t"; // depth of hierarchy
+	slash+="";
+
+	foreach( i, v in tbl )
+	{
+		switch( type(v) )
+		{
+		case "function":
+			break;
+		case "table":
+		case "array":
+			// debuglog.write( "\n"+slash + "" + i + " -> " + v );
+			Output_Battle_Std_Child( v, cnt ); // Display more contents (recursive function
+			break;
+		}
+	}
+	cnt--;
+}
+
+// Close F2
+function Output_Debug_Function()
+{
+	/*
+	local cnt = 0;
+	debuglog.write("\n>>>>Start\n");
+
+	local root = clone getroottable();
+	Output_Battle_Std_Child( root , cnt )
+
+	debuglog.write("\n\n>>>>End\n");
+	*/
+
+	//Part 2
+	local chrnum = 13;
+	local target_table = Battle_Std.SeeTable[chrnum];
+	local usevoice = array(1500, 0);
+	foreach ( i, v in target_table )
+	{
+		if ( typeof v == "array" )
+		{
+			foreach ( num , we in v )
+			{
+				local v2 = v[num];
+				if( "celist" in v2)
+				{
+					local list = v2.selist;
+
+					foreach ( i, v3 in list )
+					{
+						if ( typeof v3 == "array" )
+						{
+							foreach ( num in v3 )
+							{
+								// print("\nYou:"+num );
+								if( typeof num == "integer" )
+								{
+									usevoice [ num ] += 1 ;
+								}
+								else if ( typeof num == "table" )
+								{
+									//THE FUCKING SYSTEM
+									foreach ( slot , val in num )
+									{
+										//{ [20]=613, [100]=614, achievement_slot = 77}
+										if( typeof slot == "integer" && typeof val == "integer" )
+										{
+											usevoice [ val ] += 1 ;
+										}
+									}
+								}
+							}
+						}
+						else if( typeof v3=="integer")
+						{
+							//print("\nYou:"+v );
+							usevoice [ v3 ] += 1 ;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if( "celist" in v )
+			{
+				local list = v.selist;
+
+				foreach ( i, v in list )
+				{
+					if ( typeof v == "array" )
+					{
+						foreach ( num in v )
+						{
+							if( typeof num == "integer" )
+							{
+								//print("\nYou:"+num );
+								usevoice [ num ] += 1 ;
+							}
+							else if ( typeof num == "table" )
+							{
+								//THE FUCKING SYSTEM
+								foreach ( slot , val in num )
+								{
+									//{ [20]=613, [100]=614, achievement_slot = 77}
+									if( typeof slot == "integer" && typeof val == "integer" )
+									{
+										usevoice [ val ] += 1 ;
+									}
+								}
+							}
+						}
+					}
+					else if( typeof v=="integer")
+					{
+						//print("\nYou:"+v );
+						usevoice [ v ] += 1 ;
+					}
+				} 
+			}
+		} 
+	}
+
+	// output
+	local str = "\n\n[UseVoiceList] ChrNum:"+chrnum;
+	print ( str );
+	debuglog.write( str );
+
+	local last_find = 0;
+	for( local i=0;i<1500;i++);
+	{
+		local vo = usevoice[i];
+		if(vo!=0)
+		{
+			local str = format("\n%3d usecount:%d",i,vo);
+			if( last_find+1 != i )
+			{
+				str = "\n" + str;
+			}
+			last_find = i;
+			print ( str );
+			debuglog.write( str );
+		}
+	}
+}
+
+//Display debug message
+local debug_mess = function(str)
+{
+	local s = BMvTbl.GetMvStatus(); // Get status
+	local mvname = BMvTbl.GetMvName();
+
+	//Get the operation parent number
+	local player_chrno = -1;
+	local enemy_chrno = -1;
+
+	local player = BMvCore.GetPlayerCharaData(); // Get parent information
+	BMvCore.PushCharaData( player ); //
+		local player_mvs = BMvTbl.GetMvStatus(); // Get status
+		local player_name = BMvTbl.GetMvName();
+		player_chrno = player_mvs.CharaNo;
+	BMvCore.PopCharaData(); //
+
+	local enemy = BMvCore.GetNearEnemyCharaData(); // Get enemy information
+	if(enemy.IsDone)
+	{
+		BMvCore.PushCharaData( enemy ); //
+			local enemy_mvs = BMvTbl.GetMvStatus(); // Get status
+			//local enemy_name = BMvTbl.GetMvName();
+			enemy_chrno = enemy_mvs.CharaNo;
+		BMvCore.PopCharaData(); //
+	}
+
+	if( s.FrameID == 0)
+	{
+		btl_debPrint2(format("\n%dP [%2dvs%2d] %d [%3d-%2d] F:%3d %s %s (%s)",BMvTbl.GetPlayerSide()+1,player_chrno,enemy_chrno, s.CharaNo,s.DataPattern,s.DataFrame,s.MvCount,str.tostring(),mvname, player_name ));
+	}
+	else
+	{
+		btl_debPrint2(format("\n%dP [%2dvs%2d] %d [%3d-%2d] ID:%d %s %s (%s)",BMvTbl.GetPlayerSide()+1,player_chrno,enemy_chrno, s.CharaNo,s.DataPattern,s.DataFrame,s.FrameID,str.tostring(),mvname, player_name ));
+	}
+}
+
+//Display debug message
+local debug_write = function(str)
+{
+	local s = BMvTbl.GetMvStatus(); // Get status
+
+	//Get the operation parent number
+	local player_chrno = -1;
+	local enemy_chrno = -1;
+
+	local player = BMvCore.GetPlayerCharaData(); // Get parent information
+	BMvCore.PushCharaData( player ); //
+		local player_mvs = BMvTbl.GetMvStatus(); // Get status
+		local player_name = BMvTbl.GetMvName();
+		player_chrno = player_mvs.CharaNo;
+	BMvCore.PopCharaData(); //
+
+	local enemy = BMvCore.GetNearEnemyCharaData(); // Get enemy information
+	if(enemy.IsDone)
+	{
+		BMvCore.PushCharaData( enemy ); //
+			local enemy_mvs = BMvTbl.GetMvStatus(); // Get status
+			enemy_chrno = enemy_mvs.CharaNo;
+		BMvCore.PopCharaData(); //
+	}
+
+	if( s.FrameID == 0)
+	{
+		// debuglog.write(format("\n%dP [%2dvs%2d] %d [%3d-%2d] F:%3d %s %s",BMvTbl.GetPlayerSide()+1,player_chrno,enemy_chrno, s.CharaNo,s.DataPattern,s.DataFrame,s.MvCount,str.tostring(),player_name ));
+	}
+	else
+	{
+		// debuglog.write(format("\n%dP [%2dvs%2d] %d [%3d-%2d] ID:%d %s %s",BMvTbl.GetPlayerSide()+1,player_chrno,enemy_chrno, s.CharaNo,s.DataPattern,s.DataFrame,s.FrameID,str.tostring(),player_name ));
+	}
+}
+
+//Messages related to character table creation
+function btl_debPrint_CharacterMake(str) : (debug_mess)
+{
+	if( BMvTbl.GetPlayerSide()!=0 ) return; //1P only
+	//debuglog.write(format("\n %s",str.tostring()));
+	//btl_debPrint2(format("\n %s",str.tostring()));
+}
+
+//Error messages related to character table creation
+function btl_debError_CharacterMake(str) : (debug_mess)
+{
+	if( Def_Dbg_TmplMoveLog )
+	{
+		//debuglog.write(format("\n %s",str.tostring()));
+		btl_debPrint2(format("\n %s",str.tostring()));
+	}
+}
+
+//For warnings and error messages
+function _dem(str) : (debug_mess,debug_write)
+{
+	debug_write(str);
+	debug_mess(str);
+}
+
+//chore debug messages
+function _dm(str) : (debug_mess,debug_write)
+{
+	//debug_write(str);
+	debug_mess(str);
+}
+
+//print only in local environment //same as btl_debPrint2
+function_dp(str)
+{
+	btl_debPrint2( str );
+}
+
+function_dpn(str)
+{
+	btl_debPrint2( "\n"+str );
+}
+
+//print only in local environment
+function _dp1p(str)
+{
+	if( BMvTbl.GetPlayerSide()!=0 ) return;
+	btl_debPrint2( str );
+}
+
+function _dp2p(str)
+{
+	if( BMvTbl.GetPlayerSide()!=1 ) return;
+	btl_debPrint2( str );
+}
+
+//chore debug messages
+//1P only
+function _print1P(str)
+{
+	if( BMvTbl.GetPlayerSide()!=0 ) return;
+	btl_debPrint2( str );
+}
+
+//Voice check debug message
+function _vdm(str) : (debug_mess,debug_write)
+{
+	//debug_write(str);
+	local s = BMvTbl.GetMvStatus(); // Get status
+
+	if( s.Param0 == 0)
+	{
+		btl_debPrint2(format("\n%dP %d [%3d-%2d] F:%3d %s",BMvTbl.GetPlayerSide()+1,s.CharaNo,s.DataPattern,s.DataFrame,s.MvCount, str.tostring() ));
+	}
+	else
+	{
+		btl_debPrint2(format("\n%dP %d [%3d-%2d] Param0:%d %s",BMvTbl.GetPlayerSide()+1,s.CharaNo,s.DataPattern,s.DataFrame,s.Param0, str.tostring() ));
+	}
+}
+
+//chore debug messages
+//1P only
+function _dm1P(str) : (debug_mess,debug_write)
+{
+	if( BMvTbl.GetPlayerSide()!=0 ) return;
+
+	//debug_write(str);
+	debug_mess(str);
+}
+
+function _dm2P(str) : (debug_mess,debug_write)
+{
+	if( BMvTbl.GetPlayerSide()!=1 ) return;
+
+	//debug_write(str);
+	debug_mess(str);
+}
+
+// table check
+function btl_debCheckTable( tbl )
+{
+	foreach(i, v in tbl )
+	{
+		btl_debPrint( "\n --> " + i );
+	}
+}
+
+// const table check
+function btl_debCheckConstTable( tbl )
+{
+	btl_debCheckTable( getconsttable() );
+}
+
+//Status display & parameter sample
+function btl_debPrintMvStatus()
+{
+	local status = BMvTbl.GetMvStatus(); // Get status
+	local sTxt = "\n";
+
+	sTxt += " Update:" + status.isUpdate; // If this is 1, it is not stopped (for Update())
+	// Should always be 1 when calling FrameUpdate()
+	// When calling Update(), it will be 0 if time is stopped or hit stop
+
+	sTxt += "FrmUpdate:" + status.isFrameUpdate; // If this is 1, frame update was performed, old Effect execution timing (for FrameUpdate())
+	// Is it better to only refer to it within FrameUpdate()?
+
+	sTxt += " Cnt:" + status.MvCount; // Number of frames since entering the action table (affected by stopping)
+	sTxt += " Pat:" + status.DataPattern; // Data pattern number
+	sTxt += " Frm:" + status.DataFrame; // Data frame number
+	sTxt += " FrameID:" + status.FrameID; // Frame ID
+
+	btl_debPrint( sTxt );
+}
+
+// Hit status display & parameter sample
+function btl_debPrintMvHitStatus()
+{
+	local status = BMvTbl.GetMvHitStatus(); // Get status
+	local sTxt = "\n";
+
+	//If you hit the opponent, it should not be 0 if you get it with HitInterrupt()?
+	sTxt += "Type:";
+	if( status.Type & _HitType_Damage ) sTxt += "Damage"; //
+	if( status.Type & _HitType_Guard ) sTxt += "Guard"; //
+
+	// Under what circumstances was the opponent hit?
+	sTxt += "PosSt:"; //
+	if( status.PosState & _PosState_Ground ) sTxt += "Ground"; //
+	if( status.PosState & _PosState_Air ) sTxt += "Air"; //
+
+	// It doesn't matter if you hit a sleeping person or not.
+	sTxt += " isDown:" + status.isDown; // 
+	//sTxt += "btl_debPrintMvHitStatus()";
+
+	btl_debPrint( sTxt );
+}

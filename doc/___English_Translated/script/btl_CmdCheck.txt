@@ -1,0 +1,1106 @@
+print( "\n>>> [btl_CmdCheck]" );
+
+class DoujiStatus{
+
+	done_ = 0;
+	target_mv_pos_ = -1; // -1:Now 0:1 ago 1:2 ago
+	info_ = null;
+
+	type_ = 0;
+
+	constructor()
+	{
+		target_mv_pos_ = -1; //Check the current Mv
+
+		/*
+		MEMO
+		236A>When using Zurashi D, there is a possibility that an A+D technique will appear.
+		Since you have entered 236A, you have entered a command, so it is natural to prevent techniques without commands from appearing.
+		It would be weird if something like open came out with 236A>B+C, and it would be weird if a dash came out with 236A>6B.
+		41236A>BC, there are cases like 236A>41236BC, 41236A>236BC, so this is OK
+		It's weird that a non-command move comes out when you press a command move at a different time.
+		Roughly speaking, after a special move, you have to use a special move.
+		*/
+
+		//For Mvs that allow Mv changes by shifting and pressing, decide whether to check now, one Mv before, or two before.
+		if( Battle_Std.MoveCodeEx.CheckFlag( 1, def_MC1_CmdLvDZ_OK ) )
+		{
+			info_ = [ BCMDTbl.GetCmdInfoEx(0), BCMDTbl.GetCmdInfoEx(1) ];//Save command information Previous 1, Previous 2
+
+			local button_count = 0;//How many buttons to press at the same time?
+			{
+				//See how many buttons are pressed at the same time
+				//If it's something like A+B+C, it's 3 buttons, so you can look at the two previous actions, but if it's something like A+B, there's no way to see the two previous actions, so I exclude it.
+				//If you don't do this, it will be like D>A+D, shield>guard>shield counter>throw
+				local button_mask = BCMDTbl.GetSuccessButton();
+				for( local i=0; i<4; i++ )
+				{
+					if( button_mask&(1<<i) )
+					{
+						button_count++;
+					}
+				}
+				// _dpn("button_mask:"+button_mask+", "+button_count);
+			}
+
+			if( button_count >= 3 && info_[0].GetFrame() == 1 && info_[1].GetFrame() == 1 )
+			{
+				// When the previous action is 1F and the second action is 1F (B>B+C>A+B+C)
+				//Battle_Std.CheckDoujiButton: Check if A+B+C is OK after A+B but B+C is not OK after A+B.
+				//def_MC1_CmdLvDZ_OK: Whether the action is allowed to move to another action by pressing simultaneously. This checks the previous one, not the two previous ones
+				if( CheckDoujiButton( info_[0] ) && CheckDoujiButton( info_[1] ) )
+				{
+					target_mv_pos_ = 1;//2 previous
+				}
+			}
+			else if( info_[0].GetFrame() <= 2 )
+			{
+				// Press simultaneously if the previous action is within 2F (B(2F)>B+C)
+				//Battle_Std.CheckDoujiButton: Check if A+B+C is OK after A+B but B+C is not OK after A+B.
+				//def_MC1_CmdLvDZ_OK: Whether the action is allowed to move to another action by pressing simultaneously
+				if( CheckDoujiButton( info_[0] ) )
+				{
+					target_mv_pos_ = 0;//previous
+				}
+			}
+		}
+
+		SetHitType();//Save hit information based on target_mv_pos_ (based on this to determine whether cancellation is possible)
+	}
+	
+	
+	function CheckCancel( flag )
+	{
+		local ret_checkcancel = 0;
+		if( target_mv_pos_ == -1 ) // now
+		{
+			//If checking the current Mv, do it normally
+			ret_checkcancel = BCMDTbl.CheckCancel( flag )
+		}
+		else
+		{
+			//Otherwise, change Mv by 1 or 2
+			ret_checkcancel = info_[target_mv_pos_].GetCancel( flag );
+		}
+		return ret_checkcancel;
+	}
+
+
+	function GetMvStatus()
+	{
+		if( target_mv_pos_ == -1 ) // now
+		{
+			return BMvTbl.GetMvStatus();
+		}
+		return BMvTbl.GetMvStatusBF();
+	}
+
+
+	function _DebugGetBtnMaskStr( mask )
+	{
+		local ret_str = "";
+		if( mask&(1<<0) ) ret_str+="A";
+		if( mask&(1<<1) ) ret_str+="B";
+		if( mask&(1<<2) ) ret_str+="C";
+		if( mask&(1<<3) ) ret_str+="D";
+		return ret_str;
+	}
+
+
+	function CheckDoujiButton( _info )
+	{
+		//Process to play if the buttons are not from the same system (B?ÅNB+C is fine, but A?ÅNB+C is not)
+		local last_button = _info.GetLastButton(0);
+		local button_mask = BCMDTbl.GetSuccessButton(); // _info.GetLastButton(0);
+				
+		if( (button_mask - last_button) != (last_button^button_mask) ) return 0; // A+B+C after A+B is OK, but B+C after A+B is not (are they all included?)
+				
+		if( last_button == button_mask ) return 0; // If you try to perform the A+B technique after A+B, it won't work
+		if( !(last_button&button_mask) ) return 0; // If you try to perform a technique that does not include A (such as B+C) after A, it will not work.
+				
+		// print("\n Previous time:"+_DebugGetBtnMaskStr(_info.GetLastButton(1))+" Last time:"+_DebugGetBtnMaskStr(last_button)+" Now:"+_DebugGetBtnMaskStr(button_mask) );
+		return 1;
+	}
+
+
+	function GetHitType()
+	{
+		return type_;
+	}
+
+
+	function CheckFlag( pos, flag )
+	{
+		//CheckFlag
+		if( target_mv_pos_ == -1 ) // now
+		{
+			return Battle_Std.MoveCodeEx.CheckFlag( pos, flag );
+		}
+		else
+		{
+			return Battle_Std.ChangeMoveCodeEx_CheckFlag( pos, flag );
+		//It doesn't work when target_mv_pos_ == 1
+		}
+		return 0;
+	}
+
+
+	function IsGuard()
+	{
+		if( target_mv_pos_ == -1 ) // now
+		{
+			local bs = BtlMvStd.GetBoundStatus();
+			local mvname = BMvTbl.GetMvName();
+			if( bs.isBound == 2 && mvname=="Mv_Guard" )
+			{
+				return 1;
+			}
+		}
+		else
+		{
+			//If the previous action name is guard...
+			if( BMvTbl.ChangeMv_GetMvName() == "Mv_Guard" )
+			{
+				return 1;
+			}
+		}
+		return 0;
+	}
+
+
+	function SetHitType()
+	{
+		local ret_hittype = 0;
+		local hs = ( target_mv_pos_ == -1 )? BMvTbl.GetMvHitStatus() : BMvTbl.GetMvHitStatusBF();
+		if( hs.Type & _HitType_Damage )
+		{
+			ret_hittype = _HitType_Damage;
+		}
+		if( hs.Type & _HitType_Guard || hs.Type & _HitType_SuperArmor )
+		{
+			//Armor is also treated as a guard
+			//This will not allow the armor state to be detected, but the processing will be completed.
+			ret_hittype = _HitType_Guard;
+		}
+		type_ = ret_hittype;
+	}
+
+
+	function GetMvName()
+	{
+		if( target_mv_pos_ == -1 )//Now, right?
+		{
+			return BMvTbl.GetMvName();
+		}
+		else
+		{
+			return BMvTbl.ChangeMv_GetMvName();
+		}
+	}
+
+
+	// Are you trying to issue a command by pressing and holding
+	// Please note that the cancellation check itself is not possible, so it is unclear whether it can be issued or not.
+	function IsZurashiCommand()
+	{
+		//Returns whether it is a sliding push type check
+		return ( target_mv_pos_ != -1 )? 1 : 0;
+	}
+
+
+	// The following checks are for insurance processing
+	// I'm writing something like ``It's definitely strange to go there'' regardless of the grace period for simultaneous pressing.
+	//For example, if he has EX's 236C and FF's B + C, 236C > Misalignment > B + C is "ok in terms of processing," but realistically he wants to play it.
+	// Therefore, only that is described
+	function CancelCheck_NormalAtk() // Check when performing normal techniques
+	{
+		if( Def_Rule_CmdCancelCheck )
+		{
+			// When unable to act (when canceled)
+			if( BCMDTbl.CheckCancel( _SkillType_None ) == 0 )
+			{
+				//Not possible when using special moves
+				// if( Battle_Std.MoveCode.CheckFlag( def_MC_Skill ) )
+				//Basically not possible when using other than normal techniques
+				if( !Battle_Std.MoveCode.CheckFlag( def_MC_Atk|def_MC_BCAction ) )
+				{
+					// _dpn("Normal move or not FF = special move class");
+					// Allow canceling from special move to normal move, otherwise it won't work
+					if( !Battle_Std.MoveCode.CheckFlag( def_MC_EnableCansel_SkilltoAtk ) || IsZurashiCommand() )
+					{
+						return 0;
+					}
+				}
+				// If there is a flag that excludes cancellation to normal moves, it will fail in the first place (for dash attacks)
+				if( Battle_Std.MoveCodeEx.CheckFlag( 1, def_MC1_NoAtkCansel ) )
+				{
+					return 0;
+				}
+
+				if( Battle_Std.MoveCodeEx.CheckFlag( 0, def_MC_NoJumpCansel ) )
+				{
+					return 0;
+				}
+			}
+			if( Battle_Std.GS_CheckFlag( def_PP_GS_NoAct_Atk ) ) return 0;
+		}
+		return 1;
+	}
+	
+	
+	function CancelCheck_JumpCancel() // Check when canceling a jump
+	{
+		if( Def_Rule_CmdCancelCheck )
+		{
+			// When unable to act (when canceled)
+			if( BCMDTbl.CheckCancel( _SkillType_None ) == 0 )
+			{
+				//Not possible when using special moves
+				// if( Battle_Std.MoveCode.CheckFlag( def_MC_Skill ) )
+				//Basically not possible when using other than normal techniques
+				if( !Battle_Std.MoveCode.CheckFlag( def_MC_Atk ) )
+				{
+					// Allow canceling from special move to normal move, otherwise it won't work
+					if( !Battle_Std.MoveCode.CheckFlag( def_MC_EnableCansel_SkilltoAtk|def_MC_EnableCansel_SkilltoJump ) || IsZurashiCommand() )
+					{
+						return 0;
+					}
+				}
+			}
+			if( Battle_Std.GS_CheckFlag( def_PP_GS_NoAct_Atk ) ) return 0;
+		}
+		return 1;
+	}
+
+
+	// Special move cancellation check
+	function CancelCheck_SpecialSkill( _dashkansei_ok = 0 ) 
+	{
+		if( Def_Rule_CmdCancelCheck )
+		{
+			if( BCMDTbl.CheckCancel( _SkillType_None ) == 0 )
+			{
+				//Cannot be used when special move or normal throw
+				if( Battle_Std.MoveCode.CheckFlag( def_MC_Skill|def_MC_Throw ) )
+				{
+					if( !Battle_Std.MoveCode.CheckFlag( def_MC_EnableCansel_SkilltoSkill ) || IsZurashiCommand() )
+					{
+						return 0;
+					}
+				}
+
+				//Cannot be done after EX special move
+				//This seems to be due to checks that UNI doesn't originally do, such as Yuzuriha and 214C>214A not being possible.
+				/*
+				local mvcode = BMvTbl.GetMoveCode();
+				if( mvcode&def_MC_Skill && ( mvcode&def_MC_EXAction || mvcode&def_MC_SPAction ) )
+				{
+					return 0;
+				}
+				*/
+
+				// Unified as not possible from SS
+				if( Battle_Std.MoveCodeEx.CheckFlag( 2, def_MC2_SSRelayAtk ) )
+				{
+					return 0;
+				}
+			}
+			if( Battle_Std.GS_CheckFlag( def_PP_GS_NoAct_Atk ) ) return 0;
+
+			if( _dashkansei_ok )
+			{
+				// Add dash inertia OK
+			}
+			else
+			{
+				// UNI allows dash to act on 1F, so 236AB will prevent dash inertia special moves from appearing.
+				if( BMvTbl.GetPP(def_PP_CmdStatus)&def_PP_CS_DoujiDash_F )
+				{
+					// _dpn("Dash included");
+					return 0;
+				}
+			}
+		}
+		return 1;
+	}
+	
+	
+	// Cancel check for EX special move
+	function CancelCheck_EXSpecialSkill( _douji_command = 0 )
+	{
+		if( Def_Rule_CmdCancelCheck )
+		{
+			if( BCMDTbl.CheckCancel( _SkillType_None ) == 0 )
+			{
+				//Not possible when using EX special move/SP special move
+				local mvcode = BMvTbl.GetMoveCode();
+				if( _douji_command )
+				{
+					if( mvcode&def_MC_Skill && ( mvcode&def_MC_EXAction || mvcode&def_MC_SPAction ) )
+					{
+						if( !IsZurashiCommand() )
+						{
+							return 0;
+						}
+					}
+				}
+				else
+				{
+					if( mvcode&def_MC_Skill && ( mvcode&def_MC_EXAction || mvcode&def_MC_SPAction ) )
+					{
+						if( !Battle_Std.MoveCode.CheckFlag( def_MC_EnableCansel_SkilltoSkill ) || IsZurashiCommand() )
+						{
+							return 0;
+						}
+					}
+				}
+				// Unified as not possible from SS
+				if( Battle_Std.MoveCodeEx.CheckFlag( 2, def_MC2_SSRelayAtk ) )
+				{
+					return 0;
+				}
+			}
+			if( Battle_Std.GS_CheckFlag( def_PP_GS_NoAct_Atk ) ) return 0;
+		}
+		return 1;
+	}
+	
+	// BC special move cancellation check
+	function CancelCheck_SpecialBCSkill() 
+	{
+		if( Def_Rule_CmdCancelCheck )
+		{
+			if( BCMDTbl.CheckCancel( _SkillType_None ) == 0 )
+			{
+				//Cannot be used when special move and BC/SP special move
+				local mvcode = BMvTbl.GetMoveCode();
+				if( mvcode&def_MC_Skill && ( mvcode&def_MC_BCAction || mvcode&def_MC_SPAction ) )
+				{
+					if( !Battle_Std.MoveCode.CheckFlag( def_MC_EnableCansel_SkilltoSkill ) || IsZurashiCommand() )
+					{
+						return 0;
+					}
+				}
+
+				// Unified as not possible from SS
+				if( Battle_Std.MoveCodeEx.CheckFlag( 2, def_MC2_SSRelayAtk ) )
+				{
+					return 0;
+				}
+			}
+			if( Battle_Std.GS_CheckFlag( def_PP_GS_NoAct_Atk ) ) return 0;
+		}
+		return 1;
+	}
+};
+
+
+// Command check function
+function Battle_Std::CmdCheck( t, tmplname="" )
+{
+	// *Change only when this process passes
+	// _dp1p(format("\n[%s] CmdCheck In",tmplname) );
+
+	// Occurs when performing a normal move from a ready state
+	// Occurs even if there is a simultaneous press check generation flag
+	// Flag for whether or not to issue Mv in response to simultaneous presses and offset presses
+
+	local douji_st = DoujiStatus();
+
+	local flag_useComboGauge = 0;// Gauge consumption reservation flag 0: Techniques that do not consume gauge 1: Techniques that consume n gauge 2: Only during VO etc.
+	local flag_useReverseBeat = 0;// Techniques passed with reverse beat 1
+
+	local check_CancelNone = douji_st.CheckCancel( _SkillType_None ); // Remember this as it is often used
+	local check_HitType = douji_st.GetHitType();
+	local check_ZurashiCommandFromSpecial = (Battle_Std.MoveCode.CheckFlag( def_MC_Skill ) && !Battle_Std.MoveCodeEx.CheckFlag( 6, def_MC6_EnableZurashiDashCancel ) && douji_st.IsZurashiCommand());//Zurashi push technique from special move
+
+	// I'll say goodbye here while I'm being attacked or guarded (it's a heavy place, right?)
+	// In the past, it seems that if there was no "SkillType" specified, it would pass.
+	local bound_status = BtlMvStd.GetBoundStatus();
+	local CmdTbl_SkillType = ("SkillType" in t)? t.SkillType : "Special"; // Special move level if not specified
+	local CmdTbl_Flags = ("Flags" in t)? t.Flags : 0;
+	if( bound_status.isDone ) // Killed or guarded
+	{
+		if( CmdTbl_SkillType != "GuardCancel" && CmdTbl_SkillType != "BoundCancel" )
+		{
+			return 0; // Failure if GuardCancel is not specified
+		}
+		if( bound_status.isCapture ) return 0; // Absolutely fails while being thrown (to prevent throwing bug)
+	}
+
+	if ( "Cost" in t ) // Gauge-related activation conditions
+	{
+		if ( "ComboGauge" in t.Cost ) //Gauge limit specified
+		{
+			if( t.Cost.ComboGauge == "OverLiberate")
+			{
+				if( ( BMvEff.Liberate_Get() != _SpGaugeMode_Liberate ) && ( BCMDTbl.GetComboGauge() < 20000 ) ) return 0;
+				flag_useComboGauge = 2; // Technique that consumes combo gauge (used in subsequent checks after execution)
+			}
+			else if( t.Cost.ComboGauge == "Liberate")
+			{
+				if( BMvEff.Liberate_Get() != _SpGaugeMode_Liberate ) return 0;
+				flag_useComboGauge = 2; // Techniques that consume combo gauge (in subsequent checks after execution)
+			}
+			else
+			{
+				if( BCMDTbl.GetComboGauge() < t.Cost.ComboGauge ) return 0;
+				flag_useComboGauge = 1; // Technique that consumes combo gauge (used in subsequent checks after execution)
+			}
+		}
+	}
+
+	local limit_type = 0; // 0: Normal 1: Cancel multiple hits
+	// Restrictions by cancellation type
+	// Normal: Normal skills, special skills, throws
+	// Special : Special
+	// EX : EX VO
+	// SP : IW IWE
+	// Make it impossible to go back down when pressed at the same time
+
+	local isExSpecial = 0; // If it is a command type that is trying to perform an EX special move, set it to 1. In that case, some MvCode is used to play it.
+
+	if( "CancelOnly" in t )
+	{
+		if( check_CancelNone ) return 0;//Not possible when action is possible
+	}
+
+	switch ( CmdTbl_SkillType )
+	{
+	case "Special": // Special move
+	case "SpecialDouji": // Special move
+		if( !douji_st.CheckCancel( _SkillType_Special ) ) return 0;
+		if( !douji_st.CancelCheck_SpecialSkill() ) return 0;
+
+		/*
+		//Is BC technique like this?
+		//With Carmine etc, you can now do mysterious push like J2BC>J236C>J6BC.
+		if( !douji_st.IsZurashiCommand() )
+		{
+			if( !douji_st.CancelCheck_SpecialSkill() ) return 0;
+		}
+		else
+		{
+			//If you feel like pushing and pushing, special moves > special moves are also allowed.
+			//It may be safer to only allow some techniques such as BC special moves
+		}
+		*/
+		break;
+	case "SpecialThrow":
+		if( !douji_st.CheckCancel( _SkillType_Special ) ) return 0;
+
+		// Allow dash inertia throw
+		if( !douji_st.CancelCheck_SpecialSkill( 1 ) ) return 0;
+		/*
+		// It seems that if I delete ?a, 236A>D will no longer be possible...Is it okay to delete it? I'm worried, so I only exclude it when I'm pushed and pushed.
+		if( !douji_st.IsZurashiCommand() )
+		{
+			if( !douji_st.CancelCheck_SpecialSkill( 1 ) ) return 0;
+		}
+		else
+		{
+			//Allow special moves if you're feeling lazy and pushy
+		}
+		*/
+		// Many opinions were that it was difficult to perform special moves + throws were easy to miss.
+		// I lowered the priority of normal throws a little, so when I set it to 623AD, it shifted to 623A and became AD, so it would be healthier to fix it.
+
+		// It is treated as a special move, but another CommandTbl check shows that it only comes out from the A system.
+
+		break;
+	case "DirectSS":
+		//Basically the same check as the special move
+		if( !douji_st.CheckCancel( _SkillType_Special ) ) return 0;
+		if( !douji_st.CancelCheck_SpecialSkill() ) return 0;
+
+		if( check_CancelNone ) return 0; // Can only be issued by canceling
+				
+		if( douji_st.CheckFlag( 0, def_MC_Skill ) )
+		{
+			_dpn("Special moves that can normally be C are too strong, so they are useless");
+			return 0;
+		}
+
+		// Can only be issued immediately after hit (no delay)
+		local isJustHit = 0;
+		local enemy = BMvCore.GetEnemyCharaData();
+		if( enemy.push() )
+		{
+			local bs = BtlMvStd.GetBoundStatus();
+			if( bs.isBound )
+			{
+				// _dpn("time:"+bs.BoundTime );
+				if( bs.BoundTime <= 5 )
+				{
+					isJustHit = 1;
+				}
+			}
+			enemy.pop();
+		}
+		if( !isJustHit ) return 0;
+		break;
+	case "SpecialAdd": // Special move additional test for Wagner, Enkidu, and Londrekia
+		if( !douji_st.CheckCancel( _SkillType_Special ) ) return 0;
+		// if( !douji_st.CancelCheck_SpecialSkill() ) return 0; // Just don't process this
+		break;
+	case "AddCommand": //Add command/unconditional
+		break;
+	case "AnyNormalCancelFlag": // Refer to unconditional/judgment data settings
+		local dataCancelFlag = BCMDTbl.CheckCancelFlag( 0 );
+		// _dpn("dataCancelFlag:"+dataCancelFlag);
+		if( dataCancelFlag&(_CancelFlag_Always|_HitType_Hit|_HitType_Damage) )
+		{
+			// OK if there is some setting
+		}
+		else
+		{
+			return 0;
+		}
+		break;
+	case "AnySpecialCancelFlag": // Refer to unconditional/judgment data settings
+		local dataCancelFlag = BCMDTbl.CheckCancelFlag( 1 );
+		// _dpn("dataCancelFlag:"+dataCancelFlag);
+		if( dataCancelFlag&(_CancelFlag_Always|_HitType_Hit|_HitType_Damage) )
+		{
+			// OK if there is some setting
+		}
+		else
+		{
+			return 0;
+		}
+		break;
+	case "ExSpecial": //EX
+		isExSpecial = 1; // About to perform an EX special move
+		if( !douji_st.CheckCancel( _SkillType_ExSpecial ) ) return 0;
+		if( !douji_st.CancelCheck_EXSpecialSkill( 0 ) ) return 0;
+		break;
+	case "ExSpecialDouji": //EX press command simultaneously
+		isExSpecial = 1; // About to perform an EX special move
+		if( !douji_st.CheckCancel( _SkillType_ExSpecial ) ) return 0;
+		if( !douji_st.CancelCheck_EXSpecialSkill( 1 ) ) return 0;
+		break;
+	case "SpecialBC": // BC special move
+		// Since it's 236B+C, I think about waiting for simultaneous presses.
+		//I feel like it should basically be treated the same as an EX move.
+		isExSpecial = 1; // About to perform an EX special move
+		if( !douji_st.CheckCancel( _SkillType_ExSpecial ) ) return 0;
+		if( !douji_st.CancelCheck_SpecialBCSkill() ) return 0;
+		break;
+	case "CVO":
+		isExSpecial = 1; // About to perform an EX special move
+
+		if( check_CancelNone )
+		{
+			// Do not take action when possible
+			return 0;
+		}
+		else
+		{
+			if( douji_st.CheckCancel( _SkillType_ExSpecial ) )
+			{
+				// _dpn("If EX can be canceled, it's fine");
+			}
+			else if( douji_st.CheckCancel( _SkillType_ChainShift ) && douji_st.CheckFlag( 2, def_MC2_EnableCVO_OnlyCS ) )
+			{
+				// _dpn("When only CVO can be issued");
+			}
+			else
+			{
+				// _dpn("Incapable of action but cancellation conditions not met")
+				return 0;
+			}
+		}
+		break;
+	case "SpSpecial": //SP
+		isExSpecial = 1; // Trying to perform an EX special move or higher
+		// if( !BCMDTbl.CheckCancel( _SkillType_ExSpecial ) ) return 0;
+
+		// new process
+		local combo_vo = ( BMvEff.Liberate_GetType() == _LiberateType_Combo ); // Crosscast veil state only
+		local gauge_status = BMvEff.Liberate_Get();
+		local ex_timing = ( gauge_status == _SpGaugeMode_Normal )? douji_st.CheckCancel( _SkillType_ExSpecial ) : ( douji_st.CheckCancel( _SkillType_ExSpecial ) || (douji_st.CheckCancel( _SkillType_ChainShift ) && Battle_Std.CheckEnemyisDamage() && combo_vo ) );
+
+		// _dp("\n gauge_status:"+gauge_status+" combo_vo:"+combo_vo+" douji_st.CheckCancel( _SkillType_ExSpecial ):"+douji_st.CheckCancel( _SkillType_ExSpecial ) );
+		if( !ex_timing ) return 0;
+		break;
+	case "NoneDash": //None (techniques that cannot be performed after canceling) Can only be performed when action is possible, only for forward and backward dashes
+		if( !check_CancelNone ) return 0;
+
+		// By commenting out this process, I was able to cancel the special attack attack with a dash, but
+		// This is a countermeasure for things like Batista's 4 and 6A>B, so we limited the commands that handle this process.
+		if( check_ZurashiCommandFromSpecial ) return 0; // Don't push from special move
+
+		//I want to make it impossible to use from invincible moves
+		//(You can use the backstare, but the previous one is not allowed)
+		//This process is not necessary, but leave it as insurance
+		if( douji_st.IsZurashiCommand() && Battle_Std.CheckDagekiMuteki() )
+		{
+			// _dpn("Failed because it was a random push from some kind of invincibility");//All special moves, normal moves, movement moves, etc.
+			return 0;
+		}
+		break;
+	case "None": //None (techniques that cannot be performed after canceling) Can only be performed when action is possible
+	case "NoneDouji": //None (techniques that cannot be performed after canceling) Can only be performed when action is possible
+		if( !check_CancelNone ) return 0;
+
+		// I can't do it with Light, but I could do it with old UNI, so I'll allow it (it's a bit scary, so I made it conditional)
+		if( check_ZurashiCommandFromSpecial ) return 0; // Don't push from special move
+		break;
+	case "NormalRapid": //Normal technique that can be hit repeatedly
+		if( !douji_st.CheckCancel( _SkillType_Normal ) ) return 0;
+		// With this check, normal C can no longer cancel damage special moves (fixed a problematic move)
+		if( !douji_st.CancelCheck_NormalAtk() ) return 0;
+		if( check_ZurashiCommandFromSpecial ) return 0; // Don't push from special move
+		limit_type = 1; // Repeated hit cancellation type
+		break;
+	case "Normal": //Normal technique
+		if( !douji_st.CheckCancel( _SkillType_Normal ) ) return 0; //Cannot be canceled at normal skill level
+		// With this check, normal C can no longer cancel damage special moves (fixed problematic moves)
+		if( !douji_st.CancelCheck_NormalAtk() ) return 0;
+		if( check_ZurashiCommandFromSpecial ) return 0; // Don't push from special move
+		break;
+	case "NormalJump": //Normal jump
+		if( !douji_st.CheckCancel( _SkillType_Normal ) ) return 0; //Cannot be canceled at normal skill level
+		// With this check, normal C can no longer cancel damage special moves (fixed a problematic move)
+		if( !douji_st.CancelCheck_JumpCancel() ) return 0;
+		if( check_ZurashiCommandFromSpecial ) return 0; // Don't push from special move
+		break;
+	case "SpecialJump": //Special move (with upper element)
+		//Special moves can no longer be canceled with the same move?
+		//Accept only jump transition frames
+		if( Battle_Std.IsMatchMvNameArray( ["Mv_JumpWait_F","Mv_JumpWait_N","Mv_JumpWait_B"] ) )
+		{
+		}
+		else
+		{
+			if( !douji_st.CheckCancel( _SkillType_Special ) ) return 0;
+		}
+		if( !douji_st.CancelCheck_SpecialSkill() ) return 0;
+		break;
+	case "ExSpecialJump": //EX
+		isExSpecial = 1; // About to perform an EX special move
+		// There is the same process as this for ?Å·
+		if( Battle_Std.IsMatchMvNameArray( ["Mv_JumpWait_F","Mv_JumpWait_N","Mv_JumpWait_B"] ) )
+		{
+		}
+		else
+		{
+			if( !douji_st.CheckCancel( _SkillType_ExSpecial ) ) return 0;
+		}
+		if( !douji_st.CancelCheck_EXSpecialSkill( 0 ) ) return 0;
+		break;
+	case "GuardCancel": //Guard Cancel
+		if( !( BMvTbl.GetMvName()=="Mv_Guard" && bound_status.isBound == 2 ) ) return 0; //Failure
+		break;
+	case "BoundCancel":
+		if( !bound_status.isBound ) return 0; // Fails if not hit or guarded
+		// I can't release it if I'm dead
+		local rs = BMvTbl.GetMvRoundStatus();
+		if(rs.isMyKo)
+		{
+			// *Blast cannot be used if the player is dead, but there are other options as well, so keep it in there.
+			// _dp("\nCan't get it because it's dead");
+			return 0;
+		}
+		break;
+	}
+
+	// When canceling EX, it will fail if there is no hit information
+	if( isExSpecial && Battle_Std.MoveCodeEx.CheckFlag( 2, def_MC2_NoWhiffEXCancel ) )
+	{
+		//MEMO:Battle_Std.CheckExSpecialCancel() performs similar processing, but strictly speaking it is different (such as pressing at the same time), so leave it as is.
+		local hs = BMvTbl.GetMvHitStatus();
+		// _dpn("Check:"+hs.Type );
+		if( !(hs.Type & _HitType_Hit) )
+		{
+			return 0;
+		}
+	}
+
+	// Make the combo limit an overall limit, not a limit on normal skills etc.
+	if( "ComboLimit" in t )
+	{
+		if( t.ComboLimit )
+		{
+			local limit_combo = BCMDTbl.CheckComboLimit( t.ComboLimit );
+			if( limit_type == 1 ) // Repeat type
+			{
+				if( limit_combo == 1 ) return 0; // Restricted
+			}
+			else
+			{
+				if( limit_combo == 255 || limit_combo == 1 ) return 0;
+			}
+			if( limit_combo == 1 ) return 0; // Restricted
+		}
+		local nowcombolv = BCMDTbl.GetComboLimitLevel();
+		if( t.ComboLimit < nowcombolv )
+		{
+			flag_useReverseBeat = 1; // Technique to perform from reverse beat
+		}
+	}
+
+	// detailed restrictions
+	if ( "BallLimit" in t ) // Projectile limit
+	{
+		foreach(i, v in t.BallLimit)
+		{
+			//print("\nNumber:"+i+" Number:"+v+" Check:"+BMvTbl.TobiParam_Func({ slot=i, type=_ValGet }) );
+			if ( BMvTbl.TobiParam_Func({ slot=i, type=_ValGet }) >= v) //It will not appear unless it is less than the specified value
+			{
+				return 0; // Must be less than the projectile counter
+			}
+		}
+	}
+	if ( "BallCount" in t ) // Projectile limit
+	{
+		foreach(i, v in t.BallCount)
+		{
+			//print("Number:"+i+" Number:"+v);
+			if ( BMvTbl.TobiParam_Func({ slot=i, type=_ValGet }) != v) return 0; // Must be the same as the projectile counter
+		}
+	}
+	if ( "BallOver" in t ) // Projectile limit
+	{
+		foreach(i, v in t.BallOver)
+		{
+			if ( BMvTbl.TobiParam_Func({ slot=i, type=_ValGet }) < v) return 0; // Must be greater than or equal to the projectile counter
+		}
+	}
+	if ( "DashLimit" in t ) //Dash limit
+	{
+		if (BCMDTbl.CheckDash(0,0) >= t.DashLimit) return 0;
+	}
+	if ( "HeightLimit" in t ) //Height limit
+	{
+		//_dm("Yes? t.HeightLimit:"+t.HeightLimit+" Result: "+BCMDTbl.CheckDash(t.HeightLimit,0));
+		//if ( !BCMDTbl.CheckDash(t.HeightLimit,0) ) return 0;
+		local pos = BMvTbl.GetPosition(0); //Get the coordinates (does it not have to be the operation parent?)
+		if( pos.y > -t.HeightLimit ) return 0; //HeightLimit is the height (plus), so convert it a bit
+	}
+	if ( "AirJumpLimit" in t ) //Multi-stage jump check Will not be able to jump again until lever neutral is detected
+	{
+		if (!BCMDTbl.CheckAirJump(t.AirJumpLimit)) return 0;//0 if jump count is greater than or equal to t.AirJumpLimit
+	}
+	if ( "AirCountLimit" in t ) //Limit the number of times you can use it in the air (it won't work unless you set a limit in Mv)
+	{
+		foreach(slot, val in t.AirCountLimit)
+		{
+			if( BMvTbl.AddAirCount( slot, 0 ) >= val ) return 0;
+		}
+	}
+
+	//MV check processing
+	//It's a little weird, but I made it possible to change whether to check depending on cmdpos
+	local MvCheckTable = 0;
+
+	if( "MvCheck_CmdPos" in t )
+	{
+		if( BMvTbl.IsCpu()==0 )
+		{
+			local cmd_spos = BCMDTbl.GetSuccessButtonPos();
+			if( cmd_spos in t.MvCheck_CmdPos )
+			{
+				// _dpn("replacement");
+				MvCheckTable = t.MvCheck_CmdPos[cmd_spos];
+			}
+		}
+	}
+	else if ( "MvCheck" in t )
+	{
+		MvCheckTable = t.MvCheck;
+	}
+
+	// If you write the current Mv-only processing, the hit check will be shifted and you will have to look only at the current information without considering the push.
+	// After looking at the current Mv with the special move additional command and narrowing it down to Only, it will be a big problem if you look at the previous Mv when looking at HitStatus.
+	local checkOnlyNowMv = 0; // Command that must be checked with current Mv
+
+	//Reject when specific Mv
+	if( MvCheckTable )
+	{
+		if ( "SkillFail" in MvCheckTable ) //Reject if it is a specific Mv (for special moves)
+		{
+			//Check if action is possible
+			//* MVs that are originally incapable of action but are able to act in the second half of the anime will be able to be canceled with the same move.
+
+			//It's scary so only the ground MV
+			if( !check_CancelNone )
+			{
+				//Incapable of action
+				if( Battle_Std.IsMatchMvNameArray( MvCheckTable.SkillFail ) ) return 0;
+			}
+			else
+			{
+				//ground cancel
+				if( !BCMDTbl.CheckPosState( _PosState_Ground ) )
+				{
+					//Not on the ground
+					if( Battle_Std.IsMatchMvNameArray( MvCheckTable.SkillFail ) ) return 0;
+				}
+				else
+				{
+					//It's on the ground
+					//Available for action and on the ground
+					//Do not check for the same move
+				}
+			}
+		}
+
+		if ( "Fail" in MvCheckTable ) //Reject if it is a specific Mv
+		{
+			if( Battle_Std.IsMatchMvNameArray( MvCheckTable.Fail ) ) return 0;
+		}
+		if ( "Only" in MvCheckTable ) //Reject if it is not from a specific Mv
+		{
+			checkOnlyNowMv = 1; // Command that must be checked with current Mv
+			//This doesn't take into account the simultaneous press grace period (I feel like it's better)
+			if( !Battle_Std.IsMatchMvNameArray( MvCheckTable.Only ) ) return 0;
+		}
+		if ( "CancelOnly" in MvCheckTable ) //Reject if it is not from a specific Mv (only when canceling)
+		{
+			if( !check_CancelNone )
+			{
+				checkOnlyNowMv = 1; // Command that must be checked with current Mv
+				//This doesn't take into account simultaneous press grace (I think it's better)
+				if( !Battle_Std.IsMatchMvNameArray( MvCheckTable.CancelOnly ) ) return 0;
+			}
+		}
+		if ( "DoujiFail" in MvCheckTable ) //If it is from a specific Mv, there is a grace period for repelling/simultaneous pressing
+		{
+			local mvname = douji_st.GetMvName();
+			// _dpn("mvname:"+mvname);
+			if( Battle_Std.IsMatchNameArray( mvname, MvCheckTable.DoujiFail ) ) return 0;
+		}
+		if ( "DoujiOnly" in MvCheckTable ) //Rejects if it is not from a specific Mv / There is a grace period for pressing at the same time
+		{
+			local mvname = douji_st.GetMvName();
+			//_dpn("mvname:"+mvname);
+			if( !Battle_Std.IsMatchNameArray( mvname, MvCheckTable.DoujiOnly ) ) return 0;
+		}
+	}
+
+	//Look at ID and flick
+	if( "FrameIDCheck" in t)
+	{
+		//_dm("ID:"+Battle_Std.GetPlayerFrameID() );
+		if ( "Fail" in t.FrameIDCheck ) //Reject if it is a specific FrameID
+		{
+			local p_frameid = Battle_Std.GetPlayerFrameID();
+			if( type( t.FrameIDCheck.Fail ) == "array" )
+			{
+				foreach( i, v in t.FrameIDCheck.Fail )
+				{
+					if( p_frameid == v ) return 0;
+				}
+			}
+			else
+			{
+				if( p_frameid == t.FrameIDCheck.Fail ) return 0;
+			}
+		}
+		if ( "Only" in t.FrameIDCheck ) //Reject if it is not from a specific FrameID
+		{
+			checkOnlyNowMv = 1; // Command that must be checked with current Mv
+			local p_frameid = Battle_Std.GetPlayerFrameID();
+			if( type( t.FrameIDCheck.Only ) == "array" )
+			{
+				local hit = 0;
+				foreach( i, v in t.FrameIDCheck.Only )
+				{
+					if( p_frameid == v )
+					{
+						hit = 1;
+						break;
+					}
+				}
+				if( !hit ) return 0; // Failure if there is nothing
+			}
+			else
+			{
+				if( p_frameid != t.FrameIDCheck.Only ) return 0;
+			}
+		}
+
+		if ( "OnlyDouji" in t.FrameIDCheck ) //Reject if it is not from a specific FrameID
+		{
+			// checkOnlyNowMv = 1; // Command that must be checked with current Mv
+			local p_frameid = douji_st.GetMvStatus().FrameID;
+
+			if( type( t.FrameIDCheck.OnlyDouji ) == "array" )
+			{
+				local hit = 0;
+				foreach( i, v in t.FrameIDCheck.OnlyDouji )
+				{
+					if( p_frameid == v )
+					{
+						hit = 1;
+						break;
+					}
+				}
+				if( !hit ) return 0; // Failure if there is nothing
+			}
+			else
+			{
+				if( p_frameid != t.FrameIDCheck.OnlyDouji ) return 0;
+			}
+		}
+	}
+
+	//Bit flag check with Param
+	//ParamFlagCheck = { Only = { [2]=16 } } will result in success with Param2&16
+	//ParamFlagCheck = { Only = { [2]=16, [3]=8 } } Param2&16 || Param3&8 will be successful (or be careful)
+	if( "ParamFlagCheck" in t )
+	{
+		if( "Fail" in t.ParamFlagCheck )
+		{
+			foreach( slot, val in t.ParamFlagCheck.Fail )
+			{
+				if( Battle_Std.CheckParamFlags( slot, val ) )
+				{
+					return 0;
+				}
+			}
+		}
+
+		if( "Only" in t.ParamFlagCheck )
+		{
+			checkOnlyNowMv = 1; // Command that must be checked with current Mv
+			local isFlagFind = 0;
+			foreach( slot, val in t.ParamFlagCheck.Only )
+			{
+				if( Battle_Std.CheckParamFlags( slot, val ) )
+				{
+					isFlagFind = 1;
+					break;
+				}
+			}
+			if( !isFlagFind ) return 0;
+		}
+		if( "OnlyDouji" in t.ParamFlagCheck ) // Version that supports simultaneous pressing and sliding
+		{
+			local isFlagFind = 0;
+			local use_mvs = douji_st.GetMvStatus();
+			foreach( slot, val in t.ParamFlagCheck.OnlyDouji )
+			{
+				if( Battle_Std.CheckParamFlags( slot, val, use_mvs ) )
+				{
+					isFlagFind = 1;
+					break;
+				}
+			}
+			if( !isFlagFind ) return 0;
+		}
+	}
+
+	//Check the hit status and flick
+	if( "HitStatus" in t)
+	{
+		// local s = ;
+		//_dm( " hs:"+s.Type+" _HitType_Damage:"+_HitType_Damage+" _HitType_Guard:"+_HitType_Guard );
+		//_dm("HitStatis"+(s.Type ==_HitType_Damage || s.Type ==_HitType_Guard ));
+		local use_HitType = (checkOnlyNowMv)? BMvTbl.GetMvHitStatus().Type : check_HitType;
+		switch ( t.HitStatus )
+		{
+		case "Hit":
+			if( !(use_HitType&_HitType_Hit ) ) return 0;
+			break;
+		case "Damage":
+			if( !(use_HitType&_HitType_Damage ) ) return 0;
+			break;
+		case "Guard":
+			if( !(use_HitType&_HitType_Guard ) ) return 0;
+			break;
+		case "Always":
+			break;
+		}
+	}
+
+	// special play
+	if( !Def_Rule_EnableReverseBeat )
+	{
+		if( flag_useReverseBeat ) return 0;
+	}
+
+	// It's weird that the technique comes out while I'm blacking out
+	// If CS is possible during a blackout, such as during CVO, insurance processing for canceling the blackout and taking another action
+	// Note that with this process, the flag disappears 1F later, so you won't be able to use techniques in the frame immediately after the blackout ends, but you won't be able to take immediate action after the blackout, so there shouldn't be a problem.
+	if( Def_Sys_NoCmdCheckDuringAnten )
+	{
+		local anten = Battle_Std.MoveCodeEx.CheckFlag( 3, def_MC3_Anten );
+		if(anten)
+		{
+			// _dpn("Failed because it's darkening");
+			return 0;
+		}
+	}
+
+	//Processing after confirming that it can be released from here ---------------------------------
+	// _dp1p("\n Success:"+tmplname );
+
+	//Status updated when CmdCheck passes
+	//_dp("\n def_PP_CmdStatus initialization");
+	BMvTbl.SetPP(def_PP_CmdStatus,0); //Initialization
+	if( douji_st.CheckCancel( _SkillType_Normal )==255 )
+	{
+		BMvTbl.SetPP(def_PP_CmdStatus, BMvTbl.GetPP(def_PP_CmdStatus)|def_PP_CS_MoveAble ); //Able to act
+		BMvTbl.SetPP(def_PP_CmdStatus, BMvTbl.GetPP(def_PP_CmdStatus)|def_PP_CS_ExCancelOK ); //I was in a state where I could perform an EX move
+	}
+	else
+	{
+		// There is the same process as this above
+		local cmd_excancel = 0;
+		if( BCMDTbl.CheckMoveName( ["Mv_JumpWait_F","Mv_JumpWait_N","Mv_JumpWait_B","Mv_HighJumpWait_F"] ) )
+		{
+			// cmd_excancel = 1; // *Because it's UNI
+		}
+		else
+		{
+			if( douji_st.CheckCancel( _SkillType_ExSpecial ) ) cmd_excancel = 1;
+		}
+		if( cmd_excancel )
+		{
+			// _dp("\nFrom where you can perform SP techniques");
+			if( douji_st.CancelCheck_EXSpecialSkill( 0 ) )
+			{
+				// _dp("\nFrom where you can perform EX techniques");
+				BMvTbl.SetPP(def_PP_CmdStatus, BMvTbl.GetPP(def_PP_CmdStatus)|def_PP_CS_ExCancelOK ); //I was in a state where I could perform an EX move
+			}
+		}
+	}
+
+	// Gauge consumption reservation processing
+	if( !flag_useComboGauge ) // Technique that does not consume gauge
+	{
+	}
+	else if( flag_useComboGauge == 2 ) // Only during VO
+	{
+		BMvEff.Liberate_End(); // Be careful as CheckAlive will fail if you cancel here
+		// MEMO: When a technique comes out with a gauge consumption reservation, it should always go through BMvEff.Liberate_End()
+		BCMDTbl.SetSpUseBufferTmp( { value=20000 } ); // Gauge consumption reservation
+		BMvTbl.SetPP(def_PP_CmdStatus, BMvTbl.GetPP(def_PP_CmdStatus)|def_PP_CS_UseGauge ); // Gauge consumption technique reservation
+	}
+	else // Consumes 1 gauge etc.
+	{
+		// _dpn("t.Cost.ComboGauge:"+t.Cost.ComboGauge);
+		BCMDTbl.SetSpUseBufferTmp( { value=t.Cost.ComboGauge } ); // Gauge consumption reservation
+		BMvTbl.SetPP(def_PP_CmdStatus, BMvTbl.GetPP(def_PP_CmdStatus)|def_PP_CS_UseGauge ); // Gauge consumption technique reservation
+	}
+
+	// Reverse beat announcement?
+	if( flag_useReverseBeat ) // The technique you tried to perform from reverse beat
+	{
+		//_dp("\n useReverseBeat reservation");
+		BMvTbl.SetPP(def_PP_CmdStatus, BMvTbl.GetPP(def_PP_CmdStatus)|def_PP_CS_ReverseBeat ); // Tried to start from reverse beat
+	}
+
+	// If the switch is forced due to simultaneous presses
+	if( douji_st.IsZurashiCommand() )
+	{
+		// _dp("\n flag_changeDoujiEnd reservation");
+		Battle_Std.MoveCodeEx.AddFlag( 1, def_MC1_DoujiEndYoyaku );
+	}
+
+	return 1; // Techniques you can do if you get this far
+}
+
+print("\n btl_CmdCheck.....OK");

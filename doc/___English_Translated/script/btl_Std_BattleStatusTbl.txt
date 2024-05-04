@@ -1,0 +1,183 @@
+btl_debPrint2( "\n>>> [btl_Std_BattleStatusTbl]" );
+
+//Standard battle status table
+//Load each character in SC
+
+Battle_Std.GetStd_BattleStatusTable <- function()
+{
+	local tbl = {};
+
+	tbl =
+	{
+		StartPosition = 320, // Start position, distance from center
+		StartPosition_Partner = 240, // default 240
+
+		GuardEffName = "", // Guard default Eff_Hit_Guard
+		// FailedGuardEffName = "Eff_Hit_FaultGuard", // Failed Guard default Eff_Hit_Guard
+		FailedGuardEffName = "Eff_Hit_Guard", // Failed Guard default Eff_Hit_Guard
+
+		AttackRate = 100, // Final attack power modification factor
+		ComboRate = 100,// Multiplication factor for each hit Basic value 96 Value used if there is no tool hit number correction (0-255)
+
+		SeedGaugeCorrectValue_Plus = 100, // seedgauge plus direction fluctuation correction value
+		SeedGaugeCorrectValue_Minus = 100, // seedgauge negative fluctuation correction value
+
+		ScratchDamageVal_Atk = 100, // Scratching damage, when attacking
+		ScratchDamageVal_Def = 100, // Scratching damage, when defending
+		ScratchDamageVal_ExDef = 100, // Scratch damage, just defense
+
+		SpGauge_PlusVal = 100, // EXS gauge "increase" coefficient?@If it's all, it will affect the gauge consumption, so just add it for now
+		Swing_ExsPlusVal = 0, // EXS increase coefficient when swinging, tool settings required
+
+		// HP division value and total health (viewed from top)
+		HpDivValue = [ 10000 ],
+
+		// Distribution on HP gauge (added value must be 100)
+		HpDivRatio = [ 100 ],
+
+		// auto guard distance
+		GuardRange = (128 << 7),
+
+		// Unique ability
+		IsKoArmor = false, // default[false] KO resistance, only survives once
+
+		SpGauge_Max = def_SC_SpGauge_Max, // Gauge maximum value (20000)
+		Liberate_Minus = def_SC_Liberate_Minus, // Decreased value in Liberate state (20)
+		OverLiberate_Minus = def_SC_OverLiberate_Minus, // Decrease value in OverLiberate state (15)
+
+		// combo rate
+		ComboRate_HitCount = 1, // Number of hits with multiplication factor, invalid if 0
+		ComboRate_CorrectVal = 72, // Multiplication factor
+
+		// Liberate_EXSPlusVal = 100, // EXS increase factor in Liberate state (meaningless since gauges are common)
+		Liberate_AttackPlusVal = 120, // Attack power increase factor in Liberate state
+
+		Liberate_SpMinusVal = 400, // Decrease in gauge usage techniques, how many Liberate_Minus should be reduced?
+		Liberate_SpMinusVal_CVO = 640, // How much does OverLiberate_Minus decrease in gauge usage techniques?
+		Liberate_SpMinusVal_DangerCVO = 400, // Decrease in gauge usage techniques, OverLiberate_Minus How much should it be reduced?
+		// OverLiberate_Minus is referenced when OverLiberate
+		// Example: If it is a technique that reduces by 15000 when Liberate
+		// Decrease amount = (Liberate_Minus * Liberate_SpMinusVal * 15000) / 10000;
+
+		GRD =
+		{
+			Liberate_AutoPlusVal = 150, // GRD automatic increase factor in Liberate state
+
+			AutoFramePlus = [ 15,12,5,3,2,0, 0,0,0,0,0,0 ], // 12 pieces If there is a minus, it will decrease the more you push, so it is no good
+			ShieldFramePlus = 10,
+			JustShieldPlus = 10000,
+			PassiveMovePlus = 5000,
+
+			PressureVal_Min = 50, // Pressure coefficient minimum value 100=1.0
+			PressureVal_Max = 700, // Pressure coefficient maximum value 100=1.0
+
+			TimeResultVal = 100, // Time reinforcement factor 100=1.0
+
+			MaxKeepTime = 10*60, // Maximum state duration
+			BreakTime = 10*60,
+			OverBreakTime = 10*60,
+
+			JustShieldMinus = 1,
+			FailedGuardMinus = 1,
+
+			ReduceSuccessPlus = 0, // Increase amount when reduce is successful (obsolete)
+
+			// Judgment
+			//Vorpal time
+			JudgeWin_ExsPlusVal = 105, // When GRD judgment wins, EXS increase coefficient 100=1.0
+			JudgeWin_AttackPlusVal = 110, // When GRD judgment wins, attack power increase coefficient 100=1.0
+			JudgeCelestialWin_AttackPlusVal = 120, // When GRD judgment wins, attack power increase coefficient 100=1.0
+			JudgeBreak_ExsPlusVal = 25, // EXS increase coefficient at break 100=1.0
+
+			EnemyGRDBreak_AttackPlusVal = 110, // Attack power increase factor when the opponent breaks
+		}
+
+		GaugePlus_DamageMinVal = 50, // Guaranteed percentage of damage gauge increase
+		//If you lower this too much, the gauge won't increase even if you do a good combo (it's like 100 until ST)
+
+		// Definition of gauge increase amount by technique type
+		// Specified with BMvTbl.SetMvAction() BMvTbl.GetMvAction()
+		// pos -- technique type number 0-31
+		// gaugeplusval -- Gauge increase factor [attacker HIT, attacker GUARD, victim HIT, victim GUARD] Value is 100 = 1.0
+		MvActionParam =
+		[
+			{ pos= def_MVA_None  	, gaugeplusval=[ 110, 35, 35, 28 ], finishtype=  1 }, // Technique type not set
+			{ pos= def_MVA_Throw  	, gaugeplusval=[  70, 35, 40, 28 ], finishtype=  1 }, // Normal throw
+			{ pos= def_MVA_EXAtk 	, gaugeplusval=[  80, 25, 50, 28 ], finishtype=  1 }, // Special skill (FF)
+			{ pos= def_MVA_Skill 	, gaugeplusval=[ 110, 35, 35, 28 ], finishtype=  1 }, // Special move CLR:[ 65, 35, 50, 28 ]
+			{ pos= def_MVA_EXSkill 	, gaugeplusval=[ 	0, 0, 35, 28 ], finishtype=  1 }, // EX special move
+			{ pos= def_MVA_SPSkill 	, gaugeplusval=[ 	0, 0, 35, 28 ], finishtype=  2 }, // SP IW
+			{ pos= def_MVA_LASkill 	, gaugeplusval=[ 	0, 0, 35, 28 ], finishtype=  3 }, // LA IWE
+			{ pos= def_MVA_EXSystem , gaugeplusval=[ 	0, 0, 35, 28 ], finishtype=  1 }, // EX(special) VO/IWE attack
+		]
+	}//
+
+	//
+	// { num=80, minus=0 }, // 0 for "more than" 80 points
+	// { num=50, minus=2 }, // 2 for 79-50 points
+
+	// Ground skew correction table (subtraction value) using combo points
+	tbl.CP_VecMinus_Ground <- [
+		{ num=35, minus=0  },
+		{ num=29, minus=1  },
+		{ num=24, minus=3  },
+		{ num=19, minus=4  },
+		{ num=14, minus=5  },
+		{ num=10, minus=7  },
+		{ num= 6, minus=10 },
+		{ num= 3, minus=14 },
+		{ num= 0, minus=99 },
+	];
+
+	// Aerial passive time correction table based on combo points (subtraction value)
+	tbl.CP_VecMinus_Air <- [
+		{ num=65, minus=0  }, //100?`65
+		{ num=36, minus=1  }, // 64?`36
+		{ num=28, minus=3  }, // 35?`28
+		{ num=22, minus=4  }, // 27?`22
+		{ num=17, minus=5  },
+		{ num=13, minus=6  },
+		{ num= 9, minus=8  },
+		{ num= 6, minus=10 },
+		{ num= 3, minus=15 },
+		{ num= 0, minus=99 },
+	];
+
+	// Aerial skew correction table (subtraction value) using combo points
+	tbl.CP_VecMinus_AirBound <- [
+		{ num=65, minus=0  },
+		{ num=36, minus=1  },
+		{ num=28, minus=3  },
+		{ num=22, minus=4  },
+		{ num=17, minus=5  },
+		{ num=13, minus=6  },
+		{ num= 9, minus=8  },
+		{ num= 6, minus=10 },
+		{ num= 3, minus=15 },
+		{ num= 0, minus=99 },
+	];
+
+	// Combo point correction table (multiply value) at combo time
+	// Corrected the attack timing after time has elapsed
+	//View on TS One round 840F Half round 420F 210F
+	tbl.CP_Time_Val <- [
+		{ num=210,  val=100},
+		{ num=420,  val=90 },
+		{ num=630,  val=90 },
+		{ num=840,  val=90 },
+		{ num=1260, val=80 }, // (Be careful not to use relief measures from this point on)
+		{ num=1680, val=80 },
+		{ num=9999, val=80 },
+	];
+
+	// 1 GRD = 10000
+	// (420-210)*50=10500 *Approx. 1 piece
+	tbl.GRD.BoundTimePlus <- [
+		{ time=210,  val=0  }, // 
+		{ time=420,  val=0  }, // CLR:32
+		{ time=630,  val=0  }, // CLR:64
+		{ time=9999, val=0  }, // This should now limit the maximum to 2
+	]; //
+
+	return tbl;
+}

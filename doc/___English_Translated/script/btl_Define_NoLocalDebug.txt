@@ -1,0 +1,45 @@
+const Def_Dbg_LocalDebugMode 		= 0; // Turn on/off function for debugging in local environment
+const Def_Dbg_LocalDebugScriptPath 	= 0; // "./___NotProject/LocalDebug/";
+
+// Debug message output related
+const Def_Dbg_DebugMessage 			= 0; // Turn on/off console output for debugging
+const Def_Dbg_LocalAnnounce 		= 0; // Display announcement for local debugging
+const Def_DbgMes_PlaySE 			= 0; // SE playback relationship
+
+const Def_Dbg_KeyLog1P 				= 0; // Show 1P key display
+const Def_Dbg_KeyLog2P 				= 0; // Show 2P key display
+
+const Def_Dbg_DebugButtonMode 		= 0; // Whether to use the E button as a debug button 0: Not used 1: Gauge increase 2: Pause opponent 3: For tremo 4: Edge of screen disappears 5: Forced victory 6: Knocks back with 0 damage 6: Voice check 7: Stage confirmation
+
+const Def_Dbg_DebugGauge 			= 0; // Display temporary gauge?
+
+const Def_Dbg_WriteCommandList 		= 0; // Whether to generate a command list file when loading a character
+const Def_Dbg_NoPlayUpsetSE 		= 0; // Don't play annoying SE (VORPAL and provocation)
+
+const Def_Dbg_SmartSteerLog 		= 0; // Smart steer related logs
+const Def_Dbg_KoukaFrameLog 		= 0; // Stiffness difference frame display
+const Def_Dbg_ComboChanceLog 		= 0; // Display pursuit possibility information
+const Def_Dbg_InterruptedLog 		= 0; // Gap frame display (1P & 2P)
+const Def_Dbg_TotalFrameLog 		= 0; // Frame information display (1P & 2P)
+const Def_Dbg_ComboSPKouritu 		= 0; // Gauge efficiency
+const Def_Dbg_TmplMoveLog 			= 0; // Tmpl automatically generated behavior log
+const Def_Dbg_PotentialLog 			= 0; // Potential log
+const Def_Dbg_SkillThrowLog 		= 0; // Special move throw log
+const Def_Dbg_TechHitLog 			= 0; // Throw-through log
+const Def_Dbg_DoujiDelayLog 		= 0; // Simultaneous press delay log
+const Def_Dbg_BoundBlastLog 		= 0; // Bound blast log
+const Def_Dbg_AirAtkFlag 			= 0; // Jump attack flag log
+const Def_Dbg_RoundStatus 			= 0; // Round information log
+const Def_Dbg_AirCountLog 			= 0; // Flag change log for air special moves (0 to 7), air dash, and double jump (8 to 9)
+const Def_Dbg_BattleDamageLog 		= 0; // Damage efficiency log during battle
+const Def_Dbg_HitMutekiLog 			= 0; // Attribute invincibility frame log
+const Def_Dbg_MoveCodeStatus 		= 0; // Display flags of Mv in battle on the game screen
+const Def_Dbg_MoveListStatus 		= 0; // Display the list of Mv in battle on the game screen
+const Def_Dbg_MoveZokuseiStatus 	= 0; // Display attribute information during battle on the game screen
+const Def_Dbg_MvValStatus 			= 0; // Display Mv flag in battle numerically
+const Def_Dbg_BtlGRDAssist 			= 0; // Display GRD and TS warnings during battle on the game screen
+const Def_Dbg_AllMoveAddCommand 	= 0; // Treat all techniques as additional techniques and use them in various ways
+const Def_Dbg_ViewComboEfficient	= 0; // Display combo recipe and efficiency
+const Def_Dbg_DebugButtonMenu 		= 0; // Make the debug button open the debug menu
+const Def_Dbg_AchiveMessage 		= 0; // Display achievements and activity logs
+const Def_Dbg_CommandAssist 		= 0; // Simplify/automate specific operations

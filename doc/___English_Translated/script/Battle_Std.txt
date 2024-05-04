@@ -1,0 +1,47 @@
+print("\n[Battle_Std.txt]");
+
+local chrcount = 30; // Reserve a large amount
+
+// for connection
+Battle_Std <- {}; // empty
+Battle_Std.SeTable <- []; //Sound list by character
+Battle_Std.SeTable.resize(chrcount,{}); //Initialize the characters with {}
+
+BtlPl <- {}; // empty
+BtlOb <- {}; // empty
+BtlPt <- {}; // empty
+
+/*
+   dofile() compile + run
+
+   This source must be executed
+   Cannot be used like #include
+
+   It is impossible to write const constants in separate text.
+   (Since dofile() is not executed at the time of compilation, the const constant does not exist.)
+*/
+
+// external
+__dofile__( "./script/btl_CmdCheck.txt" ); //Command check function
+__dofile__( "./script/btl_ChrTableFunc.txt"); //Character table creation related functions
+__dofile__( "./script/btl_MvInitFunc.txt"); //Common initialization process for normal moves and special moves
+__dofile__( "./script/btl_MvFunc.txt"); //Functions often used in Mv
+__dofile__( "./script/btl_StdCommdandTbl.txt" ); //Command table
+__dofile__( "./script/btl_StdMoveTbl.txt" ); //Behavior table
+__dofile__( "./script/btl_Std_BattleStatusTbl.txt" ); //SC table
+__dofile__( "./script/cmn_SetPosition.txt");
+__dofile__( "./script/sq_stagebgm.txt" ); //Stage BGM change function
+
+if( _DevWindows && Def_Dbg_LocalDebugScriptPath && BtlMvStd.IsFileAlive( Def_Dbg_LocalDebugScriptPath+"BtlFunc.txt" ) )
+{
+	__dofile__( Def_Dbg_LocalDebugScriptPath+"BtlFunc.txt" );
+	__dofile__( Def_Dbg_LocalDebugScriptPath+"BtlFuncSaveData.txt" );
+}
+
+// __dofile__( "./script/btl_UkemiFunc.txt" ); // After StdMove
+// __dofile__( "./script/btl_MvSkill.txt" ); // After StdMove
+
+// __dofile__( "./___NotProject/DaihonData/MissionText.txt" );
+// __dofile__( "./___NotProject/DaihonData/TutorialText.txt" );
+
+print( "\nStd_MoveTable Running." );

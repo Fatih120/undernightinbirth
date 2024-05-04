@@ -1,0 +1,67 @@
+stage_bgm <- {};
+
+//------------------------------------------------ -----------------------------
+// Desc: stage_bgm.initround()
+//
+// If there is a change to the battle BGM, set it here, it has higher priority than the BGM setting on the battle table
+// Information is invalid if the battle has not started when called
+//
+//------------------------------------------------ -----------------------------
+stage_bgm.initround <- function()
+{
+	local btlobj = BMvTbl.CBtlInfo();//Battle information
+	local bgmnum = 0;
+
+	local private_bgm = 0;
+
+	//------------------------------------------------ -----------------------------
+	// Get combination-specific BGM
+
+	// Get battle information
+	local stage_st = BMvTbl.GetMvStageStatus();
+	local stagetype = stage_st.IsTrainingBattle(); // 1-Training 2-Tutorial 3-Mission
+
+	if( stagetype != 2 && stagetype != 3 ) // Exclude Tutorial Mission
+	{
+		// Caius vs Gordo
+		if( btlobj.CheckCharaAlive_str("chr015") != 0 && btlobj.CheckCharaAlive_str("chr005") != 0 )
+		{
+			private_bgm = 91; // Change to private BGM
+		}
+		// Hyde vs Seto
+		else
+		if( btlobj.CheckCharaAlive_str("chr000") != 0 && btlobj.CheckCharaAlive_str("chr008") != 0 )
+		{
+			private_bgm = 92; // Change to private BGM
+		}
+		// Wagner vs Londrechia
+		else
+		if( btlobj.CheckCharaAlive_str("chr016") != 0 && btlobj.CheckCharaAlive_str("chr018") != 0 )
+		{
+			private_bgm = 93; // Change to private BGM
+		}
+	}
+
+	//------------------------------------------------ -----------------------------
+
+	if( btlobj.IsBgmAuto() )
+	{
+		// It was auto
+		if( private_bgm != 0 ) // There was a fixed combination of BGM
+		{
+			bgmnum = private_bgm;
+		}
+		if( bgmnum == 0 )
+		{
+			bgmnum = btlobj.GetFixStageBGM(); // Change according to each mode
+		}
+	}
+
+	// If a decision is made here, it will be adopted as battle BGM
+	if( bgmnum != 0 )
+	{
+		btlobj.SetBattleBgm( bgmnum );
+	}
+}
+
+btl_debPrint( "\n>>> sq_stagebgm." );

@@ -1,0 +1,31 @@
+
+print("\n< in Battle_init >");
+
+/*
+	Processed Executed before Battle_Std.txt
+	Maybe it would be a good idea to read the const definition file here?
+*/
+
+//Output for debugging
+local file = "./script/btl_Define_LocalDebug.txt";
+if( _DevWindows && BtlMvStd.IsFileAlive( file ) )
+{
+	__dofile__( file )
+	print("\n Local debugging mode available");
+	debuglog.write("\n"); //Only line breaks for ease of viewing
+	debuglog.write_r("[Battle_Init]"); //With automatic line break and date at the end
+}
+else
+{
+	__dofile__( "./script/btl_Define_NoLocalDebug.txt" )
+	// print("\n No local debugging mode");
+}
+
+__dofile__("./script/btl_Define.txt"); //Constant
+__dofile__("./script/btl_Define_Chara.txt"); //Constant
+__dofile__("./script/btl_Define_CharaNew.txt"); //Constant
+__dofile__("./script/btl_debugFunc.txt"); /**/
+
+print("\n< out Battle_init >");
+
+// __dofile__("./script/Battle_Std.txt"); /* Is this better? */

@@ -1,0 +1,25 @@
+// Something like SEPrio constant
+// If local, scope only this file?
+
+Def_SEP_Furimuki 		<- -1; //Do not play if something is playing -1 does not play while something is playing
+Def_SEP_Vorpal 			<- -1; //Do not play if something is playing -1 does not play while something is playing
+
+Def_SEP_GuardLv1 		<- 5;
+Def_SEP_GuardLv2 		<- 10;
+Def_SEP_GuardLv3 		<- 20;
+
+Def_SEP_NiceGuard 		<- 30;
+Def_SEP_GuardMiss 		<- 40;
+
+Def_SEP_Recover 		<- -30000; //Stop even if anything is playing
+
+Def_SEP_Shield 			<- 50; // Activate shield
+Def_SEP_ShieldSuccess 	<- 200; //Shield success
+
+Def_SEP_DamageLv1 		<- 110;
+Def_SEP_DamageLv2 		<- 120;
+Def_SEP_DamageLv3 		<- 130;
+Def_SEP_KO 				<- 999;
+Def_SEP_ThrowTech 		<- 300;
+
+Def_SEP_ChainShift 		<- 100;
