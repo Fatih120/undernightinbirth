@@ -1,1 +1,1 @@
-../palettehelper.exe -input ListPal.txt -output palette.pal
+palettehelper.exe -input ListPal.txt -output palette.pal
