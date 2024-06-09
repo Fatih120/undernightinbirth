@@ -1,0 +1,430 @@
+/*********************************************
+  This is a definition file for release.
+  Please do not define it during development.
+  Please be sure to check the operation.
+  *******************************************/
+
+Chara_Table <-
+{
+	// Arrangement for character selection, 99 is random, so it is always a two-dimensional array
+	// The array is an internal value, the position of the icon will not be moved.
+	// Probably won't work properly if the same character number is placed
+	// Crashes if there is an array of length 0
+	// The number of arrays should be less than 100 in length x width
+
+	SelectTable =
+	[
+		[ 23,24,12,08,02,00,01,03,09,13,21,22,99 ], // This column is the initial position
+		[ 11,19,10,06,04,16,17,05,07,15,18,14,99 ],
+		//[ -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,99 ], // Extra row added for convienience
+	],
+	SelectDefault = [ 0, 1 ], // Initial position 1P 2P
+
+	//Specification to force flag *Save data will be overwritten
+	_FileType = 0, //
+	// _SecretFlag = 0, // clear
+	// _SecretFlag = (1<<0), // Eltnum can be used
+
+	// EDITOR NOTE - This may neeed to remain Japanese... need to test.
+	// Message at the top of the screen, up to 16 full-width characters
+	AcVsMes0 = "Beginner practice!",
+	AcVsMes1 = "Welcome to the intrusion! Challenger wanted!",
+	AcVsMes2 = "Looking for rivals!",
+
+	Status = [],
+};
+
+Chara_Table.Status.resize(100); // half-hearted
+local chara_no = Chara_Table.Status; // For easier registration
+
+	/*
+	Fails if name_short, name_long, and strings are missing.
+
+	name_short = is internally converted to all lowercase letters when read.
+	name_master = is used when the program wants to use a Japanese character name and its data (mainly used in the victory message lottery).
+
+	isAlive = Is the definition valid? 	1 = Valid
+
+	unselect = The cursor will not fit and random drawing will not be performed.
+	norandom = No longer selected in random lottery (demo lottery, character selection random).
+
+	SecretFlag = (UNUSED, DEPRACATED)
+	hide = Hidden character. -1 = Not a hidden character
+
+	hideScenario = ID of the B scenario that is unlocked when you clear the A scenario.
+	releaseScenario = Character ID of A scenario that is a release condition for B scenario.
+	
+	init = Initial character or not. 1 = Initial character (for release conditions after update, etc.)
+	DLCCharaFlag = Treats it as a DLC character and makes it unselectable if you don't own it.
+	*/
+
+//
+chara_no[0] =
+{
+	name_short = "chr000",
+	name_long = "Hyde",
+	name_str = "ハイド",
+	name_master = "ハイド",
+	isAlive = 1,
+
+	stage = 1, // city center/intersection
+	bgm = 1, // Scraper Sky High (Hyde)
+
+	order = 0,
+}; //
+
+//
+chara_no[1] =
+{
+	name_short = "chr001",
+
+	name_long = "Linne",
+	name_str = "リンネ",
+	name_master = "リンネ",
+	isAlive = 1,
+	drawtype = 1,
+
+	stage = 2, // High-rise building/rooftop
+	bgm = 2, // Night Walker (Linnaeus)
+
+	order = 1,
+}; //
+
+//
+chara_no[2] =
+{
+	name_short = "chr002",
+	name_long = "Waldstein",
+	name_str = "ワレンシュタイン",
+	name_master = "ワレンシュタイン",
+	isAlive = 1,
+
+	stage = 3, // Silent Park
+	bgm = 3, // Maximize Power! (Wallenstein)
+
+	order = 2,
+}; //
+
+//
+chara_no[3] =
+{
+	name_short = "chr003",
+	name_long = "Carmine",
+	name_str = "カーマイン",
+	name_master = "カーマイン",
+	isAlive = 1,
+
+	stage = 10, // Parking lot dyed red
+	bgm = 4, // Bad Surface (Carmine)
+
+	order = 3,
+}; //
+
+//
+chara_no[4] =
+{
+	name_short = "chr004",
+	name_long = "Orie",
+	name_str = "オリエ",
+	name_master = "オリエ",
+	isAlive = 1,
+
+	stage = 5, // Expressway/lower section
+	bgm = 5, // Purity & Strictly (Orie)
+
+	order = 4,
+}; //
+
+//
+chara_no[5] =
+{
+	name_short = "chr005",
+	name_long = "Gordeau",
+	name_str = "ゴルドー",
+	name_master = "ゴルドー",
+	isAlive = 1,
+
+	stage = 4, // Square by the river
+	bgm = 6, // Rushing Heart (Gordo)
+
+	order = 5,
+}; //
+
+//
+chara_no[6] =
+{
+	name_short = "chr006",
+	name_long = "Merkava",
+	name_str = "メルカヴァ",
+	name_master = "メルカヴァ",
+	isAlive = 1,
+	drawtype = 1,
+
+	stage = 6,
+	bgm = 7, // Unseen Entities (Merkava)
+
+	order = 6,
+}; //
+
+//
+chara_no[7] =
+{
+	name_short = "chr007",
+	name_long = "Vatista",
+	name_str = "バティスタ",
+	name_master = "バティスタ",
+	isAlive = 1,
+	drawtype = 1,
+
+	stage = 7, // Meitou commercial facility
+	bgm = 8, // Snow Sisters (Batista)
+
+	order = 7,
+}; //
+
+//
+chara_no[8] =
+{
+	name_short = "chr008",
+	name_long = "Seth",
+	name_str = "セト",
+	name_master = "セト",
+	isAlive = 1,
+
+	stage = 5,
+	bgm = 9, // Monochrome Memory（Seth）
+
+	order = 8,
+}; //
+
+//
+chara_no[9] =
+{
+	name_short = "chr009",
+	name_long = "Yuzuriha",
+	name_str = "ユズリハ",
+	name_master = "ユズリハ",
+	isAlive = 1,
+
+	stage = 8, // Morito no Shrine
+	bgm = 10, // The walking figure is a lily flower♪ (Yuzuriha)
+
+	order = 9
+}; //
+
+//
+chara_no[10] =
+{
+	name_short = "chr010",
+	name_long = "Hilda",
+	name_str = "ヒルダ",
+	name_master = "ヒルダ",
+	isAlive = 1,
+
+	stage = 9, // Altar of Glittering
+	bgm = 11, // Overwhelm Despair (Hilda)
+
+	order = 10,
+}; //
+
+//
+chara_no[11] =
+{
+	name_short = "chr011",
+	name_long = "Eltnum",
+	name_str = "エルトナム",
+	name_master = "エルトナム",
+	isAlive = 1,
+
+	stage = 6, // Under the amber viaduct
+	bgm = 12, // Blood Drain -Again- (Eltnam)
+
+	order = 22,
+}; //
+
+//
+chara_no[12] =
+{
+	name_short = "chr012",
+	name_long = "Nanase",
+	name_str = "ナナセ",
+	name_master = "ナナセ",
+	isAlive = 1,
+
+	stage = 13, // Sleeping Fountain Square
+	bgm = 13, // Gallant Girl "Sora yori Nagare, Hasiru Kaze" (Nanase)
+
+	order = 12,
+}; //
+
+//
+chara_no[13] =
+{
+	name_short = "chr013",
+	name_long = "Byakuya",
+	name_str = "ビャクヤ",
+	name_master = "ビャクヤ",
+	isAlive = 1,
+
+	stage = 14, // Old school building with cherry blossoms in bloom
+	bgm = 14, // Beat Eat Nest (Byakuya)
+
+	order = 13,
+}; //
+
+//
+chara_no[14] =
+{
+	name_short = "chr014",
+	name_long = "Akatsuki",
+	name_str = "アカツキ",
+	name_master = "アカツキ",
+	isAlive = 1,
+
+	stage = 12, // Rumbling industrial facility
+	bgm = 15, // Kaisen -Again- (Akatsuki)
+
+	order = 23,
+}; //
+
+//
+chara_no[15] =
+{
+	name_short = "chr015",
+	name_long = "Chaos",
+	name_str = "ケイアス",
+	name_master = "ケイアス",
+	isAlive = 1,
+
+	stage = 11, // Decayed ruins
+	bgm = 16, // Erudite Eyes (Caius)
+
+	order = 11,
+}; //
+
+//
+chara_no[16] =
+{
+	name_short = "chr016",
+	name_long = "Wagner",
+	name_str = "ワーグナー",
+	name_master = "ワーグナー",
+	isAlive = 1,
+
+	stage = 18,
+	bgm = 17, // (Wagner)
+
+	order = 16,
+}; //
+
+//
+chara_no[17] =
+{
+	name_short = "chr017",
+	name_long = "Enkidu",
+	name_str = "エンキドゥ",
+	name_master = "エンキドゥ",
+	isAlive = 1,
+
+	stage = 16, //Momiji Yokocho-mae Street
+	bgm = 18, // (Enkidu)
+
+	order = 17,
+}; //
+
+//
+chara_no[18] =
+{
+	name_short = "chr018",
+	name_long = "Londrekia",
+	name_str = "ロンドレキア",
+	name_master = "ロンドレキア",
+	isAlive = 1,
+
+	CPartFlag=1, //Is there a C part of the scenario?
+
+	stage = 19, //Light and Water Art Museum
+	bgm = 19, // (Londrechia)
+
+	order = 18,
+}; //
+
+//
+chara_no[19] =
+{
+	name_short = "chr019",
+	name_long = "Tsurugi",
+	name_str = "ツルギ",
+	name_master = "ツルギ",
+	isAlive = 1,
+
+	stage = 21, // Tsurugi stage
+	bgm = 20, // (Tsurugi)
+
+	order = 19,
+}; //
+
+//
+chara_no[21] =
+{
+	name_short = "chr021",
+	name_long = "Mika",
+	name_str = "ミカ",
+	name_master = "ミカ",
+	isAlive = 1,
+
+	stage = 17, // Kansakai East Children's Amusement Park
+	bgm = 22, // (Mika)
+
+	order = 15,
+}; //
+
+//
+chara_no[22] =
+{
+	name_short = "chr022",
+	name_long = "Kaguya",
+	name_str = "カグヤ",
+	name_master = "カグヤ",
+	isAlive = 1,
+
+	stage = 20, // Kaguya stage
+	bgm = 23, // (Kaguya)
+
+	order = 20,
+}; //
+
+//
+chara_no[23] =
+{
+	name_short = "chr023",
+	name_long = "Kuon",
+	name_str = "クオン",
+	name_master = "クオン",
+	isAlive = 1,
+	drawtype = 1,
+
+	stage = 22, // Quon stage
+	bgm = 24, // (Quon)
+
+	order = 21,
+
+	DLCCharaFlag = 1, //Treat it as a DLC character and make it unselectable if you don't own it
+}; //
+
+//
+chara_no[24] =
+{
+	name_short = "chr024",
+	name_long = "Phonon",
+	name_str = "フォノン",
+	name_master = "フォノン",
+	isAlive = 1,
+
+	stage = 15, // Film cafeteria
+	bgm = 25, // (phonon)
+
+	order = 14,
+}; //
+
+//print("\n>>> BtlCharaTbl Running");

@@ -1,0 +1,49 @@
+// The order of techniques is now standing > crouching > jumping.
+local base_stand = sqfunc.GetExStringText("command_base_stand");
+local base_crouch = sqfunc.GetExStringText("command_base_crouch");
+local base_air = sqfunc.GetExStringText("command_base_air");
+local base_dash = sqfunc.GetExStringText("command_base_dash");
+
+Training_cmdList <-
+{
+	list = [
+		{ text=sqfunc.GetExStringText("command_act_off"), cmdnum=def_CN_ReversalNeutral },
+		
+		{ text=base_stand+"\\@A@", cmdnum=def_CN_Atk_StdA },
+		{ text=base_stand+"\\@B@", cmdnum=def_CN_Atk_StdB },
+		{ text=base_stand+"\\@C@", cmdnum=def_CN_Atk_StdC },
+		{ text=base_crouch+"\\@A@", cmdnum=def_CN_Atk_CroA },
+		{ text=base_crouch+"\\@B@", cmdnum=def_CN_Atk_CroB },
+		{ text=base_crouch+"\\@C@", cmdnum=def_CN_Atk_CroC },
+		{ text=base_air+"\\@A@", cmdnum=def_CN_Atk_AirA },
+		{ text=base_air+"\\@B@", cmdnum=def_CN_Atk_AirB },
+		{ text=base_air+"\\@C@", cmdnum=def_CN_Atk_AirC },
+		{ text=base_dash+"\\@B@", cmdnum=def_CN_Atk_DashStdB_Direct },
+		{ text=base_dash+"\\@C@", cmdnum=def_CN_Atk_DashStdC_Direct },
+		
+		{ text=sqfunc.GetExStringText("command_act_groundthrow"), cmdnum=def_CN_Throw_F },
+		{ text="\\@B+C@", cmdnum=def_CN_AtkBandC },
+		
+		{ text=sqfunc.GetExStringText("command_act_iw"), cmdnum=def_CN_Skill_41236SP },
+		{ text=sqfunc.GetExStringText("command_act_iwe"), cmdnum=def_CN_Skill_DyingIWE },
+		
+		{ text=sqfunc.GetExStringText("command_act_frontdash"), cmdnum=def_CN_Dash_F },
+		{ text=sqfunc.GetExStringText("command_act_backdash"), cmdnum=def_CN_Dash_B },
+		{ text=sqfunc.GetExStringText("command_act_frontjump"), cmdnum=def_CN_Jump_F },
+		{ text=sqfunc.GetExStringText("command_act_neutraljump"), cmdnum=def_CN_Jump_N },
+		{ text=sqfunc.GetExStringText("command_act_backjump"), cmdnum=def_CN_Jump_B },
+
+		{ text=sqfunc.GetExStringText("command_act_std_assult"), cmdnum=def_CN_Assault_Std },
+		{ text=sqfunc.GetExStringText("command_act_air_assult"), cmdnum=def_CN_Assault_Air },
+
+		{ text=sqfunc.GetExStringText("command_act_frontdodge"), cmdnum=def_CN_ForwardShift },
+		{ text=sqfunc.GetExStringText("command_act_concentration"), cmdnum=def_CN_ConvertCharge },
+
+		{ text=sqfunc.GetExStringText("command_act_standshield"), cmdnum=def_CN_Barrier_Std },
+		{ text=sqfunc.GetExStringText("command_act_crouchshield"), cmdnum=def_CN_Barrier_Cro },
+		{ text=sqfunc.GetExStringText("command_act_airshield"), cmdnum=def_CN_Barrier_Air },
+
+		{ text=sqfunc.GetExStringText("command_act_chainshift"), cmdnum=def_CN_Convert },
+		{ text=sqfunc.GetExStringText("command_act_veiloff"), cmdnum=def_CN_Liberate },
+	]
+};

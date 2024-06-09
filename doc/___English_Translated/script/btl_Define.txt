@@ -1,0 +1,1928 @@
+const Def_Sys_ChrAttackImpactParticle 			= 0; // Perform particle processing for each character's attack impact (0 on PS3 as it is heavy)
+const Def_Sys_EraseObjHitBackFlags_UniqIDChange = 1; // For projectiles and AtkObj, erase _ObjFlags_ToParentHitBack when the generation parent changes
+const Def_Sys_ComboRateSetStartTiming 			= 1; // Change combo rate to be applied at Start timing instead of Init
+
+const Def_Dbg_EXSLimit_EXSkillOki 				= 0; // Whether to put a limit on gauge increase for the attack that takes advantage of EX moves
+
+const Def_Sys_FireBallSousai 					= 1; // Cancellation between projectiles
+
+const Def_Sys_CelesVorpal 						= 1; // Implement Celestial Vorpal?
+
+const Def_Sys_ThrowCounterToForwordShift 		= 1; // Make it easier to crush 3D with normal throws?
+
+const Def_Sys_Shield_EraseEnemyUniqCancel 		= 2; // Delete the opponent's special cancel route when the shield is successful 1: Delete 2: def_MC7_ActiveEraseEnemyUniqCancel Delete only those with the flag
+
+const Def_Sys_AssultAirAtkCanGuardChainShift 	= 1; // Enable CS when Assault J attack is guarded
+
+const Def_Sys_BoundTableUkemiCPBonus 			= 1; // Test processing that applies correction according to CP at the second and subsequent tbl of the vector
+
+const Def_Sys_FixPosAfterThrowTech 				= 140; //Fix the coordinates after the throw & specify the coordinates *The frame throw is different
+const Def_Sys_DelayedConvertChargeDemerit 		= 1; // Performance degrades when converting later than the opponent
+
+const Def_Sys_VeilOff_GRDBreak 					= 2; // Breaks or peels off VP when VO hits 1 until CLR 0: No effect 1: CLR 2: Only peels VP raw
+const Def_Sys_Concentration_SubExs 				= 0; // Reduce your EXS during concentration
+const Def_Sys_Shield_SubExs 					= 0; // Reduce your EXS while shielding
+const Def_Sys_ThrowF_EnableStick1 				= 1; // Issue a throw at 1AD
+const Def_Sys_SmartStear_EnableStick4 			= 1; // Enable A series at 4A
+const Def_Sys_Concentration_CheckEnemyKyori 	= 1; // Check the distance to the opponent during concentration and reduce the effect
+
+const Def_Sys_CVO_AddUkemiTime 		= 1; // Increase opponent's untechable time during CVO
+const Def_Sys_Concentration_AddTS 	= 5; // Speed up TS rotation during concentration (increase value for each F)
+const Def_Sys_Shield_AddTS 			= 250; // Speed up TS rotation during conse (increase value upon success)
+
+const Def_Sys_EXSkillVorpalBonus = 1; // Increase EXS if you have VP when performing an EX move
+const Def_Sys_CmdShortAtkInit	 = 10; // Add SetCommandShortDelay to the normal move F (temporary measure to prevent the move from being easily leaked when performing a normal move repeatedly)
+
+const Def_Sys_ComboLiberate_BoundHosei = 0; // Whether to apply correction due to CVO bound 1:Up to UNIclr/with correction
+const Def_Sys_VeilOff_SubEnemyGRDStock = 1; // Applying VO reduces the opponent's GRD
+
+const Def_Sys_CheckObjectEnemyGuardMuki = 1; // Eliminate the front and back sides of installed objects *Individual settings are required for each technique
+
+const Def_Sys_EnableExtendHoldForever 			= 1; //If you release the button in the middle of the attack, all charges will be disabled (def_JFIDNHB_HoldForever is set)
+const Def_Sys_NoPlayTrainingRestartUpsetEffect 	= 1; // Suppress the effect immediately after restarting with tremo
+const Def_Sys_NoCmdCheckDuringAnten 			= 1; // Use CmdCheck to prevent commands from being issued during darkening
+
+const Def_Sys_NewTrapYarareCheck = 3; // Arrange the damage check for installation with a new process 2: Can be erased with a projectile 3: Can be erased with a weak attack (= eliminates the ability to prevent it from being erased)
+
+const Def_Sys_ChainShiftGRDLimit 				= 12; // 6: Maximum of 6 CS (up to CLR) 12: Practically unlimited
+const Def_Sys_EnableCrossupBarrier 				= 1; // Make the shield appear at 6D against flip J attack
+const Def_Sys_EasierLaunchAirAssult 			= 1; // Make it easier to perform low altitude assault & adjust the occurrence frame
+const Def_Sys_ChangeGRDAddValue_OverheadFrame 	= 1; // Change the GRD increase amount during middle guard depending on the frame of occurrence
+const Def_Sys_FF_RecoverGRD 					= 0; // Recover GRD with FF effect 0or1 CLR:1 *Excludes only Merkava FF
+const Def_Sys_FastSkillVecPosShift 				= 1; // Whether to include processing to prevent special moves with fast vectors from passing through
+const Def_Sys_CVO_ResetAnyLimit 				= 1; // Reset some usage limit systems during CVO (currently only jump cancellation)
+const Def_Sys_ShieldHoldCommandCheckStrict 		= 1; // Strictly check shield hold command to avoid leaks
+const Def_Sys_ForwardShiftMinusDelay 			= 0; // Will stiffness be reduced if offset in the second half of 3D?
+const Def_Sys_BoostDamageVorpalIWE 				= 0; // Increase IWE firepower during VP
+
+const Def_Sys_EnemyGRDDrainPar 			= 50; // Multiplier of effect that reduces opponent's GRD CLR:100
+const Def_Sys_ThrowF_BreakTimePar 		= 20; // The rate at which the break time is reduced when receiving a normal throw during a break. Including this is expected to reduce character differences depending on the length of the throw performance.
+const Def_Sys_MutekiHosei 				= 50; //Overwrite correction to be applied when the MV exits after the move that has finished issuing the invincibility announcement hits at the start (insurance processing)
+const Def_Sys_MutekiHosyouHosei 		= 1; // Whether to limit the guaranteed damage at the start of an invincible move or not. Def_HosyoHosei_Muteki_Init is corrected.
+const Def_Sys_ChangeMutekiHosyoTiming 	= 1; // Change the timing to set the guaranteed damage limit for invincible move start 0:AttackImpact 1:Skill is LastUpdate
+const Def_Sys_GRDInkreaseAnyCancelSkill = 0; // Increase the amount of GRD increase when guarding special moves with many cancel routes
+
+const Def_Sys_RapidAtkA_Hosei 			   = 0; // Whether to apply compensation when issuing an A attack with continuous scanning
+const Def_Sys_ThrowCounterTechMissWaitType = 1; // 0: Red throw effect is the same as gold throw (CLR) 1: Same as normal throw
+
+const Def_Sys_AnnounceAtemiFailed = 1; // Whether to make an announcement when you are hit by a bullet or not
+// It doesn't come out when you're hit by a thrown bullet, but it comes out when you try to take a hit and can't take it.
+// If there is a gap in the atkemi detection like Yuzuriha 4B, it will appear even if you are hit there.
+
+const Def_Sys_EnemyAntenStopNoCancel = 1; // Make some actions uncancelable when the scene goes dark & make the assault uncancelable when a red haze appears in the CS
+const Def_Sys_VorpalCutinPosType 	 = 1; // 0: Same position as VORPAL announcement 1: Depends on character orientation (same as cut-in)
+const Def_Sys_VorpalCutinDrawType 	 = 1; // 0: Normal 1: Fade in & slightly darker
+
+const Def_Sys_EnableDirectSSSkill = 1; // Enable SS technique to be activated directly?
+const Def_Sys_IWEGRDBreakType 	  = 1; // 0: Activate to break or release vorpal 1: Consume only if no hit
+
+const Def_Sys_SSRelayType = 1;
+
+
+//flag constant for SwitchNextMoveTable *Not used
+const Def_SNMT_Hit = 1;
+
+// Constants for TM_GetCharaGauge
+// It is a constant, but when changing it, the tremo menu definition must also be changed
+const Def_TMCG_Chr011Bullet  = 0; // Character-specific gauge
+const Def_TMCG_ExtraTraining = 1;
+const Def_TMCG_EnableAppeal  = 2;
+
+// Based on UNIclr
+// const Def_CMD_236A = "236A";
+// const Def_CMD_236B = "236B";
+// const Def_CMD_236C = "236C";
+// const Def_CMD_623A = "6@N,4@23A@D,12@";
+// const Def_CMD_623B = "6@N,4@23B@D,12@";
+// const Def_CMD_623C = "6@N,4@23C@D,12@";
+// const Def_CMD_214A = "214A";
+// const Def_CMD_214B = "214B";
+// const Def_CMD_214C = "214C";
+// const Def_CMD_421A = "4@N,4@21A@D,12@";
+// const Def_CMD_421B = "4@N,4@21B@D,12@"
+// const Def_CMD_421C = "4@N,4@21C@D,12@"
+// const Def_CMD_22A = "0202A@N,255@";
+// const Def_CMD_22B = "0202B@N,255@";
+// const Def_CMD_22C = "0202C@N,255@";
+// const Def_CMD_63214A = "63214A@N,6@";
+// const Def_CMD_63214B = "63214B@N,6@";
+// const Def_CMD_63214C = "63214C@N,6@";
+// const Def_CMD_41236A = "41236A@N,6@";
+// const Def_CMD_41236B = "41236B@N,6@";
+// const Def_CMD_41236C = "41236C@N,6@";
+// const Def_CMD_236BC = "236B+C";
+// const Def_CMD_214BC = "214B+C";
+// const Def_CMD_623BC = "6@N,4@23B+C@D,12@"
+// const Def_CMD_22BC = "0202B+C@N,255@";
+
+const Def_CMD_236A = "23@D,9@@N,6@6A@D,9@@N,8@@L,4@";
+const Def_CMD_236B = "23@D,9@@N,6@6B@D,9@@N,8@@L,4@";
+const Def_CMD_236C = "23@D,9@@N,6@6C@D,9@@N,8@@L,4@";
+const Def_CMD_623A = "6@N,4@2@D,11@3A@D,9@@N,8@@L,4@";
+const Def_CMD_623B = "6@N,4@2@D,11@3B@D,9@@N,8@@L,4@";
+const Def_CMD_623C = "6@N,4@2@D,11@3C@D,9@@N,8@@L,4@";
+const Def_CMD_6239A = "6@N,4@2@D,11@3^A@D,9@@N,8@@L,4@";
+const Def_CMD_6239B = "6@N,4@2@D,11@3^B@D,9@@N,8@@L,4@";
+const Def_CMD_6239C = "6@N,4@2@D,11@3^C@D,9@@N,8@@L,4@";
+const Def_CMD_214A = "21@D,9@@N,6@4A@D,9@@N,8@@L,4@";
+const Def_CMD_214B = "21@D,9@@N,6@4B@D,9@@N,8@@L,4@";
+const Def_CMD_214C = "21@D,9@@N,6@4C@D,9@@N,8@@L,4@";
+const Def_CMD_214D = "21@D,9@@N,6@4D@D,9@@N,8@@L,4@";
+const Def_CMD_421A = "4@N,5@2@D,9@1A@D,9@@N,8@@L,4@";
+const Def_CMD_421B = "4@N,5@2@D,9@1B@D,9@@N,8@@L,4@";
+const Def_CMD_421C = "4@N,5@2@D,9@1C@D,9@@N,8@@L,4@";
+const Def_CMD_22A = "0202A@N,255@@L,4@";
+const Def_CMD_22B = "0202B@N,255@@L,4@";
+const Def_CMD_22C = "0202C@N,255@@L,4@";
+const Def_CMD_22D = "0202D@N,255@@L,4@";
+const Def_CMD_63214A = "63214A@N,6@@L,4@";
+const Def_CMD_63214B = "63214B@N,6@@L,4@";
+const Def_CMD_63214C = "63214C@N,6@@L,4@";
+const Def_CMD_63214D = "63214D@N,6@@L,4@";
+const Def_CMD_41236A = "41236A@N,6@@L,4@";
+const Def_CMD_41236B = "41236B@N,6@@L,4@";
+const Def_CMD_41236C = "41236C@N,6@@L,4@";
+const Def_CMD_41236D = "41236D@N,6@@L,4@";
+const Def_CMD_236BC = "236B+C@L,4@";
+const Def_CMD_214BC = "214B+C@L,4@";
+const Def_CMD_623BC = "6@N,4@23B+C@D,12@@L,4@"
+const Def_CMD_22BC = "0202B+C@N,255@@L,4@";
+
+// Simple command
+const Def_CMD_Ex0_63214A = "631@N,1@4A@N,6@@L,4@";
+const Def_CMD_Ex0_63214B = "631@N,1@4B@N,6@@L,4@";
+const Def_CMD_Ex0_63214C = "631@N,1@4C@N,6@@L,4@";
+const Def_CMD_Ex0_63214D = "631@N,1@4D@N,6@@L,4@";
+const Def_CMD_Ex0_41236A = "413@N,1@6A@N,6@@L,4@";
+const Def_CMD_Ex0_41236B = "413@N,1@6B@N,6@@L,4@";
+const Def_CMD_Ex0_41236C = "413@N,1@6C@N,6@@L,4@";
+const Def_CMD_Ex0_41236D = "413@N,1@6D@N,6@@L,4@";
+
+const Def_CMD_Ex1_63214A = "621@N,1@4A@N,6@@L,4@";
+const Def_CMD_Ex1_63214B = "621@N,1@4B@N,6@@L,4@";
+const Def_CMD_Ex1_63214C = "621@N,1@4C@N,6@@L,4@";
+const Def_CMD_Ex1_63214D = "621@N,1@4D@N,6@@L,4@";
+const Def_CMD_Ex1_41236A = "423@N,1@6A@N,6@@L,4@";
+const Def_CMD_Ex1_41236B = "423@N,1@6B@N,6@@L,4@";
+const Def_CMD_Ex1_41236C = "423@N,1@6C@N,6@@L,4@";
+const Def_CMD_Ex1_41236D = "423@N,1@6D@N,6@@L,4@";
+
+const Def_CMD_Ex2_63214A = "632@N,1@4A@N,6@@L,4@";
+const Def_CMD_Ex2_63214B = "632@N,1@4B@N,6@@L,4@";
+const Def_CMD_Ex2_63214C = "632@N,1@4C@N,6@@L,4@";
+const Def_CMD_Ex2_63214D = "632@N,1@4D@N,6@@L,4@";
+const Def_CMD_Ex2_41236A = "412@N,1@6A@N,6@@L,4@";
+const Def_CMD_Ex2_41236B = "412@N,1@6B@N,6@@L,4@";
+const Def_CMD_Ex2_41236C = "412@N,1@6C@N,6@@L,4@";
+const Def_CMD_Ex2_41236D = "412@N,1@6D@N,6@@L,4@";
+
+const Def_CMD_ExA_41236D = "413@N,1@6D@N,6@@L,30@";
+const Def_CMD_ExB_41236D = "423@N,1@6D@N,6@@L,30@";
+const Def_CMD_ExC_41236D = "412@N,1@6D@N,6@@L,30@";
+
+
+//FGP//Fighting game-like additional information attached to Mv
+//ret_tmpl.fgp <- Def_FGP_Invincibility;
+// const Def_FGP_Invincibility = 1; // Whole body invincibility
+// const Def_FGP_CommandThrow = 2; // Top throwing technique
+// const Def_FGP_Add = 4; // Derived technique
+// const Def_FGP_MoveAction = 8; // Move-only technique (no attack)
+// const Def_FGP_OverHead = 16; // Middle technique
+// const Def_FGP_LowAttack = 32; // Low attack
+// const Def_FGP_ShotFireBall = 64; // Technique to release a projectile (not on the bullet side)
+// const Def_FGP_SetTrap = 128; // Technique to issue a setting technique (not the setting side)
+
+// Flags for CmdCheck
+const Def_CMDC_BoundOK = 1; // Commands that can be issued even during Bound
+
+// Battle_Std.MakeMv.SetCaptureCharaAnime
+// Flag for Throw
+const Def_SCCA_Throw_CheckFrontStage = 1; // Correct the X coordinate so that it does not go to the edge of the front stage when grabbing with Throw
+
+//Constant for SetCaptureCharaAnime2
+const Def_SCCA_HitVec_InitVec = 1; // Set HitVec (inherited if not set)
+const Def_SCCA_HitVec_AutoMuki = 2; // Turn to face the enemy
+
+//Constants for command table
+const Def_SCT_Common = 1; // Command to register for all characters (formerly "Std_")
+
+//Attribute invincibility flag (defined here)
+//BMvTbl.SetHitCheckFlag( { type=1, val=Def_HitCheckFlag_AirDive, time=255, flag=_ClearFlag_ChangeMv } ); // Scar to invincible air attack
+// _HitCheckFlag_Head = 1
+// _HitCheckFlag_Body = 2
+// _HitCheckFlag_Legs = 4
+// _HitCheckFlag_FireBall = 8
+// _HitCheckFlag_Throw = 16
+const Def_HitCheckFlag_AirDive = 64; // Performs air lunge technique
+// _HitCheckFlag_Reverse = 128
+const Def_HitCheckFlag_LightLegs = 256; // Attach to the lower weak attack (light)
+const Def_HitCheckFlag_HitToDown = 512; // Applies to techniques that cause down
+
+// COM behavior constant (invocation frequency)
+const com_frequency0 = 1;
+const com_frequency1 = 10;
+const com_frequency2 = 30;
+const com_frequency3 = 100;
+const com_frequency4 = 300;
+const com_frequencyX = 0;//9999; // For debugging
+
+// for cmdparam
+// Get what command was used to jump to Mv
+const Def_CMDP_StdComboChain = 1; // Flying with standing smart steer
+const Def_CMDP_AirComboChain = 2; // Flying with air smart steer
+const Def_CMDP_CroComboChain = 4; // Crouching and flying with smart steer
+const Def_CMDP_ComboChain 	 = 7; // Flying with smart steer
+const Def_CMDP_ChrCommand 	 = 8; // All command techniques
+
+// Battle_Std.JumpFrameID_NotHoldButton
+// Battle_Std.JumpFrameID_NotHoldAllButton
+// Battle_Std.JumpFrameID_NoHoldButton_MaskCheckd
+const Def_JFIDNHB_NoCheckNgTiming = 1; //
+const Def_JFIDNHB_HoldForever 	  = 2; // Fails if not pressed for a long time
+const Def_JFIDNHB_CheckAllButton  = 4; // Fail if all buttons are not held down
+
+//Debug enable flag
+const Def_Dbg_AssaultCansel 	 = 0; //Whether to implement assault cancellation
+const Def_Dbg_GuardCancelAssault = 0; //Whether to implement GC assault?
+const Def_Dbg_AssaultAutoVector  = 1; //Whether to change assault depending on distance
+const Def_Dbg_GuardCancelAttack  = 1; //Whether to implement guard cancellation 1: Normal 2: Test
+const Def_Dbg_ExSkillABButton    = 0; //Whether EX skill is A+B or C 0:C 1:A+B
+const Def_Dbg_SpSkillVOCSCancel  = 1; //If SP skill is in VO, should it be possible to cancel it with CS condition?
+
+const Def_Sys_MoveDownRecover_UseGRD = 1; // Whether to consume GRD before and after down recovery? consumption amount
+
+const Def_Sys_DownRecover_BigKasanari 	 = 1; // Whether to make down recovery overlap big
+const Def_Sys_HajiShield_EnemyNockBack 	 = 1; // Give the opponent a guard vector while carrying a shield on your back?
+const Def_Sys_EXCutinNageMuteki 		 = 2; // Force throw invincibility to EX cut-in technique? 0: Not attached 1~: Invincibility frame
+const Def_Sys_ShieldSuccess_MinusVecTime = 1; // Vector time to reduce when shield is successful
+const Def_Sys_GuardShield_UseEXS 		 = 1; // Whether to consume EXS to activate Guard Shield def_SP_GuardShield_Init consumption
+const Def_Sys_GuardShield_PlusVecTime 	= 17; // Vector time added to guard vector when guard shield is activated CLR:15
+const Def_Sys_GuardShield_PlusVecTimeMin= 22; // Minimum value of vector time added to guard vector when guard shield is activated CLR: None
+const Def_Sys_ReverseBeatAnnounce 		 = 0; // Whether to issue a reverse beat announcement
+const Def_Sys_VeilOff_GRDPlus 			 = 0; // Increase GRD by attacking during VO?
+const Def_Sys_RecoverBarrierType 		 = 1; // Barrier type when passive 0: Disappears immediately 1: Disappears when action is possible *Can be respecified by character
+const Def_Sys_VeilOff_GRDBonus 			 = 0; // Give GRD bonus when Veil Off is activated 0: Do nothing 1: Do various things
+const Def_Sys_DyingIWExistAtk 			 = 2; // Whether to implement an IWE attack that can be used only when dying
+const Def_Sys_DyingVeilOffShortCharge 	 = 0; // Whether to shorten the VO charge time when dying
+const Def_Sys_DirectDashDelay 			 = 0; // How many frames to delay the spawning dash attack 0: Do not delay 1 ~: Frames to delay (via Dash pattern)
+
+const Def_Sys_CancelAirAtk_GuardCrouch = 2; // Make the canceled jump attack crouch guardable? 0: Do nothing 1: Enable crouch guard 2: Apply damage compensation
+const Def_Sys_AirAtkShieldSubVecTime   = 1; // Subtract more vector when shielding jump attack
+
+//Game rules flag
+const Def_Rule_GroundThrowType = 0; // 0: Throw Scary (A+D) 1: Strong lever insertion
+
+const Def_Rule_ToParentFireBallHitStatus  = 1; // Whether to notify the parent of FireBall projectile hits
+const Def_Rule_AddComboRateFireBallDamage = 1; // Whether to add combo rate when FireBall hits
+
+//For system classification (unintelligible)
+const Def_Rule_EnableReverceBeat 			= 1; // Presence or absence of reverse beat 0: No reverberation
+const Def_Rule_StdSmartSteerKeyType 		= 1; // Standing smart steer key type 0:[ "0+A","4+A","6+A" ] 1:[ "0+A","6+A" ]
+const Def_Rule_StdSmartSteer 				= 1; // Presence of smart steer
+const Def_Rule_CroSmartSteer 				= 0; // Presence of smart steer
+const Def_Rule_AirSmartSteer 				= 0; // Presence of smart steer
+const Def_Rule_SetThrowType 				= 0; // Automatically change opponent pattern for normal throw 0:UNI (do nothing) Ground at 1:304 Float at 2:320
+const Def_Rule_GroundBoundSlideKeep 		= 0; // Leave inertia on the ground with DivKeep
+const Def_Rule_GroundGuardSlideKeep 		= 0; // Leave inertia with DivKeep when passing ground guard
+const Def_Rule_AirRecover_ClearAirJumpCount = 0; // Do you want to reset the number of double jumps during air passive?
+const Def_Rule_SkipRock_DownOiuti 			= 0; // Do not perform half lock when chasing down 1: Do not perform 0: Do
+const Def_Rule_CmdHitStatus_JumpCancel  	= "Damage"; // Jump cancellation condition (including double jump) "Hit" or "Damage"
+const Def_Rule_CmdCheckMuki_MultiJump 		= 0; // Direction settings for MultiJump command check, 0-Auto (basic value) 1-Direction you are facing 2-Direction you plan to turn around
+const Def_Rule_SPSkillMvEnd_EraseCutIn  	= 0; // Erase cut-in at the end of Mv (Fin and LU) of SP technique
+const Def_Rule_GuardPat_HitStopAnime 		= 6; // Whether to animate during guard's hit stop 0: No 1 - How many guard animations are looped?
+
+const Def_Rule_GameSystem = 1;
+	const Def_RGS_UNI = 1;
+	const Def_RGS_CLI = 2;
+const Def_Rule_CmdCancelCheck = 1; // Should MvCode be included in the cancellation check (for example, special is not possible when special)?
+
+const Def_Rule_SPCutinAura = 1; // Whether to add a border aura to the character during super move cut-in
+
+// For tuning debugging
+
+//Constant for CmdCheck
+const Def_CmdCh_GenDoujiCheck  = 1; // Whether to issue a simultaneous press check (normal moves will appear automatically)
+const Def_CmdCh_KeepDoujiCheck = 2; // Do not erase the grace period for simultaneous press check when command is established
+
+
+//For reversal behavior definition such as cmd_common
+//Please note that menus are managed using int values including cmdnum, stick, and flags, so flags can only be used up to 999.
+const Def_TCL_Extend = 1; // Tame attack
+// up to 999
+
+
+//Constant for combo limit, be careful about the definition position as it will be converted at compile time
+// 900-929: weak
+// 930-959: Medium
+// 960-989: Strong
+
+const DEF_BS_CL_STDA 	 = 900;
+const DEF_BS_CL_STDB 	 = 930;
+const DEF_BS_CL_STDC 	 = 960;
+const DEF_BS_CL_CROA 	 = 901;
+const DEF_BS_CL_CROB 	 = 931;
+const DEF_BS_CL_CROC 	 = 961;
+const DEF_BS_CL_AIRA 	 = 902;
+const DEF_BS_CL_AIRB 	 = 932;
+const DEF_BS_CL_AIRC 	 = 962;
+const DEF_BS_CL_DASHSTDA = 903;
+const DEF_BS_CL_DASHSTDB = 933;
+const DEF_BS_CL_DASHSTDC = 963;
+const DEF_BS_CL_DASHCROA = 904;
+const DEF_BS_CL_DASHCROB = 934;
+const DEF_BS_CL_DASHCROC = 964;
+
+const DEF_BS_CL_ATK1A = 905;
+const DEF_BS_CL_ATK1B = 935;
+const DEF_BS_CL_ATK1C = 965;
+
+const DEF_BS_CL_ATK3A = 906;
+const DEF_BS_CL_ATK3B = 936;
+const DEF_BS_CL_ATK3C = 966;
+
+const DEF_BS_CL_ATK6A = 907;
+const DEF_BS_CL_ATK6B = 937;
+const DEF_BS_CL_ATK6C = 967;
+
+const DEF_BS_CL_ATK4A = 908;
+const DEF_BS_CL_ATK4B = 938;
+const DEF_BS_CL_ATK4C = 968;
+
+const DEF_BS_CL_ATKJ2A = 909;
+const DEF_BS_CL_ATKJ2B = 939;
+const DEF_BS_CL_ATKJ2C = 969;
+
+const DEF_BS_CL_ATKJ6A = 910;
+const DEF_BS_CL_ATKJ6B = 940;
+const DEF_BS_CL_ATKJ6C = 970;
+
+const DEF_BS_CL_ATKJ4A = 911;
+const DEF_BS_CL_ATKJ4B = 941;
+const DEF_BS_CL_ATKJ4C = 971;
+
+
+const DEF_BS_CL_ATKA_A = 912;
+const DEF_BS_CL_ATKB_B = 942;
+const DEF_BS_CL_ATKC_C = 972;
+
+const DEF_BS_CL_ATK2A_2A = 913;
+const DEF_BS_CL_ATK2B_2B = 943;
+const DEF_BS_CL_ATK2B_2B_2B = 944;
+const DEF_BS_CL_ATK2C_2C = 973;
+
+const DEF_BS_CL_ATKJA_JA = 974;
+const DEF_BS_CL_ATKJB_JB = 975;
+const DEF_BS_CL_ATKJC_JC = 976;
+
+
+const DEF_BS_CL_ATKA_A_A = 915;
+const DEF_BS_CL_ATK6B_6B = 946;
+
+//def_CN_AtkAandB
+const DEF_BS_CL_ATKAANDB = 919;
+const DEF_BS_CL_ATKCAANDB = 920;
+const DEF_BS_CL_ATKJAANDB = 921;
+
+//def_CN_AtkBandC
+const DEF_BS_CL_ATKBANDC = 916;
+const DEF_BS_CL_ATKCBANDC = 917;
+const DEF_BS_CL_ATKJBANDC = 918;
+const DEF_BS_CL_DASHSTDBANDC = 919;
+
+
+//Combo limit for special moves that can be chain canceled even though they are special moves
+const DEF_BS_CL_Skill00 = 980;
+const DEF_BS_CL_Skill01 = 981;
+const DEF_BS_CL_Skill02 = 982;
+const DEF_BS_CL_Skill03 = 983;
+const DEF_BS_CL_Skill04 = 984;
+const DEF_BS_CL_Skill05 = 985;
+const DEF_BS_CL_Skill06 = 986;
+const DEF_BS_CL_Skill07 = 987;
+const DEF_BS_CL_Skill08 = 988;
+const DEF_BS_CL_Skill09 = 989;
+const DEF_BS_CL_Skill10 = 990;
+const DEF_BS_CL_Skill11 = 991;
+const DEF_BS_CL_Skill12 = 992;
+const DEF_BS_CL_Skill13 = 993;
+const DEF_BS_CL_Skill14 = 994;
+const DEF_BS_CL_Skill15 = 995;
+const DEF_BS_CL_Skill16 = 996;
+const DEF_BS_CL_Skill17 = 997;
+const DEF_BS_CL_Skill18 = 998;
+const DEF_BS_CL_Skill19 = 999;
+
+//Use lowercase letters as they are difficult to read
+
+//Character-specific constants (?)
+const def_CHR_Elt_BulletMax = 13; //Maximum number of bullets
+
+const def_Cha_ObjID_Dah 		= 1; // ObjectID
+const def_Cha_ObjID_Barrier 	= 2; // ObjectID
+const def_Cha_ObjID_BarrierBook = 3; // ObjectID
+const def_Cha_ObjID_IWE_RedBoard= 8; // ObjectID
+const def_Cha_ObjID_IWE_DahMoya = 9; // ObjectID
+
+//Flag for which Mv to go to or not from Mv
+//Finalize code is also this
+const def_CHR_Dah_ActFlag_Stand  = 1; // 1
+const def_CHR_Dah_ActFlag_Walk_F = 2; // 2
+const def_CHR_Dah_ActFlag_Walk_B = 4; // 3
+const def_CHR_Dah_ActFlag_0202A  = 8; // 4
+const def_CHR_Dah_ActFlag_0202B  = 16; // 5
+const def_CHR_Dah_ActFlag_RiseUp = 32; // 6 Dahaka rises
+const def_CHR_Dah_ActFlag_0202EX = 536870912; // 30
+const def_CHR_Dah_ActFlag_0202D  = 1073741824; // 31 //181016 added Dahaka on the spot summon
+const def_CHR_Dah_ActFlag_236A 	 = 64; // 7
+const def_CHR_Dah_ActFlag_236B 	= 128; // 8
+const def_CHR_Dah_ActFlag_236EX = 67108864; // 27
+const def_CHR_Dah_ActFlag_214A 	= 512; // 10
+const def_CHR_Dah_ActFlag_214B 	= 1024; // 11
+const def_CHR_Dah_ActFlag_214EX = 134217728; // 28
+const def_CHR_Dah_ActFlag_AppearAct = 4096; // 13 Attack during extinction
+const def_CHR_Dah_ActFlag_ChaDmgVanish = 8192; //14 Vanish
+const def_CHR_Dah_ActFlag_DahDmgVanish = 16384; //15 Vanish
+const def_CHR_Dah_ActFlag_DahLimitVanish = 32768; //16 Vanishing due to too much movement
+const def_CHR_Dah_ActFlag_MoveFront = 65536; // 17
+const def_CHR_Dah_ActFlag_MoveBack = 131072; // 18
+const def_CHR_Dah_ActFlag_IW = 524288; //20
+const def_CHR_Dah_ActFlag_623A = 1048576; //21
+const def_CHR_Dah_ActFlag_623B = 2097152; //22
+const def_CHR_Dah_ActFlag_623EX = 268435456; // 29
+const def_CHR_Dah_ActFlag_AirAct = 8388608; // 24 Air Attack
+const def_CHR_Dah_ActFlag_InputWalk = 16777216; // 25
+const def_CHR_Dah_ActFlag_HideRock = 33554432; // 26 0202 Grasp from attack
+
+const def_CHR_Dah_ActFlag_421A = 256; // 9 Breath of ground B+C
+const def_CHR_Dah_ActFlag_41236B = 2048; // 12 Ground 2+B+C rear attack
+
+const def_PP_Cha_DahActionPointLimit = 1000; //If this is exceeded, it will stop moving *Used for recasting after being hit
+
+//Power constant of BoudStatus *Actually it is a flag
+const def_BS_Pow_LV0 = 1; //Super weak (silent) hit
+const def_BS_Pow_LV1 = 2; //Weak damage
+const def_BS_Pow_LV2 = 0; //Default is medium damage (since the initial value is 0)
+const def_BS_Pow_LV3 = 4; //forced
+const def_BS_Pow_Furimuki = 8; // Turning attribute (Turn around towards the attacking person.Basically depends on the direction of the opponent's controlling parent.)
+const def_BS_Pow_SPGuardLimit = 16; // Weak against shields
+const def_BS_Pow_GuardFloat = 32; // Float with guard (invincibility attached)
+const def_BS_Pow_WallBound = 256; // Wall bound hit
+const def_BS_Pow_BoundCPHosei = 16384; // The untechable time of the second vector changes greatly depending on CP
+const def_BS_Pow_ReflexCPHosei = 32768; // The first untechable time changes greatly depending on CP
+// Since it is a short type, his limit is 32768
+
+//GRD_CorrectBreakTime constant (what percentage to subtract)
+const def_CBT_NoboriTyudanGuard = 30; // Middle stage of the climb
+const def_CBT_TyudanGuard = 4; // middle row
+const def_CBT_TyudanGuardSyodan = 10; // Middle first stage
+const def_CBT_GedanGuard = 4; // Bottom
+const def_CBT_GedanGuardSyodan = 6; // Lower first stage
+const def_CBT_AnyCancel = 4; // Special move that can cancel various things
+const def_CBT_AnyCancelSyodan = 6; // Special move that can cancel various things
+const def_CBT_Guard = 2; // Guard
+
+//HP value manipulation related
+const def_HPV_Liberate = 0; //100% veil off (obsolete)
+const def_HPV_OverLiberate = 0; //200% veil off (obsolete)
+
+//coordinate constant
+const def_POS_GamenGaiYuuyoX = 16384; //Grace coordinates from the edge that is determined to be inside the screen by checking outside the screen (128*128)
+const def_POS_AirDashLimitHeight = 11776; //Air dash height limit coordinates (11776 92 dots)
+const def_POS_AirMoonSkillLimitHeight = 0; //Air Moon Skill altitude limit coordinates 8192 is about 2F
+const def_POS_AirDashHoseiMinHeight = 16384; //Air dash altitude correction coordinates (if lower than 128 dots, multiply the upper vector)
+const def_POS_GamenHajiX = 262144; //Distance to screen edge 155648
+const def_POS_TechOverGamenHajiX = 278528; //Distance considered to have gone off-screen during nage grab (+128 dots) 172032
+const def_POS_AboutAir = -15000; //If it's lower than this, it's mostly in the air.
+
+//Finalize code constant
+const def_FC_FireBallHit = 30000;
+const def_FC_FireBallSousai = 30001;
+const def_FC_FireBallLand = 30002;
+const def_FC_FireBallWall = 30003;
+const def_FC_FireBallGamenGai = 30004;
+const def_FC_FireBallBlocked = 30005;
+const def_FC_Lose = 30006;
+const def_FC_RoundLose = 30007;
+const def_FC_WallRecover_Sita = 30008;
+const def_FC_FireBallDamage = 30009;
+const def_FC_FireBallGuard = 30010;
+const def_FC_FireBallCeil = 30011;
+const def_FC_FireBallParentChange = 30012;
+
+// Flag for opening dialogue
+const def_DTF_Exclude1PlayMode = 1; // Exclude single player play
+
+// Constant for BMvTbl.AddAirCount
+// AirCountSlot constant BMvTbl.AddAirCount( num, count )
+// For flags that become 0 when coming from the air to the ground. Use 7 for air dash and 0-6 for special moves.
+// 8 and 9 may be used in the program. It seems okay, but should I avoid it just in case?
+// You can use 0 to 15. 16 and 17 seem to be used in programs.
+
+const def_ACS_AirDash = 15;
+const def_AC_Assault = 15; // For assault limit
+
+//Flag for Battle_Std.JumpFrameID_NotHoldButton
+const def_JFN_SetExtendFlagPlayer = 1; // Attach extend flag to parent by reference from object
+
+// Constants for each character are 0 to 6
+// BMvTbl.AddAirCount( def_ACS_MIK_236, 0 )
+const def_ACS_VAT_J236A = 0;
+const def_ACS_VAT_J236B = 1;
+const def_ACS_VAT_J236C = 2;
+const def_ACS_VAT_J214A = 3;
+const def_ACS_VAT_J214B = 4;
+const def_ACS_VAT_J214C = 5;
+const def_ACS_VAT_J0202 = 6;
+const def_ACS_VAT_JAB = 7;
+// 8 reservations
+// 9 reservations
+const def_ACS_VAT_J236EX = 10;
+const def_ACS_VAT_J214EX = 11;
+
+const def_ACS_MIK_236 = 0;
+const def_ACS_MIK_236EX = 1;
+
+const def_ACS_KAG_J236 = 0;
+const def_ACS_KAG_Special_Jump = 1;
+const def_ACS_KAG_214 = 2;
+
+// Behavior constant (this constant is inherited from parent to child)
+// BMvTbl.SetMvAction( def_MVA_EXSkill );
+// BMvTbl.GetMvAction()
+const def_MVA_None = 0; // Not specified (fixed at 0)
+const def_MVA_Throw = 3; // Normal throw
+const def_MVA_EXAtk = 4; // Special skill (FF)
+const def_MVA_Skill = 5; // Special move
+const def_MVA_EXSkill = 10; // EX special move
+const def_MVA_SPSkill = 20; // SP special move
+const def_MVA_LASkill = 30; // SP special move
+const def_MVA_EXSystem = 15; // EX special system (VO etc.)
+
+//Movement code constant (0 at the beginning of Mv, 0 if not set) MvCode MoveCode
+// Battle_Std.MoveCode.AddFlag( def_MC_Shielded );
+const def_MC_None = 0; //00 Not set
+const def_MC_Atk = 1; //01 Normal skill
+const def_MC_Skill = 2; //02 Special move
+const def_MC_FireBall = 4; //03 Projectile (attached to CreateFireBall and automatically generated ones)
+const def_MC_AtkBlade = 8; //04 Blade with attack detection *May be unused
+const def_MC_Recovery = 16; //05 passive
+const def_MC_Throw = 32; //06 Normal throw attribute (def_MC2_SkillThrow for special throw)
+const def_MC_EXAction = 64; //07 EX attribute (+special move as normal move, EX special move as special move), also attached to VO
+const def_MC_SPAction = 128; //08 SP attribute (+IW with special move)
+const def_MC_NoJumpCansel = 256; //09 Exclude jump cancellation from normal C
+const def_MC_BCAction = 512; //10 BC technique
+const def_MC_NoBursted = 1024; //11 Techniques that are not bursted
+const def_MC_NoBurst = 2048; //12 State where you cannot burst
+const def_MC_HitStatus_Damage = 4096; //13 Mv attack does damage at least once? *Normal moves, special moves, and special moves only
+const def_MC_HitStatus_Guard = 8192; //14 Does it guard at least once during Mv attack? *Normal moves, special moves, and special moves only
+const def_MC_DoujiCanselNG_NormalAtk = 16384; //15 Normal technique that is not allowed to transition to another technique with a simultaneous press command
+const def_MC_CharaFlag1 = 32768; // 16 character-specific flags //Caius: Motion after giving instructions or his Yuzuriha: Mode continuation Dahaka: Action after being beaten Akatsuki: Kousei-related MV Byakuya: Technique to break the EX trap and float
+const def_MC_CharaFlag2 = 65536; // 17 Character-specific flag // Caius: Is it a motion that does not accept cancelability?
+const def_MC_NoSend_ScriptKnockBackVecor = 131072; //18 Do not pass on the effects of special knockback vectors received from the opponent by scripts such as shields to the parent.
+const def_MC_GRDLowBreak = 262144; //19 GRD Break's effect is short - CP increase by counter is low - Dahaka cannot be broken - (Reinforcement segment cannot be broken: abolished)
+const def_MC_GRDBreak_FatalDmgHosei = 524288; //20 Damage correction becomes looser with GRD break (130%)
+const def_MC_Sousai = 1048576; //21 If the attack judgments overlap, they will cancel each other out (if you want to cancel, call the function with FrameUpdate) If you want to change the appearance when canceling, call it as FireBall
+const def_MC_Sousai_NoSubHitCount = 2097152; //22 Do not subtract hit count when canceled by def_MC_Sousai
+const def_MC_Sousai_EnemySubSuccess = 4194304; //23 Def_MC_Sousai succeeded in subtracting the number of hits of something from the opponent (flag that is automatically cleared)
+const def_MC_FireBallRect = 8388608; // 24 Operation parent Mv that includes projectile judgment, supports special projectile reflexes, Akatsuki no Kosei
+// const _MoveCode0_NoMoveBasicAction = 16777216; //25 Cannot transition to basic movement of walking/crouching *Jumping is excluded because it is not possible to avoid throwing. Declare a constant on the program side (to avoid tremo bug)
+const def_MC_ExDamageHosei = 33554432; // 26 Action to apply multiplication correction on hit (such as too severe break)
+const def_MC_EnableAirAtkStatus = 67108864; // 27 Mv with AirAtkStatus enabled
+const def_MC_Shielded = 134217728; // 28 Mv unshielded
+const def_MC_EnableCansel_SkilltoSkill = 268435456; //29 Allow special moves to be canceled into special moves with special C
+const def_MC_EnableCansel_SkilltoAtk = 536870912; //30 Allow special move normal C to be canceled into normal move
+const def_MC_EnableCansel_SkilltoJump = 1073741824; // 31 Allow only jump cancellation of special move normal C
+
+// def_MC_Atk
+// def_MC_Skill
+// def_MC_EXAction
+// def_MC_SPAction
+
+// Action code constant 1
+// Battle_Std.MoveCodeEx.AddFlag( 1, def_MC1_ChainShiftOK );
+/* 00 */const def_MC1_None = 0;
+/* 01 */const def_MC1_SupportChara = 1;
+/* 02 */const def_MC1_Sousai_MySubSuccess = 2; //Successfully subtracted the number of hits by def_MC_Sousai
+/* 03 */const def_MC1_CharaFlag3 = 4;
+/* 04 */const def_MC1_AtkLow = 8; // Attach to weak attacks (also attach to some attacks that are not weak but you want to make weaker)
+/* 05 */const def_MC1_AtkJump = 16; // Attach jump attack
+/* 06 */const def_MC1_AtkLegs = 32; // Switch to foot sweep system
+/* 07 */const def_MC1_AtkBall = 64; // Attach to projectile type
+/* 08 */const def_MC1_AtkImpact = 128; // Attach to impact skill (impact offset is easy to lose to impact technique)
+/* 09 */const def_MC1_SupportMukiAuto = 256; // Support issued from this Mv is generated by SetMukiAuto
+/* 10 */const def_MC1_Kirifuda = 512; // Trump card (there is a grace period for pressing at the same time, so it is unclear whether it is in a trump state)
+/* 11 */const def_MC1_EnableZurasiExSpCancel = 1024; // Mv that can empty several frames with Ex and SP skills
+/* 12 */const def_MC1_SlowRocketeerAirAtk = 2048; // Somenobori middle jump attack
+/* 13 */const def_MC1_VeryWeakImpactAtk = 4096; //
+/* 14 */const def_MC1_ExtendAction = 8192; // Mv with extend action
+/* 15 */const def_MC1_CmdLvDZ_OK = 16384; // You can move to another action by pressing simultaneously
+/* 16 */const def_MC1_CmdLvDZ_SP2OK = 32768; // If you press them at the same time, you can move if you are in IWE class or above.
+/* 17 */const def_MC1_AirAtkGuardHosei = 65536; // The jump attack that occurs quickly from now on will be the upper stage (even if it disappears in the middle of the climb)
+/* 18 */const def_MC1_NoAtkCansel = 131072; // Exclude normal move cancel from normal C (only jump cancel)
+/* 19 */const def_MC1_Shield_CanselNG = 262144; // Actions that are rewritten as uncancelable (EX cancelable is possible) & incapable of action when shielded
+/* 20 */const def_MC1_ShieldFailed = 524288; // MV reduced by GRD due to failed shield (just check whether it is a failure or not by guard return)
+/* 21 */const def_MC1_ChainShiftOK = 1048576; // MV that allows CS to miss if the tool has "chain shift possible"
+/* 22 */const def_MC1_DoujiEndYoyaku = 2097152; // MV with reservation to move to another action by pressing simultaneously
+/* 23 */const def_MC1_Jump = 4194304; // Treated as a jump (If you perform a technique from here, there will be restrictions on the middle stage of the climb, etc.)
+/* 24 */const def_MC1_CSAntenGaesiSkill = 8388608; // Special move from CS dark turn
+/* 25 */const def_MC1_MovableInitSkill = 16777216; // Special move that can be performed
+/* 26 */const def_MC1_SidouHitSkill = 33554432; // Special move used at startup (with flag transfer during Mv transition)
+/* 27 */const def_MC1_GuardChainShiftOK = 67108864; // If the tool has "chain shift possible", MV that can be CS with guard
+/* 28 */const def_MC1_GuardGRDChangeStop = 134217728; // Flag that does not increase or decrease GRD during guard recovery (including shield)
+/* 29 */const def_MC1_AirAtkKirikaeTyudanCheckStart = 268435456; // Perform F-style check with jump attack issued from this Mv
+/* 30 */const def_MC1_TutoBallMuteki = 536870912; // Appears after passing through Hyde's projectile in the tutorial
+/* 31 */const def_MC1_GenFlag = 1073741824; // Mv-specific flag (setting specifies Mv of common operation. When checking, check and use along with Mv name)
+
+// Battle_Std.MoveCodeEx.AddFlag( 2, def_MC2_SSRelayAtk );
+const def_MC2_CheckStartExtendAction = 1;
+const def_MC2_CheckEndExtendAction = 2;
+const def_MC2_ZyodanAirAtk = 4; // Upgraded jump attack
+const def_MC2_TechOP = 8; // Is it a throw-away preparation action? Please note that it is valid even after the grace period for throwing is over.
+const def_MC2_FromAssault = 16; // Jump attack from Assault. Regardless of ground or air
+const def_MC2_GuardShiled = 32; // Guard shield activated
+const def_MC2_ShiledSuccess = 64; // Shield success
+const def_MC2_CounterHit = 128; // Counter hit
+const def_MC2_InputThrowCmd = 256; // Technique with a throw command (not a throw-through preparation)
+const def_MC2_ReverseThrow = 512; // Reverse Throw
+// const def_MC2_NoBreakObject = 1024; // Judgment that installations, options, etc. cannot be erased (such as Dahaka)
+const def_MC2_SkillThrow = 2048; // Command throw attribute
+const def_MC2_EnableCVO_OnlyCS = 4096; //Allow CVO when only CS is possible
+const def_MC2_StatusStd = 8192; // General purpose standing (used in guard)
+const def_MC2_StatusCro = 16384; // Generic crouch (used in guard)
+const def_MC2_StatusAir = 32768; // General purpose air (used in guard)
+const def_MC2_Reversal = 65536; // Issued with reversal (some items do not have reversal notation during the game)
+const def_MC2_CharaFlag4 = 131072;
+const def_MC2_DashKansei = 262144; // Does it have dash inertia (only available for dash, jump, and jump attack)?
+const def_MC2_SysAtk = 524288; // Uses systematic attacks such as VO, Gar Can, and normal throw (for Havoc)
+const def_MC2_EnemyAntenStop = 1048576; // When you can't move due to the enemy going dark
+const def_MC2_DamageNoFurimuki = 2097152; // Don't turn the opponent around when taking damage
+const def_MC2_NotHoldForever = 4194304; // Release button in the middle of increase type
+const def_MC2_NoWhiffEXCancel = 8388608; // Even if there is "EX cancel" in the tool, it cannot be issued when whiffing
+const def_MC2_GRDBreakAttack = 16777216; // Attack that caused GRD break
+const def_MC2_ShieldSteady = 67108864; // A technique where the opening does not change much even if shielded
+const def_MC2_SSRelayAtk = 134217728; // SS technique
+
+// Battle_Std.MoveCodeEx.AddFlag( 3, def_MC3_SPActionProduction );
+const def_MC3_CallComboChainMv = 1; // Mv called by continuous hit combo
+const def_MC3_FromNoCancelMv = 32; // Mv of raw rather than cancel *Unsupported push and shift
+const def_MC3_Anten = 32768; // Darkening (def_MC2_EnemyAntenStop)
+const def_MC3_AirSkill = 65536; // Air special move
+const def_MC3_AfterFrameUpdateStartTiming = 524288; // After calling Start of FrameUpdate?
+const def_MC3_UniqAttack = 1048576; // Attach to special attack
+const def_MC3_SuccessHitFinalize = 134217728; // Hit branch success expected action (ThrowHitFinalize) partially set manually
+
+// Battle_Std.MoveCodeEx.AddFlag( 4, def_MC4_FastJumpAtkNoThroughCrouch );
+const def_MC4_AddMv = 16; // Special move of derivative move/additional move
+// const def_MC4_SkillVecAdded = 32; // Mv that performed vector addition*Inherit
+const def_MC4_EnablePanishAnnounce = 256; // MV for punching (normal and special moves stand automatically)
+const def_MC4_ArmorBreak = 131072; // Mv that caused armor break
+const def_MC4_PunishHit = 524288; // MV hit with Punish
+const def_MC4_MutekiSidou = 4194304; // Action corrected by starting with invincible technique
+const def_MC4_DelayMutekiSidouHosei = 8388608; // Whether to set the invincibility start correction with a delay
+const def_MC4_FastJumpAtkNoThroughCrouch = 16777216; // Don't process the process of whiffing even if you jump up (for Init_Before)
+const def_MC4_AtemiSousaiSuccess = 536870912; // Action that succeeded in offsetting the AtemiSousai system
+
+// Battle_Std.MoveCodeEx.AddFlag( 5, def_MC5_FromSidouAddSkill );
+const def_MC5_FromSidouAddSkill = 4; // Whether this is an additional skill from the starting skill
+// const def_MC5_ArcDriveSkill = 8192; // AD skill
+
+//FireBall related
+// Battle_Std.MoveCodeEx.AddFlag( 6, def_MC6_CheckSousaiYarareObject );
+const def_MC6_FB_Vanish = 1;
+const def_MC6_FB_StatusCleared = 2;
+const def_MC6_FB_FirstHit = 4;//Flag is set on first hit
+const def_MC6_OB_OnceSousai = 8; //Flag to perform each process only once (flag is set if it has already been executed)
+const def_MC6_OB_OnceWall = 16;
+const def_MC6_OB_OnceBlocked = 32;
+const def_MC6_OB_OnceParentChange = 64;
+//It's like the performance definition of MC6-type skillsWhat image? Currently only affecting GRD increase
+// Battle_Std.MoveCodeEx.AddFlag( 6, def_MC6_SousaiMuteki );
+const def_MC6_EnableCansel_JumpMoveable = 8192;//Ability to act in the air after the move
+const def_MC6_EnableCansel_AddCommand = 128;//Has additional skills
+// const def_MC6_SidouBound = 256;//Startup damage
+// const def_MC6_NoSetDownMuteki = 512;//No down invincibility.
+const def_MC6_EnableZurashiDashCancel = 1024;//Special move that allows you to dash cancel by pressing Zurashi
+const def_MC6_NoSetUseExSkillFlag = 2048;//EX special move but does not set guarantee correction flag (for enhanced skills that do not attack)
+const def_MC6_SousaiMuteki = 4096; //Invincibility due to atemi offset
+// 8192 is used above
+const def_MC6_EnableAtemiCatchedHitStopAddObject = 16384; //Object that adds an added hitstop for the body when it is caught
+const def_MC6_CheckSousaiYarareObject = 32768; //Destructible object to offset projectiles
+
+// Battle_Std.MoveCodeEx.AddFlag( 7, def_MC7_ActiveEraseEnemyUniqCancel );
+const def_MC7_StdAssult = 1;//Techniques to limit ground assault
+const def_MC7_AirAssult = 2;//Air Assault
+const def_MC7_StdAssultIgnoreNoMove = 4;//Unaffected by ground assault's incapacity flag *Assault processing is Init_Std, so call it in InitBefore
+const def_MC7_LightLegsMuteki = 8;//MV scheduled to set invincibility to the light leg attribute (if this exists, the light leg invincibility will not disappear with SetHitMuteki)
+const def_MC7_InActive = 16;//Actions where inactivity is detected when receiving CS (in addition to this, normal moves, special moves, and assaults are detected)
+const def_MC7_StdAssultFrameAdd = 32;
+const def_MC7_AnyCancelGRD = 64;//Whether the GRD increase processing for techniques that can cancel various things has already been done.
+const def_MC7_SetMutekiDamage = 128;//Make invincible when dealing damage
+const def_MC7_ShieldWeakGRDAdd = 256;//Techniques that increase GRD a lot when shielded
+const def_MC7_CompletedShieldWeakGRDAdd = 512;//Techniques that have completed GRD increase processing when shielded
+const def_MC7_ThrowCounter = 1024;//Throw caught while frozen
+const def_MC7_StdAssultLimitAirAtk = 2048;//Techniques restricted by ground assault (from falling to landing. Affected by def_MC7_StdAssultIgnoreNoMove)
+const def_MC7_StdAssultLimitAirAtk2 = 4096;//Technique 2 limited by ground assault (unaffected by def_MC7_StdAssultIgnoreNoMove)
+
+const def_MC7_TechCheck = 8192;//Whether it is a technique that can be thrown through (ground throw only)
+const def_MC7_EnemyTechImpossible = 16384;//Whether the opponent was unable to throw through in the above case, take a counter with a throw or punish.
+const def_MC7_EnableTech = 32768;//Mv that can be thrown through even if you are unable to take action (be careful as it will also lose its rigidity) It will not counter or punish during this time
+const def_MC7_Muteki = 65536;//Action with attack invincibility
+const def_MC7_PaySkillCost = 1048576;//Whether you paid the cost of EX
+const def_MC7_Damaged = 2097152;//Stands up when entering DamageImpact (= also enters with guard etc.). Use when you want to check whether you have been hit before entering the hit vector
+const def_MC7_MutekiAnnounce = 4194304;// Invincibility announcement has been issued
+const def_MC7_NoMutekiAnnounce = 8388608;// Action that does not issue an invincibility announcement
+const def_MC7_ArmorFlashTiming = 268435456;// Techniques that emit light while wearing armor (do not use for purposes other than fixing bugs while in armor)
+
+const def_MC7_ForwordShiftSousaied = 536870912; // Action taken in avoidance
+const def_MC7_ActiveEraseEnemyUniqCancel = 1073741824; // Action affected by EraseEnemyUniqCancel
+
+//mvtmpl flag
+const def_TmplFlags_ChangeStatusOnly = 1; // Only performs state transition (*It will be in a state where other flags are also included)
+const def_TmplFlags_NoFurimuki = 2; //Do not turn around (ground special moves basically turn around, but with this, it does not turn around)
+const def_TmplFlags_NoAddComboRate = 4; //Do not add combo rate
+const def_TmplFlags_DoujiCancelOK = 16; //Allow canceling by pressing simultaneously (special moves cannot be canceled by pressing simultaneously)
+const def_TmplFlags_NoDrawReversalInfo = 32; //Do not display reversal announcement characters (reversal is counted)
+const def_TmplFlags_PassBeforeMoveCodes = 64; //Inherit specific flags
+const def_TmplFlags_NoClearVector = 128; //Do not perform automatic vector initialization by script
+const def_TmplFlags_Hit = 256; //Same as "_Hit" in Mv name
+const def_TmplFlags_Add = 512; //Same as "_Add" in Mv name
+const def_TmplFlags_EX_Init = 1024; //Same as "~EX" in Mv name, EX starting technique
+const def_TmplFlags_SP_Init = 2048; //Same as "~SP" in Mv name, SP starting technique
+const def_TmplFlags_Air = 4096; //Same as "~J"~ in Mv name
+const def_TmplFlags_EX = 8192; // Treated as EX
+const def_TmplFlags_SP = 16384; // Treated as SP
+const def_TmplFlags_Muteki = 32768; //Invincibility technique
+const def_TmplFlags_BC_Init = 65536; // Treated as BC technique
+const def_TmplFlags_NoSurinuke = 1048576; //Insert processing that does not slip through
+const def_TmplFlags_NoSousai = 2097152; //Do not include offset processing
+
+//atktmpl flag
+const def_AtkTmplFlags_Enable = 1; //Perform tmpl processing in Atk as well
+
+//tmpl flag for fireball
+const def_FBTmplFlags_NoClearVector = 1; //Do not perform automatic vector initialization by script
+const def_FBTmplFlags_NoChangeLandMv = 2; //Prevent Mv from changing upon landing
+const def_FBTmplFlags_NewTypeFireBall = 4; //Mv for new fireball processing
+const def_FBTmplFlags_NoVanishLand = 8;
+const def_FBTmplFlags_NoVanishGuard = 16;
+const def_FBTmplFlags_NoVanishDamage = 32;
+const def_FBTmplFlags_NoVanishHit = 48;
+const def_FBTmplFlags_NoVanishSousai = 64;
+const def_FBTmplFlags_NoVanishWall = 128;
+const def_FBTmplFlags_NoVanishBlocked = 256;
+const def_FBTmplFlags_NoVanishScreenOut = 512; // Does not disappear even if it goes off screen
+const def_FBTmplFlags_NoVanishAtkCountZero = 1024;
+const def_FBTmplFlags_NoEXSLimit = 2048; //Remove the EXS restriction applied when hitting or blocking an EX move-like bullet
+
+//FL (frame) constant
+const def_FL_NeutralWaitMin = 420; //wait animation jump minimum frame (provocation)
+const def_FL_NeutralWaitStep = 240; //After exceeding ª, how many cycles should the wait animation jump be checked?
+
+//Invincible time related
+const def_FL_JumpWaitNageMuteki = 16; // Throw invincibility applied while waiting for jump (it becomes 0 when you exit Mv)
+const def_FL_F_RecoverMuteki = 254; //Aerial passive invincibility time 18
+const def_FL_B_RecoverMuteki = 254; //Aerial passive invincibility time 20
+const def_FL_N_RecoverMuteki = 254; //Aerial passive invincibility time 21
+const def_FL_D_RecoverMuteki = 10; //Aerial passive invincibility time 10
+const def_FL_DownRecoverMuteki = 60; // Down passive invincibility time (until landing)
+
+const def_FL_F_GroundRecoverMuteki = 23; //Ground passive invincibility time
+const def_FL_B_GroundRecoverMuteki = 23; //Ground passive invincibility time
+const def_FL_N_GroundRecoverMuteki = 23; //Ground passive invincibility time
+const def_FL_WallRecoverMuteki = 30; //Wall passive invincibility time (cancels when exiting)const def_FL_ModoriGuardFloatDagekiMuteki = 6; //Blow invincibility time of guard float return
+const def_FL_ModoriGuardNageMuteki = 8; // Guard return throw invincibility time
+const def_FL_ModoriYarareNageMuteki = 8; // Throw invincibility time for ground damage and return
+
+const def_FL_GroundRecoverModoriNageMuteki = 8; // Throw invincibility time after ground passive
+const def_FL_UkiRecoverModoriNageMuteki = 8; //Throw invincibility time after floating and passive landing
+const def_FL_OkiagariNageMuteki = 8; //Getting up throw invincibility time
+
+//rigidity time relationship
+const def_FL_GroundRecoverHane_Recovery = 20; //Ground passive (bounce) stiffness Merkava and others only have exactly 20F, so I can't mess with it.
+const def_FL_WallRecoverWaitMin = 10; // Until you can move at the fastest speed from wall passive
+const def_FL_WallRecoverWaitMax = 10; //If you do nothing after wall passive, take passive in this frame
+
+//Throw/Throw-through relationship
+const def_FL_Tech = 13; // Throw grace frame after being grabbed (-1 means fighting game grace) CLR:15
+const def_FL_BoundTech = 26; //Suspended throw frame when grabbed forcibly while being hit CLR:30
+const def_FL_TechSenkou = 10; //Suspended throw frame after inputting the throw command Until this frame, throw away *Must be smaller than def_FL_Tech
+const def_FL_TechMiss = 34; //Throw failure frame after inputting the throw command Throw failure up to this frame
+
+const def_FL_LiberateMutekiTime = 30; // Veil-off invincibility time
+const def_FL_Liberate_LandRecovery = 12; //Veil off landing stiffness CLR:7F
+const def_FL_LiberateHit_LandRecovery = 2; //Landing stiffness on veil off hit
+
+const def_FL_ConvertMinTime = 15; // Minimum guaranteed time for concentration
+const def_FL_ConvertMaxTime = 1200; //Maximum continuation time of concentration (added from ver1.03)
+
+const def_FL_ConvertStopTime = 40; //Chain shift time stop/invincibility time
+const def_FL_CancelSupportStopTime = 0; //Cancel support time stop/invincibility time
+const def_FL_CancelSupportDelayFrame = 24; //Full cancellation support F
+
+const def_FL_SPCutinStopTime = 60; //SP cut-in time stop (Worth)
+const def_FL_EXCutinStopTime = 20; //EX cut-in time stop
+const def_FL_EXCutinBGChangeTime = 42; //EX cut-in BG change time
+
+const def_FL_Shield_StdTime = 14; //Minimum guaranteed standing shield time (if longer, release D to cancel) Return is 5F*2, so +10F is added
+const def_FL_Shield_CroTime = 17; //Minimum guarantee time for crouching shield (if longer, release D to cancel) Return is 5F*2, so +10F is added
+const def_FL_Shield_AirTime = 17; // Minimum air shield guaranteed time (if longer, release D to cancel) Return is 5F*2, so +10F is added
+const def_FL_Shield_MaxTime = 420; // Maximum shield duration (forcibly canceled if longer)
+
+const def_FL_ShieldStopTime = 0; //Stop time when shield is successful Ver.1.03:6F
+
+const def_FL_Shield_GRDPlusStartFrame = 20; //From what frame of the shield should GRD be increased?
+const def_FL_Shield_SPCostStartFrame = 30; //From what frame of the shield will the gauge be consumed?
+
+const def_FL_ChainShift_ConvertFrame = 200; //Chain shift conversion time
+const def_FL_WorthSkill_NageMutekiFrame = 30; // Throwing invincibility time that is always attached to Infinite Worth
+
+const def_FL_EXSLimit_EXSkill = 300; // Gauge increase limit frames after activating an EX move
+const def_FL_EXSLimit_IWSkill = 180; // Gauge increase limit frame after activating IW technique
+const def_FL_EXSLimit_IWEAtk = 400; // Gauge increase limit frame after IWE attack is activated
+
+// Landing stiffness related (LandRecovery)
+const def_FL_Jump_LandRecovery = 2; //Sky jump landing recovery
+const def_FL_Assault_LandRecovery = 4; //Assault landing stiffness Ver.1.04:8 (The stiffness is shorter if nothing is released from assault)
+const def_FL_BarrierAir_LandRecovery = 6; //Aerial shield landing stiffness
+const def_FL_BarrierAirFall_LandRecovery = 2; //Landing stiffness after air shield ends
+
+//Jump attack landing stiffness (including special skills) *cancelled by pattern change (landing pattern is guaranteed up to 12F)
+const def_FL_AtkAirA_LandRecovery = 2; // Missed shot
+const def_FL_AtkAirB_LandRecovery = 3; //
+const def_FL_AtkAirC_LandRecovery = 4; //
+const def_FL_AtkAirA_LandRecovery_Shielded = 10; // Shielded
+const def_FL_AtkAirB_LandRecovery_Shielded = 10; //
+const def_FL_AtkAirC_LandRecovery_Shielded = 10; //
+const def_FL_AtkAirA_LandRecovery_Damage = 0; // Damaged
+const def_FL_AtkAirB_LandRecovery_Damage = 0; //
+const def_FL_AtkAirC_LandRecovery_Damage = 0; //
+const def_FL_AtkAirA_LandRecovery_Guard = 2; // Guarded
+const def_FL_AtkAirB_LandRecovery_Guard = 3; //
+const def_FL_AtkAirC_LandRecovery_Guard = 4; //
+
+//Landing stiffness from assault
+const def_FL_AtkAirA_LandRecovery_Assault = 2; // Missed
+const def_FL_AtkAirB_LandRecovery_Assault = 2; //
+const def_FL_AtkAirC_LandRecovery_Assault = 2; //
+const def_FL_AtkAirA_LandRecovery_AssaultShielded = 10; // Shielded
+const def_FL_AtkAirB_LandRecovery_AssaultShielded = 10; //
+const def_FL_AtkAirC_LandRecovery_AssaultShielded = 10; //
+const def_FL_AtkAirA_LandRecovery_AssaultDamage = 2; // Damaged
+const def_FL_AtkAirB_LandRecovery_AssaultDamage = 2; //
+const def_FL_AtkAirC_LandRecovery_AssaultDamage = 2; //
+const def_FL_AtkAirA_LandRecovery_AssaultGuard = 2; // Guarded
+const def_FL_AtkAirB_LandRecovery_AssaultGuard = 2; //
+const def_FL_AtkAirC_LandRecovery_AssaultGuard = 2; //
+
+
+
+//Which free variable to use/character-specific constants (0 to 19)
+
+//Constant for which free variable to use (from 20 onwards)
+//Something that should only be messed with by the manipulating parent
+
+const def_PP_TMP0 = 20; // Use only within Mv or only when Mv matches
+
+const def_PP_StandbyType = 21; // Opening MV specification 0:Mv_Neutral 1:Mv_Standby 2:Mv_StandbyWait 3:Mv_StandbyDuet
+const def_PP_ST_Neutral = 0;
+const def_PP_ST_Standby = 1;
+const def_PP_ST_StandbyWait = 2;
+const def_PP_ST_StandbyDuet = 3;//Unused
+const def_PP_ST_StandbyDuetEnemy = 4;//Unused
+
+const def_PP_JumpFrame = 22; // MvCount when exiting the jump
+
+const def_PP_COM_TMP0 = 23; // 1 for CPU use
+const def_PP_COM_TMP1 = 24; // Used by CPU 2
+
+const def_PP_GuardCancelStatus = 25; // When Garcan attack is activated
+
+const def_PP_SousaiCount = 26; // Number of offsets
+const def_PP_SousaiFlags = 27; // Offsetting flag memory (for Atemi processing)
+const def_PP_SFS_NoSousai = 1; // Do not use manually as it is set automatically
+const def_PP_SFS_NoHit = 2; // Treat the canceled one as a miss
+const def_PP_SFS_BallTarget = 4; // Disable if there is no "projectile detection"
+const def_PP_SFS_NoGedan = 8; // Make it impossible to take the lower row (default is all available)
+
+const def_PP_SousaiEtcHantei = 28; // Special judgment number memory used for offset
+
+// It's a constant and is used everywhere, so I just leave it here
+const def_PP_CBS_ButtonA = 1;
+const def_PP_CBS_ButtonB = 2;
+const def_PP_CBS_ButtonC = 4;
+const def_PP_CBS_ButtonD = 8;
+
+const def_PP_GRDAction_UseGRD = 29; // GRD consumed in B+C
+const def_PP_GAU_NoUse = 1; // Do not consume completely
+const def_PP_GAU_NormalUse = 2; // Normal cost reservation
+const def_PP_GAU_VORPALUse = 4; // Cost reservation during VP
+const def_PP_GAU_Used = 8; // Cost consumed
+const def_PP_GAU_NoUpdateUse = 16; // Eliminate consumption on the 4th floor (it is only consumed on Lastupdate, so it can be used for attacks etc.)
+	
+const def_PP_JumpStartHeight = 30; // Contains the height when jumping and double jumping
+
+const def_PP_SoundStatus = 31; //SE playback flag
+const def_PP_SS_NoBoundVoice = 1; //Do not play beaten voice
+const def_PP_SS_NoBoundVoiceOnce = 2; //Do not play the next hit voice (it will be deleted by BoundInit)
+	
+const def_PP_LastPlaySound = 32; //Last played SE number
+const def_PP_AniSetObject = 33; //
+
+const def_PP_VeilOffGaugeType = 34; // Gauge status when Veil Off is activated 0: 100% open 1: 200% open
+
+const def_PP_RecoverHoldMask = 35; //Hold button used passively (also supports simultaneous press) 1<<0:A 1<<1:B 1<<2:C 1<<3:D
+
+const def_PP_Temp = 36; //General-purpose variable that can be used fairly arbitrarily
+const def_PP_Temp2 = 37; //General-purpose variable that can be used fairly arbitrarily
+const def_PP_IWEXS_ChgVO_Hit = 38; // Is IWEXS usable? He is at 200% and the opponent is on the verge of death, so VO hits 1
+
+// Can only be used within the CmdCheck function
+// Battle_Std.PP_AddFlag(def_PP_CmdStatus,0);
+const def_PP_CmdStatus = 39; //Status updated when CmdCheck passes (success)
+const def_PP_CS_MoveAble = 1; //Was it possible to act? *Please note that there is a delay and cancellation when pressing at the same time
+const def_PP_CS_ReverseBeat = 2; //Are you trying to output it as reverse beat?
+const def_PP_CS_DoujiDash_F = 4; //Whether you entered a dash with 6+A+B
+const def_PP_CS_UseGauge = 8;
+const def_PP_CS_ExCancelOK = 16; // Was it in a state where Ex cancellation can be performed?
+const def_PP_CS_SpCancelOK = 16; // Was it in a state where Sp Cancel can be performed?
+const def_PP_CS_InputDoujiDash_F = 64; //Did you try to input a dash with 6+A+B (also valid when you can't do it)
+const def_PP_CS_InputDoujiDash_B = 128; //Did you try to input a dash with 4+A+B (also valid when you can't do it)
+
+// It is initialized when the victim starts, so it must always be processed on the victim side
+//Battle_Std.PP_AddFlag(def_PP_ImpactAnnounce,def_PP_IA_BarrierBreached );
+const def_PP_ImpactAnnounce = 40;
+const def_PP_IA_Punish = 1;
+const def_PP_IA_Counter = 2;
+const def_PP_IA_ArmorBreak = 256;//Falled while in armor (not necessarily armor break attribute, but an announcement will be made)
+const def_PP_IA_NoCounterCounter = 4194304;//Counter for "no counter"
+const def_PP_IA_MutekiHosei = 8388608;//Although it is not an announcement, it is used to check the damage flag processing that only occurs once during the same F.
+const def_PP_IA_BarrierBreached = 16777216;//Knocked back by being hit by a bullet
+	
+const def_PP_TechReverse = 41; //Reverse throw or not
+const def_PP_PlayerPosX = 42; // Player X coordinate memory
+const def_PP_EnemyPosX = 43; // Memory of opponent's X coordinate
+
+const def_PP_CaptureCheckObject = 44; //Whether the capture check object has been generated?
+const def_PP_TechHit_FrameManager = 45; //Throw-through frame management
+
+const def_PP_StdComboChain = 46; //A combo check
+const def_PP_CroComboChain = 47; //A combo check
+const def_PP_AirComboChain = 48; //A combo check
+
+const def_PP_SkillUpdateVal = 49; // Initialized every time the player's special move is updated
+const def_PP_SUV_FastVecPosShift = 1; // Adjust coordinates when vector is fast to prevent slippage
+	
+const def_PP_JumpStatus = 50; //Jump status Valid from front/back N jumps to landing
+const def_PP_JS_JumpF = 1; //Previous jump state (*The flag does not disappear even if you double jump)
+const def_PP_JS_JumpN = 2; //Vertical jump state
+const def_PP_JS_JumpB = 4; //backward jump state
+const def_PP_JS_MultiJumpF = 8; //Pre-jump state after double jump
+const def_PP_JS_MultiJumpN = 16; //Vertical jump state after double jump
+const def_PP_JS_MultiJumpB = 32; // Back jump state after double jump
+const def_PP_JS_SkillLimit0 = 64; //Aerial special move limit slot 0
+const def_PP_JS_SkillLimit1 = 128; //Aerial special move limit slot 1
+const def_PP_JS_SkillLimit2 = 256; //Aerial special move limit slot 2
+const def_PP_JS_SkillLimit3 = 512; //Aerial special move limit slot 3
+	
+const def_PP_PlayerStatus = 51; //General status?
+//0 1 2 4 8 16 32 64 128 256 ...
+// const def_PP_PS_isAlive = 0;
+// const def_PP_PS_isKO = 1; // KOed
+const def_PP_PS_isGRDJ_Win = 2;
+const def_PP_PS_isGRDJ_Draw = 4;
+const def_PP_PS_isLiberate = 8;
+const def_PP_PS_isOverLiberate = 16;
+const def_PP_PS_AuraKanriEnd = 32; //Stop aura management
+const def_PP_PS_isThrowMv = 64; //Whether it is a throw attribute motion (during this motion, you can throw through even if you are unable to act)
+const def_PP_PS_isBallSousaiMv = 128; //Whether the motion has a projectile offset attribute
+const def_PP_PS_NoAura = 256; //Do not reapply aura
+const def_PP_PS_isGRDJ_WinCeles = 512; //Celestial victory
+const def_PP_PS_isLiberate_Celes= 1024; //Celestial VO
+//ªIt looks like it's broken at an appropriate time around here.
+
+
+const def_PP_ReversalLeftTime = 53; //If this is 1 or more and a special move is performed, it will be treated as a reversal
+// const def_PP_AssaultCount = 43; //Did you issue an assault (for limiting the number of times in the air. becomes 0 when on the ground)
+
+const def_PP_AirAtkStatus = 54; //Jump attack status (used for jump attacks and jump special moves)
+// const def_PP_AAS_Hit = 1; // Hit or guarded (there is no chance of landing)
+const def_PP_AAS_Shielded = 2; // Shielded (something like rigidity)
+const def_PP_AAS_inAssault = 4; //Jump attack issued from Assault (all ground, air, and dodge)
+const def_PP_AAS_inAirAssault = 8; //Jump attack from air assault
+const def_PP_AAS_Rocketeer = 16; //Whether issued while jumping up or not
+const def_PP_AAS_Damage = 32; //Damage dealt (no chance of landing)
+const def_PP_AAS_Guard = 64; //Guarded (less chance of landing?)
+const def_PP_AAS_Hit = 96; //damage or guard
+// const def_PP_AAS_Cancel = 128; // Issued with cancellation
+const def_PP_AAS_RockerteerHosei= 256; //Moved to upper stage with Rocketeer correction
+const def_PP_AAS_KirikaeHosei = 512; //Switched to upper stage with low da correction
+const def_PP_AAS_KirikaeHoseiClear = 1024; //Eliminated the upper row with low da correction by switching
+
+const def_PP_ChainShiftStatus = 55; // To check whether there is a no-cancel chain shift
+
+// Battle_Std.GS_AddFlag( def_PP_GS_VorpalDyingIWEAtk ); //
+const def_PP_GlobalStatus = 56; // Flag that is never initialized
+const def_PP_GS_ThrowStdC = 1; // Standing C treated as a throw
+const def_PP_GS_DButtonHold = 2; // D button is pressed
+const def_PP_GS_ThrustComboBlast = 4; // Combo blast that thrusts forward
+const def_PP_GS_AtkA_Rapid1 = 8; // A series 1st time
+const def_PP_GS_AtkA_Rapid2 = 16; // 2nd A series
+const def_PP_GS_AliveAdvGuardVec = 32; // Reflect vector remains
+const def_PP_GS_AliveBoundingObj = 64; // Whether Mv_Obj_Bounding has been generated or not
+const def_PP_GS_SPKanriObjFlag = 128; // Flag for Mv_SPAfterImage_KanriObject
+const def_PP_GS_ThrowAtkAppeared = 256; // Attack judgment was issued from the offset parent with Throw_F
+const def_PP_GS_BackScreenBlack = 512; // Calls FadeProc_Set to make the background black
+const def_PP_GS_NoAct_Move = 1024; // Walking back and forth, dashing, backstabbing, jumping, and crouching are disabled
+const def_PP_GS_NoAct_Atk = 2048; // All attacks are disabled (CLA and trump cards can be used)
+const def_PP_GS_TransferSupportMv_MissType1 = 4096; // Support call requests rewrite Mv_SupportCharaType1
+// const def_PP_GS_StopRecastSupport = 8192; // Does support recovery stop?
+const def_PP_GS_DashStickHoldEnd = 16384; // Did you release the lever after the front dash?
+const def_PP_GS_SlideDashThrow = 32768; // Is it a sliding push dash throw?
+// const def_PP_GS_GuardCancelCmdCheckObj = 65536; // Detection object for whether Gar Can was applied during guard
+// const def_PP_GS_GuardCancelCmdFaild = 131072; // This flag is set until 214 is inserted after guarding, causing 214D to fail
+const def_PP_GS_KeepInActive = 262144; // 1 while InActive state continues
+// const def_PP_GS_ReserveAwakenedVorpal = 524288; // Awakening round VP reservation (immediately after losing round and for the first time)
+const def_PP_GS_CelecVorpal = 1048576;
+const def_PP_GS_KoAtk = 4194304;//Knocked out by something (for detecting whether time is up)
+const def_PP_GS_ImmediatelyAfterRestart = 8388608;//Valid only immediately after restart
+const def_PP_GS_ExtraTrainingMode = 16777216; // Valid during special training (character cannot be operated)
+const def_PP_GS_VorpalDyingIWEAtk = 33554432; // Whether it was in VP state when IWE was activated
+	
+const def_PP_SkillEffectPos_X = 57; // Effect coordinates of skill activation
+const def_PP_SkillEffectPos_Y = 58; // Effect coordinates of skill activation
+const def_PP_SkillEffecType = 59; // Effect type of skill activation (such as moving during darkness)
+const def_PP_SET_FindEffectPos = 1; // There was an effect
+const def_PP_SET_AntenMove = 2; // Move forward during darkness
+const def_PP_SET_CalledEffect = 4; // Effect called
+
+const def_PP_SousaiStatus = 60; // Something about whether it was offset or not *Can I use this?
+const def_PP_BoundInitStatus = 61; // Valid flags in the vector initialized by BoundInit's isFirstTbl
+const def_PP_BIS_SidouStart = 1; // Vector starting from starting technique
+const def_PP_BIS_BoundCPHoseiSeted = 2; // Vector with BoundCPHosei bonus multiplied
+
+// Battle_Std.EnemyDamageFlag_Add( def_DF_UseComboChainShift );
+const def_DF_JumpCanseled = 1; // Jump canceled
+const def_DF_ComboRecasted = 2; // Recast during combo
+const def_DF_AerialJumpCanseled = 4; // Aerial jump canceled
+const def_DF_Locked = 8; //General purpose locking flag
+const def_DF_GRD_Minused = 16; //GRD was decreased
+const def_DF_GRD_Minused_TypeA = 16; //GRD was decreased
+const def_DF_GRD_Plused = 32; //GRD has been increased
+const def_DF_CSAntenGaesied = 64; //CS dark reversal technique hit
+const def_DF_CharaFlag1 = 128;
+const def_DF_UseExSkill = 256; // Whether or not an EX skill was used (for warranty correction/some EX skills do not flag)
+const def_DF_SpHosyoHoseiSeted_DoubleEx = 512; // EX same move
+const def_DF_SpHosyoHoseiSeted_VOsukasi = 1024; // VOsukasi
+const def_DF_SpHosyoHoseiSeted_CVO = 2048; // CVO activated
+const def_DF_GRD_Minused_TypeB = 4096; //Another technique with reduced GRD
+const def_DF_GRD_Minused_TypeC = 8192; //Another technique with reduced GRD
+const def_DF_CharaFlag2 = 16384;
+const def_DF_CharaFlag3 = 32768;
+//const def_DF_test = 65536;
+const def_DF_EXSkillLocked = 131072; // Technique to lock with EX
+const def_DF_HitedVO = 262144; // Hitted VO
+const def_DF_MarkingBound = 524288; // Memory to mark damage (disappears every time AttackImpact)
+const def_DF_Vorpaled = 1048576; // Combo started in VP state
+const def_DF_SetedEXSLimit = 2097152; // Whether EXS Limit was given or not
+const def_DF_SidouPunish = 4194304; // Punish start
+const def_DF_SidouCounter = 8388608; // Counter start
+const def_DF_UseComboChainShift = 16777216; // CS sandwiched during combo
+const def_DF_BoundLimit = 33554432; // Issued bound limit announcement
+const def_DF_UseSpSkill = 67108864; // Whether IW skill was used
+const def_DF_SpHosyoHoseiSeted_SP = 134217728; // SP activated
+const def_DF_MutekiHosyoHoseiSeted = 268435456; // Guaranteed correction by invincibility technique
+const def_DF_ThrowHosyoHoseiSeted = 536870912; // Guaranteed compensation due to normal throw
+
+// per object (not used yet)
+//const def_LP_TechReverse = 0; // Reverse throw or not
+//const def_LP_TechPlayerPosX = 1; // Player X coordinate memory
+//const def_LP_TechEnemyPosX = 2; // Memory of opponent's X coordinate
+
+//LP1 usage notes for FireBall object
+// 0:
+// 1:
+// 2:
+// 3:
+// Four:
+// Five:
+// 6:def_LP1_BallFlags
+// 7:def_LP1_MvType
+// 8:def_LP1_BallSlot
+// *Since it was changed to use LPEx, it no longer overlaps with existing LP
+	
+//LP definition for FireBall
+const def_LP1_BallFlags = 6; // Flag collection for projectiles
+const def_BallFlags_None = 0; // I don't need it
+const def_BallFlags_Finalize = 1; // Finalize it next time
+const def_BallFlags_SousaiSubHited = 2; // The offset process was performed at least once (the number of hits was reduced by the offset)
+const def_BallFlags_AddComboRate = 4; // Multiplyed by combo rate
+const def_BallFlags_NoAddHitComboRate = 8; // Projectile that does not add combo rate on hit
+const def_BallFlags_NoSousaiVanish = 16; // Do not process Sousai even if the number of hits becomes 0. A flag is raised when a hit or guard is processed.
+const def_LP1_MvType = 7; // Mv attribute (used only for missiles and other projectiles)
+const def_MvType_Normal = 0; // Mv attribute: no attribute
+const def_MvType_Ball = 536870912; // Mv attribute: projectile
+const def_LP1_BallSlot = 8; // Eff6-100 Slot for 101 (61, 11, etc.)
+
+//0-9
+const def_LP_Hyd_236_Type = 0; // Projectile AorB
+const def_LP_Hyd_236_Hit = 1; //
+const def_LP_Vat_236_Type = 0; // Projectile AorB
+const def_LP_Vat_236EX_HitCount = 1; // EX projectile hit count
+
+const def_LP_Car_BloodPool_Type = 0; // FireBall to check for blood pool
+const def_LP_Car_SkillLevel = 1; // Special move weak/medium EX identification
+const def_LP_Car_BloodPool_Grp = 2; // Blood pool image memory 0:A 1:B 2:C 10:A(2P) 11:B(2P) 12:C(2P)
+
+const def_LP_Ori_41236SP_LastX = 0;
+
+const def_LP_Dah_DirectOrder = 8; // Called to action by Caius
+// Should contain Finalize code
+const def_LP_Dah_Status = 9; // Dahaka object status
+const def_LPDSFlags_Finalized = 1; // Finalized update timing (reset on every update)
+
+
+//You can play around with it as you see fit
+//const...
+
+//Pattern (PAT) number (character)
+const def_PAT_Neutral = 0; //neutral
+
+const def_PAT_Walk_F = 10; //Go forward/stop forward
+const def_PAT_Walk_B = 11; //Backward/backward stop
+
+const def_PAT_Crouch = 12; // Crouch transition
+const def_PAT_Crouch_Wait = 13; // Crouch wait
+const def_PAT_Crouch_toN = 14; // rise
+const def_PAT_Furimuki_S = 15; // Turn around
+const def_PAT_Furimuki_C = 16; // Crouch and turn around
+
+const def_PAT_GuardS = 17; //Standing guard/return
+const def_PAT_GuardC = 18; // Crouching guard/return
+const def_PAT_GuardA = 19; //Aerial guard/return
+
+const def_PAT_Jump_F = 35; //previous jump/wait
+const def_PAT_Jump_N = 36; //Vertical jump/wait
+const def_PAT_Jump_B = 37; // Jump backwards/wait
+
+const def_PAT_MultiJump_F = 38; //Multi-step jump
+const def_PAT_MultiJump_N = 39; //Multi-step jump
+const def_PAT_MultiJump_B = 40; //Multi-step jump
+
+const def_PAT_ForwardShift = 43; // Forward avoidance
+
+const def_PAT_Dash_F = 45; // Dash in front of the ground/stop
+const def_PAT_Dash_B = 46; //Dash behind ground/stop
+
+const def_PAT_Standby_1 = 50; //Appearance 1
+const def_PAT_Standby_2 = 51; //Appearance 2
+const def_PAT_GuardCancelAtk = 60; //Guard Can attack
+
+const def_PAT_AirDash_F = 67; // air front dash
+const def_PAT_AirDash_B = 68; //Aerial back dash
+
+const def_PAT_Mv_Assault_Dodge = 67; //Ground Assault (Dodge)
+const def_PAT_Mv_Assault_Std = 68; //Ground Assault
+const def_PAT_Mv_Assault_Air = 68; //Air Assault
+const def_PAT_Mv_Assault = 68; //Various assaults
+
+const def_PAT_Throw_F = 55; // Ground forward throw
+const def_PAT_Throw_F_TechWait = 56; //Wait until ground throw is completed ~ exit
+const def_PAT_Throw_F_Hit = 57; //Ground throw attack part
+
+const def_PAT_Barrier_Std = 17; //Standing resist 387
+const def_PAT_Barrier_Cro = 18; //Crouching resist 388
+const def_PAT_Barrier_Air = 19; //Air resist 389
+
+const def_PAT_VGuard_Time = 10; //Time to empty guard
+const def_PAT_VGuard_S = 17; // Standing motion 390
+const def_PAT_VGuard_C = 18; // Crouching motion 391
+
+const def_PAT_IWEAtk = 259; //IWE attack VO
+const def_PAT_Liberate = 260; //veil off
+const def_PAT_Convert = 261; //Concentration & IWE attack
+const def_PAT_ChainShift = 262; //Chain shift
+
+const def_PAT_StandbyWait = 49; // Waiting for opening pose
+const def_PAT_Standby = 50; // Appearance pose
+const def_PAT_Win = 52; // Victory pose
+const def_PAT_RoundWin = 53; // Round win pose
+
+const def_PAT_TimeupLose = 248; //Timeout loss/draw pose
+
+
+const def_PAT_Atk_StdA = 1; // Standing weak
+const def_PAT_Atk_StdB = 2; // Standing
+const def_PAT_Atk_StdC = 3; // Standing strong
+const def_PAT_Atk_CroA = 4; // Crouching weak
+const def_PAT_Atk_CroB = 5; // Crouching
+const def_PAT_Atk_CroC = 6; // Strong crouching
+const def_PAT_Atk_AirA = 7; // Jump weak
+const def_PAT_Atk_AirB = 8; // Jumping
+const def_PAT_Atk_AirC = 9; // Strong jump
+
+const def_PAT_Atk_DashStdA = 401; // Dash standing weak *Not used
+const def_PAT_Atk_DashStdB = 402; // Dash standing
+const def_PAT_Atk_DashStdC = 403; // Dash standing strong
+const def_PAT_Atk_DashCroA = 404; // Dash crouching weak *Not used
+const def_PAT_Atk_DashCroB = 405; // Dash crouching *Not used
+const def_PAT_Atk_DashCroC = 406; // Dash crouching strong *Not used
+const def_PAT_Atk_DashAirA = 407; // Dash jump weak *Not used
+const def_PAT_Atk_DashAirB = 408; // Dash jumping *Not used
+const def_PAT_Atk_DashAirC = 409; // Dash Jump Strong *Not used
+
+const def_PAT_EXCutinGrp = 997; // EX technique cut-in
+const def_PAT_IWCutinGrp = 998; // IW technique cut-in
+const def_PAT_IWXCutinGrp = 999; // IWX technique cut-in
+
+
+
+// combo num
+//command priority constant
+// 1~ *0 means no command is entered
+
+const def_CN_Skill_DyingIWE = 50; //IWE attack
+
+const def_CN_Liberate = 60; //veil off
+const def_CN_Blast = 61; //Gold Blast
+const def_CN_ComboBlast = 62; //OM Blast
+const def_CN_BoundBlast = 63; //Blue blast
+
+const def_CN_Skill_IWEXIST = 70; //Why here?
+
+const def_CN_Dash_F_Douji = 80;
+const def_CN_Dash_B_Douji = 81;
+// const def_CN_Throw_F = 82;
+
+const def_CN_Skill_236236EX = 90;
+const def_CN_Skill_214236EX = 91;
+const def_CN_Skill_214214EX = 92;
+
+const def_CN_Skill_DoubleCircleEX = 100;
+const def_CN_Skill_DoubleCircleC = 101;
+const def_CN_Skill_DoubleCircleB = 102;
+const def_CN_Skill_DoubleCircleA = 103;
+
+
+const def_CN_Skill_CircleEX = 110;
+const def_CN_Skill_CircleC = 111;
+const def_CN_Skill_CircleB = 112;
+const def_CN_Skill_CircleA = 113;
+
+const def_CN_Skill_41236SP_ABC = 116;
+const def_CN_Skill_41236SP = 120; //CPU is hitting 120 keys
+const def_CN_Skill_41236EX = 119;
+const def_CN_Skill_41236C = 121;
+const def_CN_Skill_41236B = 122;
+const def_CN_Skill_41236A = 123;
+
+const def_CN_Skill_623EX = 130;
+const def_CN_Skill_623C = 131;
+const def_CN_Skill_623B = 132;
+const def_CN_Skill_623A = 133;
+
+const def_CN_Skill_236SP = 139;
+const def_CN_Skill_236EX = 140;
+const def_CN_Skill_236C = 141;
+const def_CN_Skill_236B = 142;
+const def_CN_Skill_236A = 143;
+
+const def_CN_Skill_63214SP = 149;
+const def_CN_Skill_63214EX =150;
+const def_CN_Skill_63214C = 151;
+const def_CN_Skill_63214B = 152;
+const def_CN_Skill_63214A = 153;
+
+const def_CN_Skill_421EX = 160;
+const def_CN_Skill_421C = 161;
+const def_CN_Skill_421B = 162;
+const def_CN_Skill_421A = 163;
+
+const def_CN_Skill_214BC = 167;
+const def_CN_Skill_214EX = 170;
+const def_CN_Skill_214C = 171;
+const def_CN_Skill_214B = 172;
+const def_CN_Skill_214A = 173;
+
+const def_CN_Skill_C0202C = 175;
+const def_CN_Skill_C0202B = 176;
+const def_CN_Skill_C0202A = 177;
+
+const def_CN_Skill_020202EX = 178;
+const def_CN_Skill_0202EX = 180;
+const def_CN_Skill_0202C = 181;
+const def_CN_Skill_0202B = 182;
+const def_CN_Skill_0202A = 183;
+const def_CN_Skill_0202D = 184;//200226: If the priority is higher than A or B, it is difficult to perform advance CS at 22AD>AD
+
+//Are you using this area?
+const def_CN_Skill_236A_236EX = 195; //¦
+const def_CN_Skill_236A_236C = 196; //¦
+const def_CN_Skill_236A_236BorC = 196; //¦
+const def_CN_Skill_236A_236B = 197; //¦
+const def_CN_Skill_236A_236A = 198; //¦
+
+const def_CN_Skill_236B_236EX = 195; //¦
+const def_CN_Skill_236B_236C = 196; //¦
+const def_CN_Skill_236B_236BorC = 196; //¦
+const def_CN_Skill_236B_236B = 197; //¦
+const def_CN_Skill_236B_236A = 198; //¦
+
+const def_CN_Skill_236A_236A_236A = 198; // *
+const def_CN_Skill_236_236 = 198; // *
+const def_CN_Skill_236_236_236 = 199; // *
+const def_CN_Skill_236_236_214 = 200; // *
+
+
+const def_CN_Skill_J41236SP = 219;
+const def_CN_Skill_J41236EX = 220;
+const def_CN_Skill_J41236C = 221;
+const def_CN_Skill_J41236B = 222;
+const def_CN_Skill_J41236A = 223;
+
+const def_CN_Skill_J623EX = 230;
+const def_CN_Skill_J623C = 231;
+const def_CN_Skill_J623B = 232;
+const def_CN_Skill_J623A = 233;
+
+const def_CN_Skill_J236EX = 240;
+const def_CN_Skill_J236C = 241;
+const def_CN_Skill_J236B = 242;
+const def_CN_Skill_J236A = 243;
+
+const def_CN_Skill_J63214SP = 249;
+const def_CN_Skill_J63214EX = 250;
+const def_CN_Skill_J63214C = 251;
+const def_CN_Skill_J63214B = 252;
+const def_CN_Skill_J63214A = 253;
+
+const def_CN_Skill_J421EX = 260;
+const def_CN_Skill_J421C = 261;
+const def_CN_Skill_J421B = 262;
+const def_CN_Skill_J421A = 263;
+
+const def_CN_Skill_J214EX = 270;
+const def_CN_Skill_J214C = 271;
+const def_CN_Skill_J214B = 272;
+const def_CN_Skill_J214A = 273;
+
+const def_CN_Skill_J0202EX = 280;
+const def_CN_Skill_J0202C = 281;
+const def_CN_Skill_J0202B = 282;
+const def_CN_Skill_J0202A = 283;
+
+//Common system part
+const def_CN_Throw_F = 306; // If not here, CS will come out with repeated AD hits
+const def_CN_Throw_A = 307;
+
+const def_CN_Convert = 350; //Chain shift ver.1.02:1907¨ver.1.03:350
+
+// Dash FF
+const def_CN_Atk_DashStdBandC = 351;
+
+const def_CN_AtkCBandC = 360; // changed from 480
+const def_CN_AtkBandC = 361;
+const def_CN_AtkJBandC = 362;
+
+const def_CN_AtkCAandB = 363;
+const def_CN_AtkAandB = 364;
+const def_CN_AtkJAandB = 365;
+
+const def_CN_Atk_DashAdd = 368; // Something like 6+A+B while dashing
+
+const def_CN_Atk_DashStdC_Normal= 370; //When action is possible
+const def_CN_Atk_DashStdB_Normal= 371;
+
+const def_CN_Atk_DashStdC = 380; //When unable to act
+const def_CN_Atk_DashStdB = 381;
+
+const def_CN_Atk_DashStdC_Direct= 390; // Dash attack raw
+const def_CN_Atk_DashStdB_Direct= 391;
+
+// const def_CN_Assault_Std = 395;
+const def_CN_Assault_Air = 397;
+
+
+const def_CN_Dash_F = 400;
+const def_CN_Dash_B = 401;
+
+const def_CN_DirectSSSkill = 405; // Higher than normal moves and smart steer
+
+//Additional commands for special moves (priority is lower than special moves)
+const def_CN_Skill_AddCommand1 = 410;
+const def_CN_Skill_AddCommand2 = 411;
+const def_CN_Skill_AddCommand3 = 412;
+const def_CN_Skill_AddCommand4 = 413;
+const def_CN_Skill_AddCommand5 = 414;
+const def_CN_Skill_AddCommand6 = 415;
+const def_CN_Skill_AddCommand7 = 416;
+const def_CN_Skill_AddCommand8 = 417;
+const def_CN_Skill_AddCommand9 = 418;
+const def_CN_Skill_AddCommand10 = 419;
+const def_CN_Skill_AddCommand11 = 420;
+const def_CN_Skill_AddCommand12 = 421;
+const def_CN_Skill_AddCommand13 = 422;
+const def_CN_Skill_AddCommand14 = 423;
+const def_CN_Skill_AddCommand15 = 424;
+const def_CN_Skill_AddCommand16 = 425;
+const def_CN_Skill_AddCommand17 = 426;
+const def_CN_Skill_AddCommand18 = 427;
+const def_CN_Skill_AddCommand19 = 428;
+const def_CN_Skill_AddCommand20 = 429;
+const def_CN_Skill_AddCommand21 = 430;
+const def_CN_Skill_AddCommand22 = 431;
+const def_CN_Skill_AddCommand23 = 432;
+const def_CN_Skill_AddCommand24 = 433;
+const def_CN_Skill_AddCommand25 = 434;
+const def_CN_Skill_AddCommand26 = 435;
+const def_CN_Skill_AddCommand27 = 436;
+const def_CN_Skill_AddCommand28 = 437;
+const def_CN_Skill_AddCommand29 = 438;
+const def_CN_Skill_AddCommand30 = 439;
+const def_CN_Skill_AddCommand31 = 440;
+const def_CN_Skill_AddCommand32 = 441;
+const def_CN_Skill_AddCommand33 = 442;
+const def_CN_Skill_AddCommand34 = 443;
+const def_CN_Skill_AddCommand35 = 444;
+const def_CN_Skill_AddCommand36 = 445;
+const def_CN_Skill_AddCommand37 = 446;
+const def_CN_Skill_AddCommand38 = 447;
+const def_CN_Skill_AddCommand39 = 448;
+const def_CN_Skill_AddCommand40 = 449;
+const def_CN_Skill_AddCommand41 = 450;
+const def_CN_Skill_AddCommand42 = 451;
+const def_CN_Skill_AddCommand43 = 452;
+const def_CN_Skill_AddCommand44 = 453;
+const def_CN_Skill_AddCommand45 = 454;
+const def_CN_Skill_AddCommand46 = 455;
+const def_CN_Skill_AddCommand47 = 456;
+const def_CN_Skill_AddCommand48 = 457;
+const def_CN_Skill_AddCommand49 = 458;
+
+// Shield (changed to take priority over normal skills and special skills)
+// const def_CN_Barrier_Cro = 690;
+// const def_CN_Barrier_Std = 691;
+// const def_CN_Barrier_Air = 692;
+
+// Normal skills/special skills from here
+const def_CN_Atk1C = 700;
+const def_CN_Atk1B = 701;
+const def_CN_Atk1A = 702;
+//const def_CN_Atk2C = 710;
+//const def_CN_Atk2B = 711;
+//const def_CN_Atk2A = 712;
+const def_CN_Atk3C = 720;
+const def_CN_Atk3B = 721;
+const def_CN_Atk3A = 722;
+const def_CN_Atk4C = 730;
+const def_CN_Atk4B = 731;
+const def_CN_Atk4A = 732;
+
+const def_CN_Atk4Atk_Clear = 738; // Must be before 6A or something
+const def_CN_Atk6Atk_Clear = 739; // Must be before 6A or something
+
+const def_CN_Atk6C = 740;
+const def_CN_Atk6B = 741;
+const def_CN_Atk6A = 742;
+const def_CN_Atk6C_Add = 745;
+const def_CN_Atk6B_Add = 746;
+const def_CN_Atk6A_Add = 747;
+
+const def_CN_Atk7C = 750;
+const def_CN_Atk7B = 751;
+const def_CN_Atk7A = 752;
+const def_CN_Atk8C = 760;
+const def_CN_Atk8B = 761;
+const def_CN_Atk8A = 762;
+const def_CN_Atk9C = 770;
+const def_CN_Atk9B = 771;
+const def_CN_Atk9A = 772;
+//const def_CN_AtkC = 780;
+//const def_CN_AtkB = 781;
+//const def_CN_AtkA = 782;
+
+const def_CN_AtkJ1C = 800;
+const def_CN_AtkJ1B = 801;
+const def_CN_AtkJ1A = 802;
+const def_CN_AtkJ2C = 810;
+const def_CN_AtkJ2B = 811;
+const def_CN_AtkJ2A = 812;
+const def_CN_AtkJ3C = 820;
+const def_CN_AtkJ3B = 821;
+const def_CN_AtkJ3A = 822;
+
+const def_CN_AtkJ4Atk_Clear = 829; // Must be before 4A or something
+const def_CN_AtkJ4C = 830;
+const def_CN_AtkJ4B = 831;
+const def_CN_AtkJ4A = 832;
+
+const def_CN_AtkJ6Atk_Clear = 838; // Must be before 6A or something
+const def_CN_AtkJ6C = 840;
+const def_CN_AtkJ6B = 841;
+const def_CN_AtkJ6A = 842;
+const def_CN_AtkJ6C_Add = 845;
+const def_CN_AtkJ6B_Add = 846;
+const def_CN_AtkJ6A_Add = 847;
+
+
+
+const def_CN_AtkJ7C = 850;
+const def_CN_AtkJ7B = 851;
+const def_CN_AtkJ7A = 852;
+const def_CN_AtkJ8C = 860;
+const def_CN_AtkJ8B = 861;
+const def_CN_AtkJ8A = 862;
+const def_CN_AtkJ9C = 870;
+const def_CN_AtkJ9B = 871;
+const def_CN_AtkJ9A = 872;
+//const def_CN_AtkJC = 880;
+//const def_CN_AtkJB = 881;
+//const def_CN_AtkJA = 882;
+
+// const def_CN_Throw_F = 999; // Higher than normal techniques, but lower than special techniques, higher than smart steer
+
+//There are A series CNs from 1000 to 1010.
+Note that it is only generated with //def_CN_SmartSteer_00+n and constants after 00 are not used.
+// n = def_CNP_SmartSteerNumMAX
+const def_CNP_SmartSteerNumMAX = 10; // Maximum number of items that can be registered Up to def_CN_SmartSteer_00+30 for 10*3 types
+const def_CN_SmartSteer_00 = 1000;
+const def_CN_SmartSteer_01 = 1001;
+const def_CN_SmartSteer_02 = 1002;
+const def_CN_SmartSteer_03 = 1003;
+const def_CN_SmartSteer_04 = 1004;
+const def_CN_SmartSteer_05 = 1005;
+const def_CN_SmartSteer_06 = 1006;
+const def_CN_SmartSteer_07 = 1007;
+const def_CN_SmartSteer_08 = 1008;
+const def_CN_SmartSteer_09 = 1009;
+const def_CN_SmartSteer_10 = 1010;
+
+const def_CN_Barrier_Cro = 1035;
+const def_CN_Barrier_Std = 1036;
+const def_CN_Barrier_Air = 1037;
+const def_CN_Assault_Std = 1038;
+const def_CN_ForwardShift = 1039; //Lower priority than 3C etc.
+
+
+const def_CN_HighJump_F = 1040;
+const def_CN_HighJump_N = 1041;
+const def_CN_HighJump_B = 1042;
+const def_CN_HighJumpCancel_F = 1043;
+const def_CN_HighJumpCancel_N = 1044;
+const def_CN_HighJumpCancel_B = 1045;
+
+const def_CN_Jump_F = 1050; //¦
+const def_CN_Jump_N = 1051; //¦
+const def_CN_Jump_B = 1052; //¦
+const def_CN_JumpCancel_F = 1053; //¦
+const def_CN_JumpCancel_N = 1054; //¦
+const def_CN_JumpCancel_B = 1055; //¦
+
+const def_CN_MultiJump_F = 1060;
+const def_CN_MultiJump_N = 1061;
+const def_CN_MultiJump_B = 1062;
+const def_CN_MultiJumpCancel_F = 1063;
+const def_CN_MultiJumpCancel_N = 1064;
+const def_CN_MultiJumpCancel_B = 1065;
+const def_CN_Atk_Std6CThrow = 1070; // Normal throw at 6C (set priority above 6C)
+
+//Additional commands with higher priority than normal skills
+//If not this way, 6B>6B will become 6B>5B
+const def_CN_Atk_2B_2B_2B = 1080;
+const def_CN_Atk_6B_6B = 1083;
+const def_CN_Atk_6C_6C = 1092;
+const def_CN_Atk_6C_6C_6C = 1093;
+const def_CN_Atk_J6B_J6B = 1094;
+
+// Normal technique
+const def_CN_Atk_CroC = 1100; //¦
+const def_CN_Atk_CroB = 1101; //¦
+const def_CN_Atk_CroA = 1102; //¦
+const def_CN_Atk_StdC = 1110;
+const def_CN_Atk_StdB = 1111;
+const def_CN_Atk_StdA = 1112;
+const def_CN_Atk_AirC = 1120;
+const def_CN_Atk_AirB = 1121;
+const def_CN_Atk_AirA = 1122;
+
+//Additional commands for normal skills (lower priority than normal skills)
+//Necessary for techniques like B>B that don't involve the lever
+const def_CN_Atk_A_A = 1130;
+const def_CN_Atk_B_B = 1131;
+const def_CN_Atk_C_C = 1133;
+const def_CN_Atk_2A_2A = 1134;
+const def_CN_Atk_2B_2B = 1135;
+const def_CN_Atk_2C_2C = 1136;
+const def_CN_Atk_JA_JA = 1137;
+const def_CN_Atk_JB_JB = 1138;
+const def_CN_Atk_JC_JC = 1139;
+const def_CN_Atk_B_B_B = 1140;
+
+
+const def_CN_Atk_AddCommand1 = 1150;
+const def_CN_Atk_AddCommand2 = 1151;
+const def_CN_Atk_AddCommand3 = 1152;
+const def_CN_Atk_AddCommand4	= 1153;
+const def_CN_Atk_AddCommand5	= 1154;
+const def_CN_Atk_AddCommand6	= 1155;
+const def_CN_Atk_AddCommand7	= 1156;
+const def_CN_Atk_AddCommand8	= 1157;
+const def_CN_Atk_AddCommand9	= 1158;
+const def_CN_Atk_AddCommand10	= 1159;
+const def_CN_Atk_AddCommand11	= 1160;
+
+const def_CN_CallSupport4or6	= 1306;
+const def_CN_CallSupport		= 1307;
+
+const def_CN_GCAttackEX_Std     = 1395;
+const def_CN_GCAttack_Std       = 1396;
+
+const def_CN_Basic_AddMove1		= 1500;
+const def_CN_Basic_AddMove2		= 1501;
+const def_CN_Basic_AddMove3		= 1502;
+const def_CN_Basic_AddMove4		= 1503;
+const def_CN_Basic_AddMove5		= 1504;
+const def_CN_Basic_AddMove6		= 1505;
+const def_CN_Basic_AddMove7		= 1506;
+const def_CN_Basic_AddMove8		= 1507;
+const def_CN_Basic_AddMove9		= 1508;
+const def_CN_Basic_AddMove10	= 1509;
+const def_CN_Basic_AddMove11	= 1510;
+const def_CN_Basic_AddMove12	= 1511;
+const def_CN_Basic_AddMove13	= 1512;
+const def_CN_Basic_AddMove14	= 1513;
+const def_CN_Basic_AddMove15	= 1514;
+const def_CN_Basic_AddMove16	= 1515;
+const def_CN_Basic_AddMove17	= 1516;
+const def_CN_Basic_AddMove18	= 1517;
+const def_CN_Basic_AddMove19	= 1518;
+const def_CN_Basic_AddMove20	= 1519;
+const def_CN_Basic_AddMove21	= 1520;
+const def_CN_Basic_AddMove22	= 1521;
+const def_CN_Basic_AddMove23	= 1522;
+const def_CN_Basic_AddMove24	= 1523;
+const def_CN_Basic_AddMove25	= 1524;
+
+const def_CN_Crouch			= 1620;
+const def_CN_Walk_F			= 1621;
+const def_CN_Walk_B			= 1622;
+const def_CN_ConvertCharge = 1908; //Concentration *Number change
+
+const def_CN_CallEscapeSupportKirifuda = 1950; // Escape support (trump state)
+const def_CN_CallEscapeSupport = 1951; // Escape support
+
+const def_CN_Debug00 = 2000;
+const def_CN_Debug01 = 2001;
+const def_CN_Debug02 = 2002;
+const def_CN_Debug03 = 2003;
+const def_CN_Debug04 = 2004;
+const def_CN_Debug05 = 2005;
+const def_CN_Debug06 = 2006;
+const def_CN_Debug07 = 2007;
+const def_CN_Debug08 = 2008;
+const def_CN_ReversalNeutral = 3199;//Do nothing with reversal behavior
+
+//SPCost
+const def_SC_SpGauge_Max = 20000; // SP gauge maximum value
+const def_SC_Liberate_Minus = 20; // Decrease value in Liberate state ver1.06:20
+const def_SC_OverLiberate_Minus = 15; // Decrease value in OverLiberate state ver1.06:20
+const def_SC_SkillInit_Plus = 0; // Basic SP increase amount when special move is activated (1% at 100)
+
+
+//CmdTmplFlags
+// Is it a timing technique to issue a smart steer announcement and give a bonus?
+const def_CMDFlags_AnnounceSmaetSteer = 1;
+const def_CMDFlags_AnnounceSmaetSteerCro = 2;
+const def_CMDFlags_AnnounceSmaetSteerAir = 4;
+
+//Something that seems to affect the game balance
+//GRD increase/decrease value
+// Battle_Std.GRD_AddValue({ val=def_GRD_SSkill_Direct, pressure=0, boundplus=1 });
+const def_GRD_Guard_Frame = 80; //Every frame when guarding
+const def_GRD_Guard_Frame_Vorpal = -80; //Every frame when guarding (Vorpal side)
+const def_GRD_Guard_Frame_GRD6Vorpal = -120; //Every frame when guarding (Vorpal side and GRD is more than 6)
+const def_GRD_GuardSP_Frame = 300; //When shielding is successful, every frame ª will not be added
+const def_GRD_GuardSP_Frame_Vorpal = 150; //When shielding is successful, every frame ª is not added (Vorpal side)
+const def_GRD_GuardSP_Frame_GRD6Vorpal = 150; //Every frame when shielding is successful. ª is not added (Vorpal side and GRD is more than 6)
+const def_GRD_NiceGuard_Gedan = 500; //When a successful guard occurs (crouching guard on the lower row *not available during Vorpal)
+const def_GRD_NiceGuard_GedanSyodan = 1000; //When a successful guard occurs (crouching guard on the lower stage *Not available during Vorpal)
+const def_GRD_NiceGuard_Tyudan = 3000; //When a successful guard occurs (stand guard in the middle stage *not available during Vorpal)
+const def_GRD_NiceGuard_TyudanSyodan = 5000; //When a successful guard occurs (mid-stage standing guard *not available during Vorpal)
+const def_GRD_NiceGuard_NoboriTyudan = 5000; //When a successful guard occurs (standing guard on the middle stage of the climb *not available during Vorpal)
+const def_GRD_NiceGuard_AnyCancel = 1000; //When a successful guard occurs (Special move that can be canceled *Not available during Vorpal)
+const def_GRD_NiceGuard_AnyCancelSyodan = 1500; //When a successful guard occurs (Special move that can be canceled *Not available during Vorpal)
+const def_GRD_DamageSyodan = -10000; //Damage first hit
+const def_GRD_BoundFU = 0; //Every frame while being hit (1.03)-50
+const def_GRD_BoundFU_Vorpal = 0; //Every frame while being hit (Vorpal side) (1.03)-200
+const def_GRD_BoundFU_GRD6Vorpal = -160; //Every frame while being hit (Vorpal side and GRD is more than 6)
+const def_GRD_Liberate_AttackImpactInit = 500; //When guarding an attack during 100% veil off
+const def_GRD_OverLiberate_AttackImpactInit = 1000; //When guarding an attack during 200% veil off
+const def_GRD_ThrowHit = -20000; //When thrown
+const def_GRD_ThrowMiss = -10000; //When throwing and scaring
+const def_GRD_DashAtk_Init = 1000; //When issuing a dash attack
+const def_GRD_BackDash = -5000; //When activating BackDash
+const def_GRD_ReversalBackDash = -10000; //When reversal backup is activated
+const def_GRD_Recover = 0; //Each passive success (1.03)5000
+const def_GRD_AutoRecoverLv0 = 0; //When auto-recovering (x0.5) (called again with def_GRD_Recover)
+const def_GRD_AutoRecoverLv1 = 0; //When auto-recovering (x1.0) (called again with def_GRD_Recover)
+const def_GRD_AutoRecoverLv2 = 5000; //When auto-recovering (x1.5) (also called def_GRD_Recover)
+const def_GRD_AutoRecoverLv3 = 15000; //When auto-recovering (x2.0) (called again with def_GRD_Recover)
+const def_GRD_Assault_Init = 10000; //When issuing an assault
+const def_GRD_BackGroundRecover = -10000; //When back ground is passive
+const def_GRD_InActive = -10000;
+
+const def_GRD_SSkill_Direct = -5000;
+const def_GRD_SSkill_DirectVorpal = -2500;
+const def_GRD_SSkill_SmartSteer = 5000;
+
+//During concentration (my increase/decrease value)
+//From [st], the increase is once per 1F instead of FrameUpdate, so increase it to about 1.5 times
+const def_GRD_Convert_Frame = 450; //normal
+const def_GRD_Convert_Frame_EnemyisDamage = 250; //Opponent is being attacked clr:300
+const def_GRD_Convert_Frame_NoEXS = 300; //My EXS is empty
+const def_GRD_Convert_Frame_VeilOff = 650; // Veil off clr:750
+const def_GRD_Convert_Frame_EnemyisBreak = 900; //Opponent is breaking
+
+//During concentration (opponent's increase/decrease value)
+//From [st], the increase is once per 1F instead of FrameUpdate, so increase it to about 1.5 times
+const def_GRD_Convert_Frame_Enemy = -450; //normal
+const def_GRD_Convert_Frame_EnemyisDamage_Enemy = -225; //Opponent is being damaged
+const def_GRD_Convert_Frame_NoEXS_Enemy = -150; //My EXS is empty
+const def_GRD_Convert_Frame_VeilOff_Enemy = -1200; //I am veiled off
+const def_GRD_Convert_Frame_EnemyisBreak_Enemy = -1400; //Opponent is breaking
+
+const def_GRD_BarrierS_Frame = 40; //During shield motion
+const def_GRD_BarrierC_Frame = 20; //During shield motion
+const def_GRD_BarrierA_Frame = 10; //During shield motion
+const def_GRD_Shield_Success = 2500; //When shield is successful (this also applies to offensive defense)
+const def_GRD_Shield_Success_Enemy = -20000; // Against the opponent when the shield is successful
+const def_GRD_ForwordShift_Success = 10000; //When 3D is successful
+const def_GRD_ForwordShift_Success_Enemy = -20000; // Against the opponent when 3D is successful
+
+const def_GRD_Shield_Success_WeakBonus = 10000; //When successfully shielding against a special attack
+const def_GRD_Shield_Success_WeakBonus_Enemy= -30000; // Against the opponent when the shield is successful
+
+const def_GRD_ThrowTech_Success = 20000; //When throwing through successfully
+const def_GRD_ThrowTech_Success_Enemy = -20000; //When the throw is successful (to the opponent)
+
+const def_GRD_BMThrowTech_Success = 30000; //When a forced throw succeeds
+const def_GRD_BMThrowTech_Success_Enemy = -30000; //When a forced throw succeeds (to the opponent)
+
+const def_GRD_GuardShieldCost = 1; // Guard shield activation cost (reduced on failure)
+const def_GRD_GuardShieldNotEnough_Enemy = 10000; //When the cost of ª is insufficient (to the opponent)
+
+//GRD auto-increase frame
+const def_GRD_Superiority_JudgeFrame = 15; //Frame where it is judged as superior and the effect starts to appear
+const def_GRD_Inferiority_JudgeFrame = 45; //Frame where it is judged as inferior and the effect starts to appear
+
+
+//SP increase/decrease value
+const def_SP_Convert_Frame = 0; //Convert every frame
+const def_SP_EXConvert_Frame = 0; //EX conversion every frame
+const def_SP_Convert_Init = 0; //Convert
+const def_SP_EXConvert_Init = 0;//EX convert
+const def_SP_Assault_Init = 0; //When issuing an assault 1.06:-1000
+
+const def_SP_GuardShield_Init = -1000; // When guard shield is activated
+
+const def_SP_BarrierS_Frame = -10; //During shield motion
+const def_SP_BarrierC_Frame = -15; //During shield motion
+const def_SP_BarrierA_Frame = -12; //During shield motion
+const def_SP_ConvertCharge_Frame = -4; //During shield motion
+
+const def_SP_AutoRecoverLv0 = 500; //Up to 105F when auto-recovering (x0.5)
+const def_SP_AutoRecoverLv1 = 500; //Up to 210F when auto-recovering (x1.0)
+const def_SP_AutoRecoverLv2 = 1000; //Up to 420F when auto-recovering (x1.5)
+const def_SP_AutoRecoverLv3 = 3000; //When auto-recovering (x2.0) or more
+
+const def_SP_SmartSteerBonus = 0; // Bonus when smart steer announcement occurs (only when taking damage, only once per combo)
+
+//SP increase/decrease coefficient
+const def_SP_Barrier_Frame_BreakVal = 150; //Consumption increase factor during break
+const def_SP_Barrier_Frame_OverBreakVal = 200; //Consumption increase factor during break
+const def_SP_CVO_EXSLimitVal = 25; //Limit the opponent's gauge increase in CVO
+const def_SP_CSCheat_EXSLimitVal = 70; //Limit the amount of gauge increase for the opponent when cheating
+
+
+//vector coefficient
+const def_VEC_GuardSP_Xmax = -4500; //Additional value of the result of multiplying by «
+const def_VEC_GuardSP_Xvec = 100; //Guard vector coefficient during barrier guard Ver.1.044:350
+const def_VEC_GuardSP_Xmax_Air = -2500; //Additional value of the result of multiplying by «
+const def_VEC_GuardSP_Xvec_Air = 100; //Guard vector coefficient during barrier guard (when air shield) Ver.1.044:150
+
+const def_VEC_DashAtk_Xmax = 4000; //Dash attack vector maximum value
+const def_VEC_DashAtk_Xmin = 2500; //Dash attack vector minimum value
+
+//Special correction
+const def_HOSEI_NoboriTyudan = 40; //Overwrite correction value in the middle of the climb
+const def_HOSEI_BoundMutekiCapture = 80; //Multiplication correction value for forceful throw grab (bound or invincible)
+const def_HOSEI_ChainShift = 120; //Chain shift multiplication correction value (recovery value) clr:110
+const def_HOSEI_ChainShiftMax = 80; //Correction recovery limit value for chain shift clr:75
+const def_HOSEI_BreakFatalThrow = 110; // Break throw (def_MC_GRDBreak_FatalDmgHosei attribute only) There is an attack power correction of 1.10 when breaking, so I made it around 1.3 with 1.1*1.19
+const def_HOSEI_AssaultHit = 85; // Normal hit with moves from assault
+const def_HOSEI_ExDamageHosei = 85; // Correction value of def_MC_ExDamageHosei of Def_Sys_CancelAirAtk_GuardCrouch Also applied to Batista
+
+const def_CPH_ChainShift = 150; //Chain shift CP multiplication correction value (recovery value) clr:130
+const def_CPH_SuperChainShift = 170; //Chain shift CP multiplication correction value (recovery value) clr:150
+const def_CPH_CounterHit = 120; // Counter
+const def_CPH_LowCounterHit = 105; // Counter with Low attribute technique (unused)
+const def_CPH_BreakHit = 140; // GRD broke clr:130
+
+const def_CPH_AssaultHit = 60; // Normal hit with moves from assault
+
+const def_BGM_IWExist = 90; //Infinite Worth Exist execution BGM
+
+const def_VOType_NormalVO = 0; // Normal VO
+const def_VOType_MaxVO = 1; // VO for maximum
+const def_VOType_ComboVO = 2; // Combo VO
+// ª constants are moved here
+// _LiberateType_Normal
+// _LiberateType_Max
+// _LiberateType_Combo
+
+const def_NormalVO_MinusValue = 120; // Normal VO gauge reduction rate (set to 100)
+const def_MaxVO_MinusValue = 100; // The gauge decreases slowly at VO because it is the maximum
+const def_1stVorpalComboVO_MinusValue = 280; // Gauge decreases quickly with combo VO
+const def_ComboVO_MinusValue = 140; // Gauge decreases quickly with combo VO
+const def_DyingComboVO_MinusValue = 140; // Dying Combo VO *Not used
+
+// Battle_Std.SetHosyoHosei_Multi( def_HosyoHosei_SpRecoverDoubleEx );
+// use this function
+const def_HosyoHosei_ComboVO = 90; // Combo veil offbound
+const def_HosyoHosei_NormalThrow = 80; // Normal throw *Not used
+const def_HosyoHosei_SpRecoverDoubleEx = 120; // Recover the decrease in EX>EX guarantee correction using IW or IWE
+const def_HosyoHosei_SpRecoverVPIWE = 120; // Recover the reduction in guaranteed compensation with IWE during VP
+
+// 90 90 70 (3.30)
+// 80 60 60
+const def_HosyoHosei_DyingComboVO_Init = 80; // Combo Veil Off, Dying *In CVO, the correction when dying is looser (because there are few character differences)
+const def_HosyoHosei_SuddenDyingComboVO_Init = 60; // Dying CVO (if you become VP during combo)
+const def_HosyoHosei_NoDyingComboVO_Init = 60; // Combo veil off, guaranteed correction when not dying
+const def_HosyoHosei_Muteki_Init = 60; // Invincible move start
+const def_HosyoHosei_Throw_Init = 80; // Normal throwing technique
+
+// Warranty correction is 1. Dying 2. VP in the middle of dying & combo 3. There are three times when you are not on the verge of death.
+//
+// Veil-off guarantee correction. If the VO itself hits, you can't follow up, so it's actually a guaranteed compensation when you're scared and put in a combo.
+//If you perform a VO while an EX move is hitting, the EX move will also be compensated, but it is unavoidable (making it a flag type will solve the problem to some extent)
+// 85 85 70 (3.30)
+// 80 65 65
+const def_HosyoHosei_DyingVO_Init = 80; // Veil off, dying
+const def_HosyoHosei_SuddenDyingVO_Init = 65; // Veil off, dying
+const def_HosyoHosei_NoDyingVO_Init = 65; // Veil off, guarantee correction when not dying
+
+// 85 85 70 (3.30)
+// 65 50 50
+const def_HosyoHosei_DyingComboUsedExSkill_Init = 60; // When trying to perform an EX skill twice during a combo
+const def_HosyoHosei_SuddenDyingComboUsedExSkill_Init = 50; // When trying to perform an EX skill twice during a combo
+const def_HosyoHosei_NoDyingComboUsedExSkill_Init = 50; // When trying to perform an EX skill twice during a combo
+
+const def_HosyoHosei_DyingComboUsedSpSkill_Init = 40; // When trying to use SP skill twice during combo
+const def_HosyoHosei_SuddenDyingComboUsedSpSkill_Init = 30; // When trying to use SP skill twice during combo
+const def_HosyoHosei_NoDyingComboUsedSpSkill_Init = 30; // When trying to use SP skill twice during combo
+
+//const table def_test = {"a"=10, };
+//GRD break frame
+const def_GRDBF_IWE = 600; // Exist activation for 10 seconds
+const def_GRDBF_GuardCancel = 720; // 15 seconds Guard Cancel activated
+const def_GRDBF_GuardCancel_Max = 720; // 15 seconds Garcan activated, at 200% or VO
+const def_GRDBF_LowAtkDmg = 490; // 7 seconds lowbreak technique
+const def_GRDBF_NormalAtkDmg = 600; // 10 seconds normal attack
+const def_GRDBF_ThrowAtkDmg = 900; // 15 seconds break on throw
+const def_GRDBF_VeilOffDmg = 120; // Break in VO for 2 seconds
+const def_GRDBF_MaxVeilOffDmg = 600; // Break in VO for 10 seconds
+
+//AttackInfoStringWord
+//BMvEff.AttackInfoString_Set({ word=def_AISW_SwiftBonus,} );
+//const def_AISW_GroundRecover = "GroundRecover 0123456" //This area is the limit
+//For now, I'll just define the words by replacing them.
+const def_AISW_Recover = "RECOVER";
+const def_AISW_GroundRecover = "GroundRecover Success";
+const def_AISW_WallRecover = "WallRecover Success";
+const def_AISW_AutoRecover = "AUTO RECOVER";
+const def_AISW_TechHit = "TECH HIT";
+const def_AISW_Convert = "CHAIN SHIFT";
+const def_AISW_EXConvert = "CHAIN SHIFT";
+const def_AISW_EXSkill = "EX SKILL";
+const def_AISW_WorthSkill = "WORTH SKILL";
+const def_AISW_SPGuard = "SHIELD";
+const def_AISW_FaultGuard = "FAULT GUARD";
+const def_AISW_GRDBreak = "GRD BREAK";
+const def_AISW_Reversal = "REVERSAL";
+const def_AISW_SmartSteer = "SMART STEER"; //When the smart steer is activated one before EX
+const def_AISW_GuardCancel = "GUARD THRUST"; // guard thrust
+const def_AISW_ReverseBeat = "REVERSE LINK"; // Revival of passing link
+const def_AISW_NeppaRecover = "RECOVER";
+const def_AISW_GRDAction = "GRD SKILL"; // Temporary
+const def_AISW_FirstAttack = "FIRST ATTACK";
+const def_AISW_Inactive = "INACTIVE";
+const def_AISW_CCSEXLimit = "EXS LIMIT";
+const def_AISW_HitConfirmation = "HIT CONFIRMATION";
+const def_AISW_Punish = "PUNISH";
+const def_AISW_Invincibility = "INVINCIBILITY";
+const def_AISW_CelesVorpal = "CELESTIAL";
+const def_AISW_Counter = "COUNTER";
+const def_AISW_BoundLimit = "BOUND LIMIT";
+const def_AISW_BarrierBreached = "BARRIER BREACHED";
+const def_AISW_SwiftBonus = "SWIFT BONUS";
+
+print("\n[btl_Define loading complete]");
