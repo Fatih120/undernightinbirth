@@ -1,22 +1,16 @@
-/*********************************************
-  This is a definition file for release.
-  Please do not define it during development.
-  Please be sure to check the operation.
-  *******************************************/
-
 Chara_Table <-
 {
-	// Arrangement for character selection, 99 is random, so it is always a two-dimensional array
-	// The array is an internal value, the position of the icon will not be moved.
+	// Arrangement for character selection tiles. 99 is random. 2-dimensional array
+	// The array is an internal value - the position of the icon will not be moved.
 	// Probably won't work properly if the same character number is placed
-	// Crashes if there is an array of length 0
+	// Crashes if there is an array of length 0.
 	// The number of arrays should be less than 100 in length x width
 
 	SelectTable =
 	[
 		[ 23,24,12,08,02,00,01,03,09,13,21,22,99 ], // This column is the initial position
 		[ 11,19,10,06,04,16,17,05,07,15,18,14,99 ],
-		//[ -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,99 ], // Extra row added for convienience
+		//[ -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,99 ], // Extra row added for convienience, you can use this safely - can be above the top row
 	],
 	SelectDefault = [ 0, 1 ], // Initial position 1P 2P
 
@@ -41,6 +35,8 @@ local chara_no = Chara_Table.Status; // For easier registration
 	Fails if name_short, name_long, and strings are missing.
 
 	name_short = is internally converted to all lowercase letters when read.
+	name_long = Full name for niche cases
+	name_str = see below
 	name_master = is used when the program wants to use a Japanese character name and its data (mainly used in the victory message lottery).
 
 	isAlive = Is the definition valid? 	1 = Valid
@@ -56,6 +52,11 @@ local chara_no = Chara_Table.Status; // For easier registration
 	
 	init = Initial character or not. 1 = Initial character (for release conditions after update, etc.)
 	DLCCharaFlag = Treats it as a DLC character and makes it unselectable if you don't own it.
+	
+	stage = default stage
+	bgm = default bgm
+	
+	order = order in the character selection tab for Training and etc.
 	*/
 
 //

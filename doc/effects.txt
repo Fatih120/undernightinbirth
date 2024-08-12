@@ -92,6 +92,7 @@ PLAY SFX
 9, 0
 X, 0 0 0 0 0
 0, 0 0 0 0 0
+(Refer to se/normal_se_list.txt)
 
 //TODO UNK 10
 

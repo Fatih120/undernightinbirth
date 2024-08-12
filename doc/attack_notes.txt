@@ -1,6 +1,9 @@
-A: correction should be high at >~95, 100-200 (150)
-B: 95-90, 300-500 (400)
-C: 90, 3% variance on charge 600-900 (700)
+A: correction should be high at >~95, 100-200 (150)  |  Hitstun: ~97, 50-60
+B: 95-90, 300-500 (400) | Hitstun: ~91, ~80
+C: 90, 3% variance on charge 600-900 (700) | Hitstun: ~89, ~70-90
+
+Jumps have higher Combopoint Set
+
 
 
 Masking: 

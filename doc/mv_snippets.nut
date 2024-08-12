@@ -22,12 +22,42 @@ t.Mv_Startup <- // The code name of the intro animation
     }
 } // this was working before but now it's not? did i do something on my end or...
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////
 // System Mechanics Resize Band-Aid Fix                              //
-// -- CGs that are small and are scaled up in-game can seemingly     //
-// break and be set to 1x scale with unknown cause. If your          //
-// character does this, you can use these temporary workarounds.     //
-// They are ugly, but they set and reset the scales for such moves.  //
+// -- THIS ISN'T NEEDED ANYMORE. CHECK CHARACTER_0.txt AND ONLY KEEP //
+// ONE DATAFILE. EXAMPLE                                             //
+// [DataFile]                                                        //
+// FileNum= 1                                                        //
+// File00=Newbie.ha6                                                 //
 ///////////////////////////////////////////////////////////////////////
 
 t.Mv_Liberate <- // Veil Off

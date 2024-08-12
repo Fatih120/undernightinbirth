@@ -288,11 +288,11 @@
 287 - 
 288 - 
 289 - 
-290 - ★あお向け
-291 - ★うつ伏せ
-292 - 
-293 - Face-Up Wakeup
-294 - Face-Down Wakeup
+290 - Face-Up - Lying
+291 - Face-Down - Lying 
+292 - ★重傷 (Heavy "serious" injury?)
+293 - Face-Down Wakeup - From not teching 
+294 - Face-Up Wakeup - From not teching
 295 - Heavy Face-Down Wakeup
 296 - Up after Heavy Down (From 293?)
 297 - Up after Face-Down (From 294?)
@@ -300,7 +300,7 @@
 299 - 
 300 - Light Standing Hit 70F
 301 - Light Standing Inwards Hit 70F
-302 - Light Crouching Hit 71F
+302 - Light Crouching Hit 71F - (its still 70F, like the others following...)
 303 - Medium Standing Hit 73F
 304 - Medium Standing Inwards Hit 73F
 305 - Medium Crouching Hit 73F
@@ -310,35 +310,35 @@
 309 - 
 310 - 
 311 -
-312 - Tumble Hit 40F
-313 - Tumble Hit 40F (Air?)
+312 - ??? Tumble Hit 40F (fall on back?)
+313 - ??? Tumble Hit 40F (Air?)
 314 - 
 315 - 
 316 - 
 317 - 
 318 - 
 319 - 
-320 - Launch Air Hit/Fall
+320 - ??? Launch Air Hit/Fall
 321 - 
 322 - 
 323 - 
-324 - Falling Hit
+324 - ??? Falling Hit (otg?)
 325 - 
-326 - Fall Forwards
+326 - Fall Forwards / Trip
 327 - Brought to Knees/Crumple/Slump
-328 - Slumping to Ground
+328 - Slumping to Ground - (face down)
 329 - 
 330 - Vertical Blow off Feet
-331 - Blowback
-332 - Falling Backwards
-333 - Spinning Through the Air (45deg)
-334 - Spinning Vertically
+331 - Blowback (Belly)
+332 - ???Falling Face-Down
+333 - ???Spinning Through the Air - (45deg)
+334 - ???Spinning Vertically
 335 - 
 336 - 
 337 -
 338 - 
 339 - 
-340 - Wall Bounce - YKabe
+340 - Wall Bounce - YKabe - Fall Forwards, 2nd part is after a short while of falling YKabe
 341 - 
 342 - 
 343 - 
@@ -348,10 +348,10 @@
 347 - 
 348 - Londrekia's Crucifix
 349 - 
-350 - Falling on Back
+350 - ??? Lying on Back
 351 - Rolling Face-Down
-352 - Bumping Face-Down
-353 - Bumping on Back
+352 - Bumping Face-Down - after trip
+353 - ??? Falling Face-Up
 354 - Bumping Flat Down
 355 - Big Bounce
 356 - Big Bounce 2
