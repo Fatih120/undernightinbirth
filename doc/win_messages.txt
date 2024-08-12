@@ -1,0 +1,15 @@
+<root>\d\VycozuyzchnLimfnf3y 
+BACKUP THIS FILE.
+Open in hex editor, change win_mes_table.csv -> win_mes_table.xxx
+Save
+
+<root>\BattleRes\win_mes\script\<chara>\winmes.txt
+This can be fake or has your win messages in there. Copy the formatting.
+
+<root>\BattleRes\win_mes\win_mes_table.csv &&(?)
+\___English\BattleRes\win_mes\win_mes_table.csv
+Copy win_mes_table.csv, change characount on first line and add your character near the bottom. add their msg lists and set ratio probabilities with 0 being impossible
+Make sure the chara name uses the str_master found in btlchara txt (in front of ■)
+
+\___English\BattleRes\win_mes\script\<chara>\winmes.csv
+Has your actual win quotes, will be read from here.
