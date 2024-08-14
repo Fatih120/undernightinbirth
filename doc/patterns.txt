@@ -290,7 +290,7 @@
 289 - 
 290 - Face-Up - Lying
 291 - Face-Down - Lying 
-292 - ★重傷 (Heavy "serious" injury?)
+292 - Face-Down (Slammed/Heavy)
 293 - Face-Down Wakeup - From not teching 
 294 - Face-Up Wakeup - From not teching
 295 - Heavy Face-Down Wakeup
@@ -310,19 +310,19 @@
 309 - 
 310 - 
 311 -
-312 - ??? Tumble Hit 40F (fall on back?)
-313 - ??? Tumble Hit 40F (Air?)
+312 - Tumble Hit 40F - like for some 66b moves
+313 - ?????? Tumble Hit 40F (Air?) (BUTT??) - I still don't know what this is for yet
 314 - 
 315 - 
 316 - 
 317 - 
 318 - 
 319 - 
-320 - ??? Launch Air Hit/Fall
+320 - Aerial Hit
 321 - 
 322 - 
 323 - 
-324 - ??? Falling Hit (otg?)
+324 - Air Slam to the Ground
 325 - 
 326 - Fall Forwards / Trip
 327 - Brought to Knees/Crumple/Slump
@@ -330,9 +330,9 @@
 329 - 
 330 - Vertical Blow off Feet
 331 - Blowback (Belly)
-332 - ???Falling Face-Down
-333 - ???Spinning Through the Air - (45deg)
-334 - ???Spinning Vertically
+332 - ????? Falling Face-Down - I still don't know what this is for yet
+333 - Spinning Through the Air - (45deg)
+334 - Spinning Vertically
 335 - 
 336 - 
 337 -
@@ -343,18 +343,18 @@
 342 - 
 343 - 
 344 - 
-345 - Falling Down
-346 - Vertical Fall
+345 - ????? Falling Down - I still don't know what this is for yet
+346 - Vertical Fall Down/Spike
 347 - 
 348 - Londrekia's Crucifix
 349 - 
-350 - ??? Lying on Back
-351 - Rolling Face-Down
-352 - Bumping Face-Down - after trip
-353 - ??? Falling Face-Up
-354 - Bumping Flat Down
-355 - Big Bounce
-356 - Big Bounce 2
+350 - Bumping Face-Up - After 320 hits
+351 - Flipping Face-Down - the backwards fall after 330,334
+352 - Bumping Face-Down - after 326 trip
+353 - Slammed Bounce - after 324 > faceup > facedown
+354 - Slammed Bumping Face-Down
+355 - Prone Bounce (On Back) - similar to 353 after certain moves
+356 - Bumping Prone Bounce - from 355, similar to 354
 357 - 
 358 - 
 359 - 
