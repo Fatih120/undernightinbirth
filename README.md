@@ -209,7 +209,7 @@ TODO
 #### State Settings
 | Label | Function |
 |--|--|
-| Number of Hits | [Refer to the Attack section](###Attack). |
+| Number of Hits | [Refer to the Attack section](###Attack). The MAXIMUM number of hits the attack does for the duration of the current frame. If it is 2, the attack specified will hit twice on that frame. |
 | ASCF | Unknown |
 | Player Can Move | True or False? Is the player able to cancel this frame and do anything at all such as walking around, blocking, etc? Or do they commit to this pattern/frame? |
 | State | Is the character Standing, Crouching, or in the Air? Used to determine attack results, air mechanics, etc. |

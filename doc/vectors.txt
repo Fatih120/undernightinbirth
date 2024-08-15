@@ -122,19 +122,32 @@
 122. Like 120
 123. ------
 
+134. Quadratic Launch
+135. Quadratic Launch, air techable
+136. Quadratic Launch, further, air techable
+
 
 
 150. Blocking Standing Light Pushback
 151. Blocking Standing Medium Pushback
 152. Blocking Standing Heavy Pushback
 
+156. Blocking Standing Pushback TODO compare
+157. Blocking Standing Pushback, further
+
 160. Blocking Crouching Light Pushback
 161. Blocking Crouching Medium Pushback
 162. Blocking Crouching Heavy Pushback
 
+166. Blocking Crouching Pushback TODO compare
+167. Blocking Crouching Pushback, further
+
 170. Blocking Aerial Light Pushback
 171. Blocking Aerial Medium Pushback
 172. Blocking Aerial Heavy Pushback
+
+
+178. Mini Aerial Lift Guard
 
 200. Immediate Stumble Backwards
 201. Stumble Backwards with Pushback
@@ -195,6 +208,13 @@
 255. Ground - Go into hit falling anim, accelerate to left X direction forever??
 256. ------
 257. ------
+
+
+263. Ground Slam, shorter range
+264. Face-Down Ground Lock
+
+266. Ground Slam, Further
+
 
 270. Slam down into crouching getup
 

@@ -67,7 +67,7 @@
 066 - 
 067 - Close Assault
 068 - Far Assault / Air Dash
-069 - 
+069 - Assault Landing
 070 - 
 071 - 
 072 - 
@@ -399,7 +399,7 @@
 398 - 
 399 - 
 400 - 
-401 - Dashing A?
+401 - [Dashing A]
 402 - Dashing B
 403 - Dashing C
 404 - 

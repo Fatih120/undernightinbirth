@@ -1,0 +1,24 @@
+- Uzuki added to the game. All of her required assets like sounds, graphics, data, are new, replacing the missing slot 20.
+
+/bg/
+- Stage 024 added (Uzuki).
+- bg65535's stage_color.img was modified somehow.
+
+data
+- Character coms now debug print that the file is loaded.
+- Voices are now played using "userparam" fields in the se_list for subtitles.
+- CG files seem to be updated
+
+Hyde
+- cmd properly uses OverLiberate for SP instead of 20000.
+- StdBC has def_MC2_NoWhiffEXCancel, plays SE 195 (there is an interesting commented version added later)
+- 41236EX more strongly pulls the Hantei Box
+- IWEXIST hit releases more forwards and with a slightly different vector
+
+
+Kuon
+- Palette data was modified for some reason.
+
+
+New vectors:
+134 135 136 156 157 166 167 178 263 264 266
