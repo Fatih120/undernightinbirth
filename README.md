@@ -4,6 +4,8 @@ https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb
 [![Guilded](https://img.shields.io/badge/Guilded-F5C400?logo=guilded&logoColor=111820)](https://guilded.gg/MoF)
 [![Discord](https://img.shields.io/badge/Discord-220077?logo=discord)](https://discord.com/invite/Cy27FNfQtc)
 
+[<img src="https://img.shields.io/badge/Code-Documentation-brightgreen" height="30">](http://mof.x10.bz/unib)
+
 # Primer on Modding UNI2
 
 For starters, you may use https://github.com/Ekey/UNIB.Data.Tool to unpack the game successfully. Either build it yourself with [CSC.exe included with .NET 4](https://stackoverflow.com/questions/18286855/how-can-i-compile-and-run-c-sharp-program-without-using-visual-studio) and [some elbow grease](https://stackoverflow.com/questions/46320080/c-sharp-unable-to-compile-cs0103-the-name-gutils-does-not-exist-in-the-curre), or download it straight from this repo [right here, pre-built](uni2unpacker.exe) (or after cloning).

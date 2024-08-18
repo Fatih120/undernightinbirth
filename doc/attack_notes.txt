@@ -1,3 +1,17 @@
+StdA 5-6F
+StdB 9?
+StdC 11?
+CroA 5-6F
+CroB 8-9F -5F
+CroC 11-12F -9F--10F
+
+
+
+
+oops i accidentall closed the doc waaaa
+
+
+
 A: correction should be high at >~95, 100-200 (150)  |  Hitstun: ~97, 50-60
 B: 95-90, 300-500 (400) | Hitstun: ~91, ~80
 C: 90, 3% variance on charge 600-900 (700) | Hitstun: ~89, ~70-90
