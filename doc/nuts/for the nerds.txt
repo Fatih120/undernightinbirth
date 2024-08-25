@@ -1,0 +1,85 @@
+local get_address = function(address = -1)
+{
+        if( address == -1 ) return;
+        local base_address = 0x1169298;
+        local address_difference = (base_address > address)? base_address - address : address - base_address;
+        local address_sign = (base_address > address)? -1 : 1;
+        
+        local size = 0xBA4;
+        local p_offset = 0;
+        
+        local pside = BMvTbl.GetPlayerSide();
+        if( pside==1 ) p_offset = (size/4)*-1;
+        
+        local pp_address_offset = ((address_difference*address_sign)/4)+p_offset;
+        return BMvTbl.GetPP(pp_address_offset);
+        
+        //local string5 = format("0x%02X", pp_address_offset);
+        //Battle_Std.DrawDebugAttackInfo("test "+pp_address_offset );
+}
+
+local set_address = function(address = -1, value = 0)
+{
+        if( address == -1 ) return;
+        local base_address = 0x1169298;
+        local address_difference = (base_address > address)? base_address - address : address - base_address;
+        local address_sign = (base_address > address)? -1 : 1;
+        
+        local size = 0xBA4;
+        local p_offset = 0;
+        
+        local pside = BMvTbl.GetPlayerSide();
+        if( pside==1 ) p_offset = (size/4)*-1;
+        
+        local pp_address_offset = ((address_difference*address_sign)/4)+p_offset;
+        return BMvTbl.SetPP(pp_address_offset,value);
+        
+        //local string5 = format("0x%02X", pp_address_offset);
+        //Battle_Std.DrawDebugAttackInfo("test "+pp_address_offset );
+}
+
+local read_status_table = function(slot) : (get_address, set_address)
+{
+        local status_pointer_p1 = 0x116911c;
+        local status_pointer_p2 = 0x1169cc0;
+        
+        local pside = BMvTbl.GetPlayerSide();
+        
+        local use_pointer = (pside==1)? status_pointer_p2 : status_pointer_p1;
+        
+        local status_address = get_address(use_pointer);
+        local val = get_address(status_address + (slot*4));
+        return val;
+}
+
+local write_status_table = function(slot,value) : (get_address, set_address)
+{
+        local status_pointer_p1 = 0x116911c;
+        local status_pointer_p2 = 0x1169cc0;
+        
+        local pside = BMvTbl.GetPlayerSide();
+        
+        local use_pointer = (pside==1)? status_pointer_p2 : status_pointer_p1;
+        
+        local status_address = get_address(use_pointer);
+        set_address(status_address + (slot*4),value);
+}
+
+
+local read_player_struct = function(slot,value) : (get_address, set_address)
+{
+        local pside = BMvTbl.GetPlayerSide();
+        
+        local struct_address = (pside==1)? 0x1169500 : 0x116895c;
+        
+        get_address(struct_address + (slot*4));
+}
+
+local write_player_struct = function(slot,value) : (get_address, set_address)
+{
+        local pside = BMvTbl.GetPlayerSide();
+        
+        local struct_address = (pside==1)? 0x1169500 : 0x116895c;
+        
+        set_address(struct_address + (slot*4),value);
+}

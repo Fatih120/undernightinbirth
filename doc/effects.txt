@@ -25,6 +25,7 @@ MODIFY ATTACKER
 
 A = Type:
   12 - Translation
+  255 - System Finalize Signal, for startup/round-end animations
 X Y Rot? 0 0  0
 0 0 0    0 1? 0
   255 - Designate End-of-Pattern (For things like Victory, Startup Patterns)

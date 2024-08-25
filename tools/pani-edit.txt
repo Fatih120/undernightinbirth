@@ -1,0 +1,14 @@
+Step 1: Edit > Texture manager // Modifies all DDS sheets available in the .pat
+Step 2: Edit: Part Editor // Select the "Parts" of effects to use, align a box border (make sure the center xy is right in the middle of the image)
+
+MAIN EDITOR
+
+"Pattern" is the slot of the "Effect" that you will be see in HA6, lasts for one frame (so Pattern = 1 frame)
+
+Select Part is the "Slot ID" for a part for that frame - you can have a lot of "Parts" per frame layered over each other.
+
+Part source ID is the #ID of the Part you made in the Part Editor; fill it in and adjust the values and scale where needed, or wait to adjust the scale in HA6.
+
+"Sprite ID" becomes the "Select Pattern" ID. Be sure to use "add blend" if its a transparent effect (set to 1)
+
+If you want a colored effect like how a lot of characters have it, set "Use Color" to the COLOR PALETTE INDEX ID for your character (out of the 255 colors)

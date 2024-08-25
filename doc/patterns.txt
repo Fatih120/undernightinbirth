@@ -20,8 +20,8 @@
 019 - Aerial Guard
 020 - Falling
 021 - Landing
-022 - (Falling Dupe? Appears in vanilla)
-023 - (Landing Dupe?)
+022 - Falling Helpless
+023 - Landing Helpless
 024 - 
 025 -
 026 - 

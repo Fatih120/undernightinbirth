@@ -4,6 +4,9 @@ StdC 11?
 CroA 5-6F
 CroB 8-9F -5F
 CroC 11-12F -9F--10F
+AirA 8F
+AirB 9-10F
+AirC min.12-13F
 
 
 
