@@ -58,7 +58,7 @@
 057 - Throwing Anim
 058 - [Throwing Aerial]
 059 - [Throwing Aerial Hit]
-060 - Guard Thrust
+060 - Guard Thrust - 14/5/26
 061 - 
 062 - 
 063 - 
@@ -291,12 +291,12 @@
 290 - Face-Up - Lying
 291 - Face-Down - Lying 
 292 - Face-Down (Slammed/Heavy)
-293 - Face-Down Wakeup - From not teching 
-294 - Face-Up Wakeup - From not teching
-295 - Heavy Face-Down Wakeup
+293 - Face-Down Wakeup - From not teching (Last part is for DOWNed)
+294 - Face-Up Wakeup - From not teching (Last part is for DOWNed)
+295 - Heavy / DOWNed Face-Down Wakeup (Delay)
 296 - Up after Heavy Down (From 293?)
 297 - Up after Face-Down (From 294?)
-298 - Heavy Down Wakeup/Free(?) (From 295?)
+298 - Heavy / DOWN? Wakeup/Free(?) (From 295?) - From not teching (fullscreen bounce?)
 299 - 
 300 - Light Standing Hit 70F
 301 - Light Standing Inwards Hit 70F
@@ -402,15 +402,15 @@
 401 - [Dashing A]
 402 - Dashing B
 403 - Dashing C
-404 - 
-405 - 
-406 - 
-407 - 
-408 - 
-409 - 
+404 - [Crouching Dashing A]
+405 - [Crouching Dashing B]
+406 - [Crouching Dashing C]
+407 - [Aerial Dashing A]
+408 - [Aerial Dashing B]
+409 - [Aerial Dashing C]
 410 - 
 411 - 
-412 - 
+412 - Tech Hit
 413 - 
 414 - 
 415 -
@@ -898,9 +898,9 @@
 897 - 
 898 - 
 899 - 
-900 -
-901 - 
-902 - 
+900 - ????Entrance animation hold
+901 - ???? Entrance animation full??
+902 - ???2nd or more here?
 903 - 
 904 - 
 905 - 
