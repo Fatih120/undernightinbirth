@@ -23,7 +23,7 @@
 22 . Eased Vertical Lift
 23 . Forced Tech Hit Animation? Invul
 24 . Heavy Blocking Freezing Hitstop Anim? Invul
-25 . Small Vertical Launch, Untechable until Ground
+25 . Small Vertical Launch
 26 . Like 25, Tripping / Face Down
 27 . Like 25, Spinning
 28 . Like 25, Further/Higher

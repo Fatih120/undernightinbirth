@@ -1,1 +1,0 @@
-These hanteichan executables have been hex edited to output unique configuration files so they can be used in the same directory without overwriting one another.

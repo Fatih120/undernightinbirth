@@ -1,0 +1,35 @@
+// You might not be able to properly set movement vectors for walking without messing with btl_StdMoveTbl.Simply use these:
+
+t.Mv_Walk_F <-
+{
+	function FrameUpdate_After()
+	{	
+		BMvTbl.SetVector( { x=1000, y=0, addx=0, addy=0, flags=_Vector_Normal } );
+	}
+}
+
+t.Mv_Walk_B <-
+{
+	function FrameUpdate_After()
+	{	
+		BMvTbl.SetVector( { x=-880, y=0, addx=0, addy=0, flags=_Vector_Normal } );
+	}
+}
+
+// If you'd like to have some transitioning speeds similar to most dashes, tinker with the following:
+
+t.Mv_Walk_F <-
+{
+    function FrameUpdate_After()
+    {    
+        local mvs = BMvTbl.GetMvStatus();
+        if( mvs.MvCount == 0 ) // start val frame 0
+        {
+            BMvTbl.SetVector( { x=500, y=0, addx=0, addy=0, flags=_Vector_Normal } );
+        }
+        else if( mvs.MvCount == 2 ) // final val frame 2
+        {
+            BMvTbl.SetVector( { x=1000, y=0, addx=0, addy=0, flags=_Vector_Normal } );
+        }
+    }
+}
