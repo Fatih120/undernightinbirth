@@ -24,12 +24,14 @@ def process_dds_file(input_file):
     with open(output_file, 'wb') as f:
         f.write(dds_baked)
 
-    print(f"Processed file saved as: {output_file}")
-    print(f"make sure your dds was dx10")
+    print(f"vs screen pat saved as: {output_file}")
+    print(f"make sure your DDS was BC3 DX10+\n")
+    nput('press enter to close\n')
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python script.py <input_dds_file> (make sure its dx10 format)")
+        print("Usage: python script.py <input_dds_file>\n(make sure its BC3 DX10+ format)\n")
+        input('press enter to close')
         sys.exit(1)
 
     input_file = sys.argv[1]

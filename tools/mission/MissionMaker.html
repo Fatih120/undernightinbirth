@@ -52,7 +52,7 @@
 	<div id="recipe-buttons" class="recipe-buttons"></div>
 	<pre id="output"></pre>
 	<br><hr><div class="parameter-grid" id="optional-params"></div><hr><br>
-    <!-- <div id="tooltip"></div> -->
+    <div id="tooltip"></div>
 
     <script>
 		const tooltipData = {
@@ -197,14 +197,14 @@ function updateRecipe(addition, type) {
         let lastEntry = recipe[recipe.length - 1];
         
         if (type === 'prefix') {
-            const prefixOrder = 'di*J';
-            const existingPrefixes = lastEntry.match(/^[di*J]+/)?.[0] || '';
+            const prefixOrder = '_dli*J';
+            const existingPrefixes = lastEntry.match(/^[_dli*J]+/)?.[0] || '';
             let newPrefixes = existingPrefixes + addition;
             newPrefixes = prefixOrder
                 .split('')
                 .filter(prefix => newPrefixes.includes(prefix))
                 .join('');
-            lastEntry = newPrefixes + lastEntry.replace(/^[di*J]+/, '');
+            lastEntry = newPrefixes + lastEntry.replace(/^[_dli*J]+/, '');
             recipe[recipe.length - 1] = lastEntry;
         } else if (type === 'suffix') {
             if (!lastEntry.includes(addition)) {
@@ -235,16 +235,20 @@ function createRecipeButtons() {
         { text: 'Delay', action: () => updateRecipe('d', 'prefix') },
         { text: 'Increase', action: () => updateRecipe('i', 'prefix') },
         { text: 'Jumping', action: () => updateRecipe('J', 'prefix') },
+		{ text: 'After Landing', action: () => updateRecipe('l', 'prefix') },
+		{ text: 'Setup', action: () => updateRecipe('_', 'prefix') },
         { text: 'EX', action: () => updateRecipe('EX', 'suffix') },
         { text: '# Hits', action: () => updateRecipe('(2)', 'hits') },
         { text: 'Add', action: () => updateRecipe('>XXX_YY', 'add') },
         { text: 'Jump Cancel', action: () => updateRecipe('jc', 'separate') },
+        { text: 'Dash', action: () => updateRecipe('66', 'separate') },
         { text: 'VO', action: () => updateRecipe('VO', 'separate') },
         { text: 'VO Strip', action: () => updateRecipe('VO_Hit', 'separate') },
         { text: 'CCVO', action: () => updateRecipe('CVO', 'separate') },
         { text: 'IW', action: () => updateRecipe('IW', 'separate') },
         { text: 'A+D', action: () => updateRecipe('AD', 'separate') },
         { text: 'A+B+C', action: () => updateRecipe('CIW', 'separate') },
+        { text: 'Smart Steer', action: () => updateRecipe('A A2 A3 A4 A5 A6', 'separate') },
     ];
 
     buttons.forEach(button => {
@@ -276,7 +280,14 @@ function updateTooltipAndOutput() {
     const expl = document.getElementById('expl').value;
     const pos = document.getElementById('pos').value;
     const skill = document.getElementById('skill').value;
-	
+
+    let tooltipContent = `
+        <strong>Title:</strong> ${tooltipData.title[title] || 'No description available'}<br>
+        <strong>Category:</strong> ${tooltipData.cat[cat] || 'No description available'}<br>
+        <strong>Explanation:</strong> ${tooltipData.expl[expl] || 'No description available'}<br>
+        <strong>Position:</strong> ${tooltipData.pos[pos] || 'No position selected'}
+    `;
+    document.getElementById('tooltip').innerHTML = tooltipContent;
 
     // Process the skill input directly for capitalization and "5" removal
     const skillArray = skill.split(' ').map(s => {
@@ -291,15 +302,15 @@ function updateTooltipAndOutput() {
     }).filter(s => s.trim() !== '').map(s => `"${s}"`); // Filter out any empty entries and wrap in quotes
 
     let output = `{ tmp.append( {
-            title=${title},
-            cat=${cat},
-            enemy = "${enemy}",
-            stringID="${stringID}",
-            expl = ${expl},`;
+    title=${title},
+    cat=${cat},
+    enemy = "${enemy}",
+    stringID="${stringID}",
+    expl = ${expl},`;
     if (pos !== "") {
         output += `
-            pos = "${pos}",`;
-			}
+    pos = "${pos}",`;
+}
 
     // Add optional parameters
     const optionalParams = [
@@ -317,8 +328,8 @@ function updateTooltipAndOutput() {
     });
 
     output += `
-            skill={ recipe = [${skillArray}] },
-} ); }`;
+    skill={ recipe = [${skillArray}] }, } );
+}`;
     document.getElementById('output').textContent = output;
 }
 
@@ -346,6 +357,7 @@ function createOptionalInputs() {
 
 // Call this function after the page loads
 window.onload = function() {
+
     // Populate dropdowns
     populateDropdown('title', tooltipData.title);
     populateDropdown('cat', tooltipData.cat);
