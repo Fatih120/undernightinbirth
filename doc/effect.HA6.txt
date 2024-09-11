@@ -96,9 +96,18 @@
 
 
 
+153 - Dust Ball Expand
+
+161 - Big Dust Ball Expand
 
 
+165 - Small Dust Ball Expand
+166 - Ditto
+170 ditto
+171 ditto
 
+
+175 - big dust ball
 177 - Big Dust Ball
 
 

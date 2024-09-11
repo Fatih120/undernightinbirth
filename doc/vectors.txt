@@ -111,35 +111,57 @@
 110. Like 102
 111. ------
 112. Like 81
-
-
-
-
-
-
+113. Slam Down Face-Up Horizontal
+114. Sliding Standing Pushback
+115. Sliding Standing Pushback Inwards
+116. Sliding Crouching Pushback
+117. Slam Down Face-Up Horizontal
+118. Vertical Fall before Freeze (Londrekia Ice?)
+119. Aerial Freeze Before Small Launch
 120. Aerial Freeze Before Small Launch
 121. Like 120, Pushback(?)
 122. Like 120
 123. ------
-
+124. Freeze Frame before Slump
+125. Freeze Frame before Slump
+126. Long Freeze Frame before Slump
+127. Long Freeze Frame before Slump
+128. Long Freeze Frame before Slump
+129. Long Freeze Frame before Slump
+130. Vertical High Launch
+131. Short Arc Launch
+132. Spinning Linear Launch
+133. Vertical Spinning Launch
 134. ???Quadratic Launch (untech)
 135. ???Quadratic Launch
 136. ???Quadratic Launch, further
 137. Short/Slow Spinning Quadratic Launch, further
 
+139. Tiny Spinning Launch
 
+142. Halfscreen Curved Launch w/ Wallbounce
 
-
+146. Short Tripping Launch
+147. Like 221
+148. Fullscreen High Arc w/ Big Wallbounce
+149. Tiny Launch, Spinning
 150. Blocking Standing Light Pushback
 151. Blocking Standing Medium Pushback
 152. Blocking Standing Heavy Pushback
-
-156. Blocking Standing Pushback TODO compare
-157. Blocking Standing Pushback, further
+153. Blocking Standing Pushback
+154. Blocking Standing Pushback
+155. Blocking Standing Pushback, Shorter?
+//156. Blocking Standing Pushback TODO compare
+//157. Blocking Standing Pushback, further
 
 160. Blocking Crouching Light Pushback
 161. Blocking Crouching Medium Pushback
 162. Blocking Crouching Heavy Pushback
+
+
+163.
+164.
+165.
 
 166. Blocking Crouching Pushback TODO compare
 167. Blocking Crouching Pushback, further
@@ -147,10 +169,33 @@
 170. Blocking Aerial Light Pushback
 171. Blocking Aerial Medium Pushback
 172. Blocking Aerial Heavy Pushback
+173.
+174.
+175.
+176.
+177.
+//178. Mini Aerial Lift Guard
 
+180. aerial flying guard pushback
+181. short aerial guard pushback
+182. blocking guard pushback
+183. crouching guard pushback
+184. standing guard
+185. guard
+186. standing guard
+187. crouching guard
 
-178. Mini Aerial Lift Guard
-
+189. Exaggerated Fast Fullscreen Launch (Faster than Camera)
+190. Minimal Vertical Launch, Super Tiny
+191. Short Launch
+192. Like 191, Spinning
+193. Tiny launch into slump on ground
+194. Very Short Trip
+195. Minimal Launch, Spinning
+196. Like 193, shorter
+197. Short Slump
+198. Slump
+199. Tiny Slump
 200. Immediate Stumble Backwards
 201. Stumble Backwards with Pushback
 202. Immediate Falling into Face-Down
@@ -170,8 +215,6 @@
 216. Small Launch, Tripping (No Wakeup Anim)
 217. Far Vertical Launch, Fall on Side
 218. Like 98
-
-
 219. Spike into down
 220. Pure Vertical High Launch
 221. The Highest Vertical Launch You Will Ever See In Your Life
@@ -183,18 +226,15 @@
 227. Endless, incredibly slow raise that goes to space and reminds you of the one Ducktales song???
 228. Fullscreen high-arced blowback, Wallbounces under halfway
 229. Fullscreen Horizontal Blowback, minimal wallbounce distance
-
 230. Sliding Guard, Linear
 231. Sliding Air Guard, Linear
 232. Sliding Crouching Guard, Linear
 233. Halfscreen Arcing Launch
-
 234. Spike HKD
 235. Darkens, Freezes momentarily before small launch (Seth?)
 236. Like 236, slumps to ground
 237. Slow Spinning Small Launch, Light Wallbounce
-238. 
- Launch Slightly Backwards
+238. Launch Slightly Backwards
 239. Like 238, slightly more momentum
 240. Immediately laying on ground, face-up
 241. Like 240, face-down
