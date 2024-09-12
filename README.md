@@ -1,7 +1,6 @@
 https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb-8385-b3af4233a222
 
 [![Steam](https://img.shields.io/badge/Steam-231f20?logo=steam)](https://steamcommunity.com/id/Fatih120/)
-[![Guilded](https://img.shields.io/badge/Guilded-F5C400?logo=guilded&logoColor=111820)](https://guilded.gg/MoF)
 [![Discord](https://img.shields.io/badge/Discord-220077?logo=discord)](https://discord.com/invite/Cy27FNfQtc)
 
 [<img src="https://img.shields.io/badge/Code-Documentation-brightgreen" height="30">](http://mof.x10.bz/unib)
