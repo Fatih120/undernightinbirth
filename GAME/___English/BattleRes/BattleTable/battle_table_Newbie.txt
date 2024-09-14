@@ -1,0 +1,83 @@
+// Dictates what characters, stages and even music will be fought where for the character in Single Play!
+
+//-----------------------------------------------------------------------------
+// Story Battles
+//-----------------------------------------------------------------------------
+Stage_Table <- //Init
+{
+	List = [],
+};
+
+local tbl00 = 
+{
+	InvalidCharaList = [ "chr001" ], // Banned random selection - Linne will not appear as a matchup
+	StageTable = //Each entry is one stage.
+	[
+		{ enemy = "", bg = -1, bgm = -1 }, // Stage1 - Random Character, with automatic Stage and BGM based on BtlCharaTbl entries.
+		{ enemy = "chr000", bg = -1, bgm = -1 }, // Stage2 - Hyde. Sadly, you cannot use the character name, only the ID.
+		{ enemy = "chr004", bg = 0, bgm = -1 }, // Stage3 - Carmine, on the Rooftop stage.
+		{ enemy = "", bg = -1, bgm = -1 }, // Stage4
+		{ enemy = "", bg = -1, bgm = -1 }, // Stage5
+		{ enemy = "", bg = -1, bgm = -1 }, // Stage6
+		{ enemy = "", bg = -1, bgm = -1 }, // Stage7
+		{ enemy = "", bg = -1, bgm = -1 }, // Stage8
+		{ enemy = "", bg = -1, bgm = -1 }, // Stage9
+		{ enemy = "chr023", bg = 22, bgm = -1 }, // Stage10 - Kuon, on his stage.
+		// You can actually add as many or as little stages as you want by simply adding or removing entries. You don't have to use 10 stages.
+	]
+};
+Stage_Table.List.append( tbl00 );
+
+//-----------------------------------------------------------------------------
+// Score Attack Table
+//-----------------------------------------------------------------------------
+ScoreAttack_Table <- //Init
+{
+	List = [],
+};
+
+local sc_tbl = 
+{
+	InvalidCharaList = [  ], // Banned random selection
+	StageTable = // Characters have a pre-determined selection of characters for Score Attack.
+	[
+		{ enemy = "chr000", bg = -1, bgm = -1, script = 0 }, // Stage1
+		{ enemy = "chr009", bg = -1, bgm = -1, script = 0 }, // Stage2
+		{ enemy = "chr003", bg = -1, bgm = -1, script = 0 }, // Stage3
+		{ enemy = "chr008", bg = -1, bgm = -1, script = 0 }, // Stage4
+		{ enemy = "chr001", bg = -1, bgm = -1, script = 0 }, // Stage5
+		{ enemy = "chr007", bg = -1, bgm = -1, script = 0 }, // Stage6
+		{ enemy = "chr015", bg = -1, bgm = -1, script = 0 }, // Stage7
+		{ enemy = "chr006", bg = -1, bgm = -1, script = 0 }, // Stage8
+		{ enemy = "chr011", bg = -1, bgm = -1, script = 0 }, // Stage9
+		{ enemy = "chr023", bg = 22, bgm = -1, script = 0 }, // Stage10
+	]
+};
+ScoreAttack_Table.List.append( sc_tbl );
+
+//-----------------------------------------------------------------------------
+// Time Attack Table
+//-----------------------------------------------------------------------------
+TimeAttack_Table <- //Init
+{
+	List = [],
+};
+
+local ta_tbl = 
+{
+	InvalidCharaList = [ " ], // Banned random selection
+	StageTable = // Characters have a pre-determined selection of characters for Time Attack.
+	[
+		{ enemy = "chr000", bg = -1, bgm = -1, script = 0 }, // Stage1
+		{ enemy = "chr009", bg = -1, bgm = -1, script = 0 }, // Stage2
+		{ enemy = "chr003", bg = -1, bgm = -1, script = 0 }, // Stage3
+		{ enemy = "chr008", bg = -1, bgm = -1, script = 0 }, // Stage4
+		{ enemy = "chr001", bg = -1, bgm = -1, script = 0 }, // Stage5
+		{ enemy = "chr007", bg = -1, bgm = -1, script = 0 }, // Stage6
+		{ enemy = "chr015", bg = -1, bgm = -1, script = 0 }, // Stage7
+		{ enemy = "chr006", bg = -1, bgm = -1, script = 0 }, // Stage8
+		{ enemy = "chr011", bg = -1, bgm = -1, script = 0 }, // Stage9
+		{ enemy = "chr023", bg = 22, bgm = -1, script = 0 }, // Stage10
+	]
+};
+TimeAttack_Table.List.append( ta_tbl );
