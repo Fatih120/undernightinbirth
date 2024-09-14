@@ -1,0 +1,13 @@
+This file explains what d file was changed and what was indexed within it.
+Replace the files in your d directory with these to be able to "unlock" and edit these specfic files in your workspace.
+
+= oMtaqooqotvvonnpwmq
+BtlCharaTbl_str.ini -> xxx - To allow training mode names
+
+= rcwWiiqjmxpmojs
+stringfile.csv -> xxx - Allows us to use custom string files without touching the regular ones
+
+
+
+For the most part, txt and csv files can be modified without further edits.
+A majority of other directories and file types require dummies, however, such as System which won't apply its csv changes otherwise.
