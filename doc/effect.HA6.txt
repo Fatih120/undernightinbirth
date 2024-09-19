@@ -156,7 +156,7 @@
 281 - Rock Slam
 
 
-
+289 big landing dust cloud wald
 
 292 hit effescts
 
@@ -169,14 +169,53 @@
 
 350 buncha rocks
 
+392 Eff_Hit_Freeze
+393 Eff_Hit_FreezeLimit
+
+426 Ground radial dust impact
+
+429 467 Airborne burst vertical carmine
+
+467 Airborne burst vertical merkava
+468 467 but bigger
+
+470 whirlwind behind gust merkava
 
 
-500 range lots of hit fx
+
+
+
+455 vertical dust kickup wald
+
+
+
+
+
+(500 range lots of hit fx)
+
+500 Single Dust Kick Yuzu
+501 Airborne burst Yuzu
+502 500 but Reverse Yuzu
+
+
+510 IWEX Shine
 
 
 900 "Hit Particle"s?
 
+563 Grp_Hit_DagekiA
+564 Grp_Hit_DagekiB
+565 Grp_Hit_DagekiC
+566 Grp_Hit_DagekiD
+567 Grp_Hit_DagekiBLimit
+568 Grp_Hit_DagekiCLimit
 
+570 Grp_Hit_XDagekiA
+571 Grp_Hit_XDagekiB
+572 Grp_Hit_XDagekiC
+573 Grp_Hit_XDagekiD
+574 Grp_Hit_XDagekiBLimit
+575 Grp_Hit_XDagekiCLimit
 
 970 - TR_Num
 971 - TR_Btn

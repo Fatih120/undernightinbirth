@@ -1,5 +1,5 @@
- 0 . Pushback (Small)
- 1 . Pushback (Shorter)
+ 0 . No Knockback
+ 1 . Pushback (Short)
  2 . Pushback (Slide, Further than 0)
  3 . Pushback (Shorter Slide)
  4 . Pushback (Slightly More)
