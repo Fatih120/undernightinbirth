@@ -22,6 +22,11 @@ C: 90, 3% variance on charge 600-900 (700) | Hitstun: ~89, ~70-90
 Jumps have higher Combopoint Set
 
 
+Hitstun Decay:
+1. Reduction - Can be viewed as a scaling modifier, where the higher is less reduction and lower is more reduction, base 100.
+2. Starting Point - Strength of starter hitstun duration. Higher is more.
+
+
 
 Masking: 
 mask = (1<<X);
@@ -29,3 +34,53 @@ mask = (1<<X);
 1 = B
 2 = C
 3 probably = D
+
+
+Hit Effects:
+0 - Weak punch
+1 - Medium punch
+2 - strong punch
+3 - Weak kick
+4 - med kick
+5 - strong kick
+6 - super punch
+7 - super kick
+8 - old cut
+9 - burn
+10 - freeze
+11 - shock
+12 - NULL
+13 - NULL
+14 - NULL
+15 - Medium Kick
+16 - Double cut
+17 - Super cut (full screen)
+18 - weak cut
+19 - med cut
+20 - strong cut
+21 - Feint cut (diff SE)
+22 - cutst?
+23 - cutwk?
+24 - cutmd?
+25 - byakuya cut
+26 - punchmd?
+27 - punchmd?
+28 - EX Punch Finisher
+29 - EX Kick Finisher
+30 - EX Cut Finisher
+31 - EX F.Cut Finisher
+32+ NULL until otherwise stated
+
+37 - F.Cut Md
+38 - F.Cut Medium
+39 - heavy punch
+40 - hv kick
+
+45 - small pumnch
+46 - beeg punch
+47 - Strong Punch Center
+48 - Strong Punch Center
+49 - Strong Punch Center
+50 - Finisher Big Punch Radial/Center Hit
+51 - Ditto
+52+ unlike other NULL values these dont even have sparks

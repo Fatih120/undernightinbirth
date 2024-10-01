@@ -1,12 +1,11 @@
-Frame counts are relative guesses.
+todo actual frame counts
 Preset Hitstops:
 
-0 - Default 2F
-1 - Like 0, 2F
+0 - None
 2 - Small Hitstop 5F
-3 - Null, 0F
 4 - Medium, 10F
 5 - Heavy Shaking, 20F
 Rest are Null?
 
-TODO Custom? Blockstop, self hitstop? decay? set hitstun?
+Custom Blockstop - how many frames the opponent will freeze on block (overrides set hitstun, no shaking)
+self hitstop? decay? set hitstun?

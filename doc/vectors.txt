@@ -6,7 +6,7 @@
  5 . Pushback (Medium)
  6 . Vertical Knockdown (Immediately Techable on Ground)
  7 . Aerial Rising Knockback
- 8 . Aerial Rising Knockback (Slightly Shorter?)
+ 8 . Aerial Rising Knockback (Short)
  9 . Fullscreen Horizontal Blowback (Wall Bounce)
 10 . High Vertical Launch
 11 . 45Deg Launch
@@ -129,7 +129,7 @@
 128. Long Freeze Frame before Slump
 129. Long Freeze Frame before Slump
 130. Vertical High Launch
-131. Short Arc Launch
+131. Short Arc Launch (This has strong pushback in the corner)
 132. Spinning Linear Launch
 133. Vertical Spinning Launch
 134. ???Quadratic Launch (untech)
