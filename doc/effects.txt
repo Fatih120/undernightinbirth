@@ -1,22 +1,59 @@
 Available in HA6 files using Hantei-chan.
 Allows for several applicable effects that may also be done via *_mv.txt.
+Bitfields in this context is a single value that has multiple "flags" enabled via a single number. You should google this for a better understanding, but the idea is that you can combine several flags by adding up the values of the flags and using that as the parameter.
+For example, if you wanted bit flags #4 and #8 simultaneously on Effect 1, simply add those bit values (4+8) to get 12 as your param value.
 
 NONE
 0
 
 SPAWN PATTERN
 1, patternID
-X, Y, Z, 0, 0, 0
-0, 0, 0, 0, 0, 0
-Z less than 100 = do not be tethered to player - stays in place and disappears independently of player
+X, Y, A, B,  ,  
+ , D,  ,  ,  ,  
 
-//TODO UNK 2
+==== A Bitfield
+1   - Clear when hit / _ObjFlags_EraseParentDamage
+4   - Track parent position / _ObjFlags_ParentMove
+8   - Has hitstop
+16  - X/Y Anchors to middle of screen
+32  - Clear when parent pattern changes / _ObjFlags_EraseParentPatChange
+64  - Doesn't clip to floor / _ObjFlags_NoGround
+128 - X/Y Anchors to floor
 
-//TODO UNK 3
+==== B Bitfield
+2   - Track parent position
+4   - Clear when Thrown
+64  - Does not freeze on screen freezes / _ObjFlags_MoveTimeStop
+128 - Fixed position on screen / _ObjFlags_NoCamera
+256 - X/Y Anchors to enemy
+512 - X/Y middle of stage
+1024- X/Y middle of stage with P1 Muki
 
-//TODO UNK 4
+D = Angle
 
-//TODO UNK 5
+
+SET OPPONENT STATE
+4, patternID
+X, Y, D, A, V, U
+ , F,  ,  ,  ,  
+D = Angle?
+==== A Bitfield
+0   - If param is 0, apply vector # V
+1   - Play pattern (not paused)
+2   - "Reverse" vector direction
+8   - Set: Cannot Hit On-the-Ground
+32  - Set: Hard Knockdown
+V = Vector
+U > 0 = Untech Time
+F = Set Pattern Frame #
+
+//UNK 2
+//UNK 3
+//UNK 4
+//UNK 5
+
+
+
 
 MODIFY ATTACKER
 6 A
@@ -24,6 +61,7 @@ MODIFY ATTACKER
 ? ? ? ? ? ?
 
 A = Type:
+  1 - Screen Shake
   12 - Translation
   255 - System Finalize Signal, for startup/round-end animations
 X Y Rot? 0 0  0
@@ -61,3 +99,7 @@ SET OPPONENT TRANSFORM
 14, patternID
 X, Y, ROT 0 ? 0
 0, 0, 0   0 0 0
+
+
+SPAWN PATTERN (RELATIVE OFFSET)
+101, Offset+- (see Eff1)
