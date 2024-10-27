@@ -12,3 +12,8 @@ Part source ID is the #ID of the Part you made in the Part Editor; fill it in an
 "Sprite ID" becomes the "Select Pattern" ID. Be sure to use "add blend" if its a transparent effect (set to 1)
 
 If you want a colored effect like how a lot of characters have it, set "Use Color" to the COLOR PALETTE INDEX ID for your character (out of the 255 colors)
+
+DDS Files:
+MUST be a multiple, ie the canvas size *should* at least be 512x512 (and divisible by ? needs investigating)
+Feasible Encodings are
+	BC3 (Linear DXT5 / sRGB DX10) - Low Quality + Artifacting
