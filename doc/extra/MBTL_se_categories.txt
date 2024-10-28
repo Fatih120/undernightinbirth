@@ -1,0 +1,14 @@
+空中前ダッシュ = Aerial Dash
+空中後ろダッシュ = Aerial Backdash
+シールド反撃 = Shield Counter
+シールド裏反撃 = Shield Counter (Behind)
+強制開放 = HEAT
+本気を出す = Moon Drive
+ゲージ溜め = Count Charging (2+AB)
+登場ピンチ = Awakening
+空中投げ成功 = Air Throw
+ラストアーク攻撃 = LA Activation
+Mv_Skill_LastArc_Hit_Init = The Actual LA Attack
+Mv_Skill_RapidStdB_FU = Rapid Beat Launcher/3C
+
+Rest of the others are about the same as UNI, refer to doc/se_categories.txt for those.
