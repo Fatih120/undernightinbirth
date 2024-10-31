@@ -246,4 +246,4 @@ These cause additional effects to occur, which may also be done in the character
 
 ### Conditions
 
-Probably unused.
+- Type 3: When the attack's condition is set on a specific frame, it jumps to the pattern in the first parameter but must start with "10". For example, Shiki Tohno's 623B pattern has this condition on frame 9, so with Type 3 and a first parameter of 10255 (pattern 255 with "10" added in front), it jumps to pattern 255.
