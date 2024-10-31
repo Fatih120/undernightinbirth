@@ -1,0 +1,26 @@
+// A function that tracks the opponent's position when called.
+
+local calculateBallAngle = function()
+{
+    local ball_angle = 3200; // Random default. 2500 is 90deg and 5000 is 180 (down)
+    
+    local player = BMvCore.GetPlayerCharaData();
+    local enemy = BMvCore.GetEnemyCharaData();
+    local ppos = BMvTbl.GetPosition();
+    local pmuki = BMvTbl.GetMuki(); // Facing Direction
+	
+    if (enemy.push()) // Hook enemy data
+    {
+        local epos = BMvTbl.GetPosition();
+	enemy.pop(); // Their position is all we need, done with them
+        
+        local yoff = (epos.y - 10000) - ppos.y; // Vertical difference
+        local xoff = epos.x - ppos.x; // Horizontal difference
+        
+        local baller = atan2(yoff, xoff*pmuki) * (180 / PI); // Quick maths to calculate the angle
+        
+        ball_angle = (baller + 90) * (10000 / 360); // 0 is Up -> convert to uni angle
+    }
+
+    return ball_angle;
+}
