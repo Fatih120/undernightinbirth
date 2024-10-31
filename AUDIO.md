@@ -44,6 +44,7 @@ That should be all. Open your game and check to see your new cool song that's re
 017 = Enkidu
 018 = Londrekia
 019 = Tsurugi
+020 = Uzuki
 021 = Mika
 022 = Kaguya
 023 = Kuon
