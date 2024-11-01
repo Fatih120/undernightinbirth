@@ -9,6 +9,7 @@
 空中投げ成功 = Air Throw
 ラストアーク攻撃 = LA Activation
 Mv_Skill_LastArc_Hit_Init = The Actual LA Attack
+Mv_Atk_RapidRelayAtk_FU = Rapid Beat Attack (before Launcher)
 Mv_Skill_RapidStdB_FU = Rapid Beat Launcher/3C
 
 Rest of the others are about the same as UNI, refer to doc/se_categories.txt for those.
