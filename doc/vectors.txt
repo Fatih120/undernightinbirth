@@ -234,7 +234,7 @@
 235. Darkens, Freezes momentarily before small launch (Seth?)
 236. Like 236, slumps to ground
 237. Slow Spinning Small Launch, Light Wallbounce
-238. Launch Slightly Backwards
+238. High Vertical Launch Slightly Backwards
 239. Like 238, slightly more momentum
 240. Immediately laying on ground, face-up
 241. Like 240, face-down
