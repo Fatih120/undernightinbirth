@@ -7,10 +7,10 @@ Fourth number: Positioning
 Opponent character - 0 positions St_Face to the right side of the screen
 Opponent character - 1 positions St_Face to the left side of the screen
 Opponent character - 4 nudges St_Face to a direction
-Opponent character - 3 makes St_Face dissappear for a bit and pushes it to a side of the screen
+Opponent character - 3 makes St_Face disappear for a bit and pushes it to a side of the screen
 Opponent character - 5 makes St_Face completely
 Player character - 2 & 4 position St_Face to the right side of the screen
 Player character - 3 nudges St_Face to a direction
-Player character - 5 makes St_Face dissappear completely
+Player character - 5 makes St_Face disappear completely
 Fifth number: 3 applies a fade-in effect to St_Face (Opponent character)
 Player character - 3 applies a fade-in effect to St_Face with shading
