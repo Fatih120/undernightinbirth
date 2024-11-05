@@ -1,16 +1,16 @@
 \\@CHARA_IN@<1, 8, 9, 0, 1>
 First number: St_Face Shading (Opponent Character - 0 applies shading and sets St_Face to both sides of the screen; Opponent Character - 2 applies shading to both St_Faces)
-(0 has no effect on player character; 2 has the same affect as the above)
+(0 has no effect on player character; 2 has the same affect as the above when done on player character)
 Second number: Character ID
 Third number: St_Face
 Fourth number: Positioning
-Opponent character - 0 positions it right side of the screen
-Opponent character - 1 positions it to the left side of the screen
-Opponent character - 4 nudges it to a direction
-Opponent character - 3 makes it dissappear for a bit and pushes it to a side of the screen
-Opponent character - 5 makes it dissappear completely
-Player character - 2 & 4 position it to the right side of the screen
-Player character - 3 nudges it to a direction
-Player character - 5 makes it dissappear completely
-Fifth number: 3 applies a fade-in effect (Opponent character)
-Player character - 3 applies a fade-in effect with shading
+Opponent character - 0 positions St_Face to the right side of the screen
+Opponent character - 1 positions St_Face to the left side of the screen
+Opponent character - 4 nudges St_Face to a direction
+Opponent character - 3 makes St_Face dissappear for a bit and pushes it to a side of the screen
+Opponent character - 5 makes St_Face completely
+Player character - 2 & 4 position St_Face to the right side of the screen
+Player character - 3 nudges St_Face to a direction
+Player character - 5 makes St_Face dissappear completely
+Fifth number: 3 applies a fade-in effect to St_Face (Opponent character)
+Player character - 3 applies a fade-in effect to St_Face with shading
