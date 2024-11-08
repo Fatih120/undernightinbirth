@@ -1,2 +1,3 @@
-*.txt text=auto eol=crlf
+*.csv text=auto eol=crlf
 *.ini text=auto eol=crlf
+*.txt text=auto eol=crlf
