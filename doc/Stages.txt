@@ -1,0 +1,27 @@
+Stage background assets are located in /bg/.
+
+The 3D model format is FBX, which is probably owned by AutoDesk. It also contains animation data.
+Typically, it should come in three formats - ASCII, Binary, and JSON.
+ASCII is human-readable and comes off like a script. Binary is outputted and not-human-readable, while JSON can be parsed.
+
+However, French Bread did something proprietary. Stages have the files bg.fbx.bin and fbx.bin.json, which should be self-explanatory.
+The current issue is that the Binary and JSON files have a "fbxex" (FBX Export?) header which is atypical for these types of files. Not only that, the file structure for the Binary version is also entirely different compared to a typical model converted or exported with the FBX SDK tools. Moreso, only Training Stage (bg090) has an ASCII file, named bg.fbx. No other stage has a bg.fbx file.
+
+Currently, there is a quick script to export the models of the stages, in /tools/gfx/fbxex2obj.py which will output every object as a OBJ file which you may preview in Blender. Doesn't handle textures or animations.
+
+This file has the following information which is likely not too useful given that the only available converter resources dealing with 2013 and earlier aren't helpful:
+    FBXHeaderVersion: 1003
+    FBXVersion: 6100
+    Creator: "FBX SDK/FBX Plugins version 2009.1"
+    CreationTime: "2013-10-25 15:35:15:041"
+    Creator: "FBX SDK/FBX Plugins build 20080516"
+
+These are the things that are confirmed about loading stage assets:
+- Only bg.fbx is loaded. bg.fbx.json makes no impact on the stage.
+- DDS files are used for textures which are referenced within the FBX.
+- img files are probably meant to be "image" files, but my hunch is that they contain color information and not actual pixel data.
+
+So the roadblock is where we want to edit bg.fbx.bin, but we can't do that until we reverse or find a way to save the data into the format that UNI2 expects. While games like DFCI have the normal FBX files, converting them won't magically get them loaded into UNI2. Until this is figured out, this is a mystery.
+
+TODO - See if the commercial software would want to open these files normally. Hopefully it's just a matter of FB actually using new versions and Training's bg.fbx is a red herring. Looking into Maya / 3DS MAX.
+     - See if the JSONs can be converted to a typical ASCII or Binary file despite the custom nodes, and be able to load them in.
