@@ -1,0 +1,49 @@
+t.Mv_HEAT <-
+{
+    function Init()
+    {
+        BMvTbl.SetLP(0,0); // JustHeated? flag
+        BMvTbl.SetLP(1,0); // DidEX? flag
+    }
+    function FrameUpdate_After()
+    {
+        local player = BMvCore.GetPlayerCharaData();
+        if (player.push() )
+        {
+            local exs = BCMDTbl.GetComboGauge();
+            local gaugeType = BMvEff.Liberate_Get();
+            
+            if( exs==20000 && gaugeType==0 ) // Check for max bar
+            {
+                BMvTbl.SetLP(0,1); // We JustHeated
+                BMvEff.Liberate_Set();
+                BMvEff.Liberate_SetType( _LiberateType_Normal ); 
+            }
+            
+            local EXmvs = Battle_Std.IsMatchMvNameArray( ["Mv_Skill_236EX","Mv_Skill_623EX"] ) // TODO There is probably a better way to do this
+            if( gaugeType==1 && EXmvs )
+            {
+                BMvTbl.SetLP(1,1); // We DidEx
+            }
+            
+            if( exs==0 && BMvTbl.GetLP(0)==1 && BMvTbl.GetLP(1)==0 ) // Check we didnt EX and were out of HEAT
+            {
+                BMvEff.SetSpGauge( { value=5000 } ) 
+                BMvTbl.SetLP(0,0);
+                BMvTbl.SetLP(1,0);
+            }
+        }
+    }
+}
+
+t.Mv_Startup <-
+{
+    function Init_After()
+    {
+        local heater = Battle_Std.CreateObjectEX( { mvname="Mv_HEAT" } );
+        // if( heater.push() )
+        // {
+            // heater.pop();
+        // }        
+    }
+}

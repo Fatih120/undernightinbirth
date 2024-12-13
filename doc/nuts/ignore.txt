@@ -1,3 +1,6 @@
+// IGNORE, YOU SHOULD BE EDITING btl_StdMoveTbl
+
+
 ///////////////////////////////////////////////////////////////////////
 // Random Startup Animation                                          //
 // -- Randomly one of two startup animations to play during a match. //
