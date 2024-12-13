@@ -1,0 +1,88 @@
+When you make a series of skills that run mv code alongside them, you might initially be making several copies of these moves (such as Mv_236A, Mv_236B, Mv_236EX) that are very similar but take up a whole wall of code. If you take a look at vanilla characters, you will see that they rely on a "template" function that consolidates a series of moves that saves space and makes your code cleaner. While using a template is entirely optional, and you can use repeated code as long as it works, cleaner code is always nice and causes less confusion, and you can still be modular with a template.
+
+Here's an empty template:
+
+local maketmpl_YourSpecial = function( param={} ) // Replace YourSpecial with something like the skill's canon name, SkillFireball, 236, etc.
+{
+	local ret_tmpl = {} // Return template
+
+	local mvparam = { // These are a list of parameters for your move so that you can give each "button" a different property.
+	}
+
+	switch( param.type )
+	{
+	case "A": // A input
+		break;
+	case "B": // B input
+		break;
+        case "C": // C input
+                break;
+	case "EX": // C/EX input - You'd probably remove the "C" case entirely.
+		break;
+	}
+
+	ret_tmpl.Init_After <- function() : (mvparam)
+	{
+	    // Your code here
+	}
+		
+	return ret_tmpl; // Return and finish
+
+}
+
+Now you can easily apply the template onto your moves like such:
+
+t.Mv_Skill_236A <- maketmpl_YourSpecial( { type="A" } );
+t.Mv_Skill_236B <- maketmpl_YourSpecial( { type="B" } );
+t.Mv_Skill_236EX <- maketmpl_YourSpecial( { type="EX" } );
+
+As you can see in the "make template" function, you can add the functions that you'd usually have in your other moves, such as Init, FrameUpdate, HitInterrupt, Finalize, etc. and be a part of the template. This is how you code the rest of your moves. To utilize variables based on the input used, we reference (mvparam) and can then use if statements or make single lines of code dynamic.
+
+Here's another example to demonstrate this:
+
+local maketmpl_Skill0202 = function( param={} )
+{
+	local ret_tmpl = {};
+	
+	local mvparam = {
+	    fireball = 0, // Declare the fireball variable
+            isHoldable = 0, // Let's have another for an Increasable move
+	}
+	
+	switch( param.type )
+	{
+	case "A": // Change the fireball variable to use the type we want
+		mvparam.fireball = { mv="Mv_FireBall_0202A", pat="FB_0202A" };
+		break;
+	case "B":
+		mvparam.fireball = { mv="Mv_FireBall_0202B", pat="FB_0202B" };
+                isHoldable = 1; // We can charge this one
+		break;
+	case "EX":
+		mvparam.fireball = { mv="Mv_FireBall_0202EX", pat="FB_0202EX", };
+		break;
+	}
+	
+	ret_tmpl.FrameUpdate_After <- function() : (mvparam) // FrameUpdate_After, checking mvparams
+	{
+		switch( Battle_Std.GetUpdateFrameID() )
+		{
+		case 100: // Once we reach frame ID 100
+			Battle_Std.CreateFireBall( mvparam.fireball ); // Make our fireball depending on the mvparam button
+                        break;
+		}
+
+		if( mvparam.hold ) // Checking if the move is increasable (B version)
+		{
+			Battle_Std.SetPattern_NotHoldButton({ ButtonMask=(1<<1), CheckFrameID=100, EndFrameID=200, SetPattern="236B_IC" } ); // We'll just write direct code for this one instance, and you can add additional code as you see fit.
+		}
+	}
+	
+	return ret_tmpl;
+}
+
+t.Mv_Skill_0202A <- maketmpl_Skill0202( { type="A" } );
+t.Mv_Skill_0202B <- maketmpl_Skill0202( { type="B" } );
+t.Mv_Skill_0202EX <- maketmpl_Skill0202( { type="EX" } );
+
+If you're having issues with your character locking up, be sure of your grammar - the rest of your lines should end with the semi-colon (;) while the values in local variables like mvparam are seperated by commas (,).
