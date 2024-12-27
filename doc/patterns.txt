@@ -288,71 +288,71 @@
 287 - 
 288 - 
 289 - 
-290 - Face-Up - Lying
-291 - Face-Down - Lying 
-292 - Face-Down (Slammed/Heavy)
-293 - Face-Down Wakeup - From not teching (Last part is for DOWNed)
-294 - Face-Up Wakeup - From not teching (Last part is for DOWNed)
-295 - Heavy / DOWNed Face-Down Wakeup (Delay)
-296 - Up after Heavy Down (From 293?)
-297 - Up after Face-Down (From 294?)
-298 - Heavy / DOWN? Wakeup/Free(?) (From 295?) - From not teching (fullscreen bounce?)
-299 - 
-300 - Light Standing Hit 70F
-301 - Light Standing Inwards Hit 70F
-302 - Light Crouching Hit 71F - (its still 70F, like the others following...)
-303 - Medium Standing Hit 73F
-304 - Medium Standing Inwards Hit 73F
-305 - Medium Crouching Hit 73F
-306 - Heavy Standing Hit 78F
-307 - Heavy Standing Inwards Hit 78F
-308 - Heavy Crouching Hit 79F
+290 - Face-Up - Lying (2F)
+291 - Face-Up/Side - Lying (After wallbounce? 2F)
+292 - Face-Down (Slammed/Heavy 2F)
+293 - Face-Up Wakeup / Round lose - (Total 23, 7 frames to get up, dummy frame, 2 frames of lying down face up, dummy frame, second part for DOWN) 
+294 - Face-Down Wakeup / Round Lose - (Same as above, Last part is for DOWNed)
+295 - Heavy (Side) / same as above DOWNed Face-Down Wakeup (Delay)
+296 - To neutral (Pattern 0) from get up (facing up) (1 Frame) (from 293?)
+297 - To neutral (Pattern 0) from get up (facing down) (1 Frame) (from 294?)
+298 - To neutral (Pattern 0) from get up (HKD) (2 Frames)/Free(?) (From 295?) - From not teching (fullscreen bounce?)
+299 - Down(?) (I think this is just final round lose which uses the HKD frame where you're on the ground) (1 Frame)
+300 - Light Standing Hit 70F (2 sprites)
+301 - Light Standing Inwards Hit 70F (2 sprites)
+302 - Light Crouching Hit 71F - (its still 70F, like the others following...) (2 sprites)
+303 - Medium Standing Hit 73F (4 sprites)
+304 - Medium Standing Inwards Hit 73F (4 sprites)
+305 - Medium Crouching Hit 73F (4 sprites)
+306 - Heavy Standing Hit 78F (4 sprites)
+307 - Heavy Standing Inwards Hit 78F (4 sprites) 
+308 - Heavy Crouching Hit 79F (4 sprites)
 309 - 
 310 - 
 311 -
-312 - Tumble Hit 40F - like for some 66b moves
-313 - ?????? Tumble Hit 40F (Air?) (BUTT??) - I still don't know what this is for yet
+312 - Tumble Hit 40F - like for some 66b moves (9 sprites)
+313 - ?????? Tumble Hit 40F (Air?) (BUTT??) - 1F less - I still don't know what this is for yet
 314 - 
 315 - 
 316 - 
 317 - 
 318 - 
 319 - 
-320 - Aerial Hit
+320 - Aerial Hit (6 sprites)
 321 - 
 322 - 
 323 - 
-324 - Air Slam to the Ground
+324 - Air Slam to the Ground (uses only the last 3 frames of 320)
 325 - 
-326 - Fall Forwards / Trip
-327 - Brought to Knees/Crumple/Slump
-328 - Slumping to Ground - (face down)
+326 - Fall Forwards / Trip (5 sprites)
+327 - Brought to Knees/Crumple/Slump (first half, 5 sprites)
+328 - Slumping to Ground - (second half face down, 2 sprites)
 329 - 
-330 - Vertical Blow off Feet
-331 - Blowback (Belly)
-332 - ????? Falling Face-Down - I still don't know what this is for yet
-333 - Spinning Through the Air - (45deg)
-334 - Spinning Vertically
+330 - Vertical Blow off Feet (10 sprites) 
+331 - Blowback (Belly) (4 sprites)
+332 - ????? Falling Face-Down - (4 sprites) (use only last 4 frames of 330)
+333 - Spinning Through the Air - (45deg, 12 sprites total, first 7 frames are spinning, last 5 frames use last 5 frames of 330)
+334 - Spinning Vertically (13 sprites total, first 7 frames are spinning, last 6 frames use last 6 frames of 330)
 335 - 
 336 - 
 337 -
 338 - 
 339 - 
-340 - Wall Bounce - YKabe - Fall Forwards, 2nd part is after a short while of falling YKabe
+340 - Wall Bounce - YKabe - Fall Forwards, F1 is impact, 8 sprites, 2nd part is after a short while of falling YKabe
 341 - 
 342 - 
 343 - 
 344 - 
-345 - ????? Falling Down - I still don't know what this is for yet
-346 - Vertical Fall Down/Spike
+345 - ????? Falling Down - I still don't know what this is for yet  (backwards? 3 sprites)
+346 - Vertical Fall Down/Spike (3 frames, use last 3 frames of 330)
 347 - 
-348 - Crucifixion
+348 - Crucifixion (Orie and Lond IWEX) [apparently that's F1. F2 and F3 have more uses: First frame of 340? and Side Launch (vertical) (Use either of the last 2 frames of 331, but make the character vertical)
 349 - 
-350 - Bumping Face-Up - After 320 hits
-351 - Flipping Face-Down - the backwards fall after 330,334
-352 - Bumping Face-Down - after 326 trip
-353 - Slammed Bounce - after 324 > faceup > facedown
-354 - Slammed Bumping Face-Down
+350 - Landing/Bumping Face-Up - After 320 hits (7 sprites)
+351 - Flipping Face-Down - the backwards fall after 330,334 (6 sprites) [note this is still "aerial"]
+352 - Bumping Face-Down - after 326 trip (3 sprites) [grounded]
+353 - HKD Slammed Bounce - after 324 > faceup > facedown (not grounded, 6 frames)
+354 - HKD Slammed Bumping Face-Down (5 sprites)
 355 - Prone Bounce (On Back) - similar to 353 after certain moves
 356 - Bumping Prone Bounce - from 355, similar to 354
 357 - 
