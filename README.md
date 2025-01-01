@@ -9,6 +9,8 @@ https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb
 # Contents
 
 - [README](README.md)
+- [FAQ](FAQ.md)
+- [GLOSSARY](GLOSSARY.md)
 - [HANTEICHAN](HANTEICHAN.md)
 - [AUDIO](AUDIO.md)
 - [CONTRIBUTING](CONTRIBUTING.md)
