@@ -13,7 +13,7 @@ def process_dds_file(input_file):
     dds_baked = pat_header + dds_custom + PGED
 
     base_name = os.path.basename(input_file)
-    output_file = f"cs_chrXXX.pat"
+    output_file = f"win_ch_NAME.pat"
 
     with open(output_file, 'wb') as f:
         f.write(dds_baked)
