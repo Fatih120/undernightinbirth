@@ -1,0 +1,25 @@
+t.Mv_Startup <- {function Init_After() { local heater = Battle_Std.CreateObjectEX( { mvname="Mv_Obj_DEBUG" } );}}
+
+t.Mv_Obj_DEBUG <-
+{
+    function FrameUpdate_After()
+    {
+        local player = BMvCore.GetPlayerCharaData();
+
+        if (player.push() )
+        {
+		local mvname = BMvTbl.GetMvName(); // GET MV MAIN
+		local mvs = BMvTbl.GetMvStatus();
+		local mvc = mvs.MvCount;
+		local nowpat = mvs.DataPattern;
+		local bst = BtlMvStd.GetBoundStatus();
+		local fls = BtlMvStd.CheckHan6Data();
+		local pat = BMvEff.GetPatternNum();
+		local change_mvname = BMvTbl.ChangeMv_GetMvName(); // GET MV ALT
+		
+		
+            BMvEff.AttackInfoString_Set({ word = nowpat.75 });
+            player.pop();
+        }
+    }
+}

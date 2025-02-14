@@ -1,0 +1,4 @@
+- modify character mission accordingly in grpdat/tutorial/XXX
+- open uni replay exe while game is open in training (dummy is the character you wanna make replays for)
+- start a dummy replay and record it, press start when done
+- export button in the replay tool, move it and rename with *mvp.dat at the end, voila

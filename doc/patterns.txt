@@ -298,15 +298,15 @@
 297 - To neutral (Pattern 0) from get up (facing down) (1 Frame) (from 294?)
 298 - To neutral (Pattern 0) from get up (HKD) (2 Frames)/Free(?) (From 295?) - From not teching (fullscreen bounce?)
 299 - Down(?) (I think this is just final round lose which uses the HKD frame where you're on the ground) (1 Frame)
-300 - Light Standing Hit 70F (2 sprites)
-301 - Light Standing Inwards Hit 70F (2 sprites)
-302 - Light Crouching Hit 71F - (its still 70F, like the others following...) (2 sprites)
-303 - Medium Standing Hit 73F (4 sprites)
-304 - Medium Standing Inwards Hit 73F (4 sprites)
-305 - Medium Crouching Hit 73F (4 sprites)
-306 - Heavy Standing Hit 78F (4 sprites)
-307 - Heavy Standing Inwards Hit 78F (4 sprites) 
-308 - Heavy Crouching Hit 79F (4 sprites)
+300 - Light Standing Hit 70F (2 sprites: 10F + 60F) // For Lights, use a mildly-hit frame and then a frame that looks like it's recovering but not *too* close to the Idle anim frames
+301 - Light Standing Inwards Hit 70F (2 sprites: 10F + 60F)
+302 - Light Crouching Hit 71F - (2 sprites, 71F is misleading: 10F + 60F)
+303 - Medium Standing Hit 73F (4 sprites: 4F + 6F + 3F + 60F) // For Mediums and Heavies, use the heavy-looking hit frame where Frame 2 of 4 is recoiling further back. Frames 3 and 4 should gradually recover, but again not appear overly similar to idle.
+304 - Medium Standing Inwards Hit 73F (4 sprites: 4F + 6F + 3F + 60F)
+305 - Medium Crouching Hit 73F (4 sprites: 4F + 7F + 3F + 60F)
+306 - Heavy Standing Hit 78F (4 sprites: 6F + 9F + 3F + 60F)
+307 - Heavy Standing Inwards Hit 78F (4 sprites: 6F + 9F + 3F + 60F)
+308 - Heavy Crouching Hit 79F (4 sprites: 6F + 10F + 3F + 60F)
 309 - 
 310 - 
 311 -
@@ -353,7 +353,7 @@
 352 - Bumping Face-Down - after 326 trip (3 sprites) [grounded]
 353 - HKD Slammed Bounce - after 324 > faceup > facedown (not grounded, 6 frames)
 354 - HKD Slammed Bumping Face-Down (5 sprites)
-355 - Prone Bounce (On Back) - similar to 353 after certain moves
+355 - Prone Bounce (Flipping On Back) - similar to 353 after certain moves
 356 - Bumping Prone Bounce - from 355, similar to 354
 357 - 
 358 - 

@@ -1,0 +1,5 @@
+//CmdBeforeStdFunc: Processing immediately after a command is entered (before checking whether it will be issued)
+//CmdAfterStdFunc: Processing when the command is established and the check is passed. It does not necessarily occur just by accepting the command.
+//You have two options: "CmdCheck + CmdBeforeStdFunc + CmdAfterStdFunc" or "Check". Check is not used very often.
+// As a replacement for Check, a new flow of "CmdStdCheck + CmdAfterCheck" has been added, but it is an exception and has various inconveniences
+// It is difficult to incorporate into A-tap, and the command establishment processing does not enter properly

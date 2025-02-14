@@ -1,2 +1,0 @@
-# just do "pip install pynput"
-pynput
