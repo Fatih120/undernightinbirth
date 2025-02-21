@@ -222,7 +222,7 @@
 223. Fullscreen Horizontal Blowback with Wallbounce
 224. Like 220 but with a backwards angle
 225. Curving fullscreen arc launc
-226. Same as 225?
+226. Same as 225? (No Bounce Cost)
 227. Endless, incredibly slow raise that goes to space and reminds you of the one Ducktales song???
 228. Fullscreen high-arced blowback, Wallbounces under halfway
 229. Fullscreen Horizontal Blowback, minimal wallbounce distance
@@ -260,5 +260,24 @@
 
 
 270. Slam down into crouching getup
+
+272. (Wal IC - No Bounce Cost
+273. (Kag 214EX - No Counce Cost)
+274. (Ori 214B)
+275. (Hyde 3B)
+276. 
+277.
+278.
+279.
+280. (Ogr 6B)
+281.
+282. (Gor 5C, distance related)
+283. 
+284. 
+285. (Set 623A)
+286. (Elt 6C) ground head hit
+287. (Wag 6B) 
+288. (Mika FF) 
+289. No Bounce Cost
 
 >270 is OUT OF BOUNDS / Crash
