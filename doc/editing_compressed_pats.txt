@@ -1,0 +1,41 @@
+So there are some PAT files that may use encrypted DDSes. These are typically some character pats and System pats,
+especially the UI elements for loading and such.
+
+You may be able to open character DDSes in Pani Edit and export them there. You usually cannot open all other types of pats at all.
+You will have to use some more hex surgery as you may have already done before.
+
+The process can be very simple, however.
+
+0) Of course, de-index the /d/ file reference for the pat you want to edit.
+
+1) Extract the DDS files of the pat you are trying to edit, preferably using the script in the repo to get all of them at once.
+
+2) Use the ddsconvert tools to decompress the DDS you want to edit.
+
+3) Modify the DDS, and then save using DXT5 format (BC3 Linear). Use default settings. Yes, the quality will die, but alas.
+
+4) Open Pani Edit, and immediately go to Edit > Texture Manager and import your DDS file to that first slot.
+
+5) Close and SAVE the pat file as a test file, naming it whatever you want.
+
+6) Open the pat you want to edit (have you backed-up?) along with the test pat you're going to inject using a hex editor. View the test pat first.
+You will notice the file is rather short as all you did was add the image with some PAT header info.
+You will want to find and select a good portion before the DDS header.
+The part you're looking for : "VEEDPGST....PGNM"
+This is the DDS page that Pani Edit has saved. Select STARTING from PGNM (inclusive). You will select all the way to the END of the file, UNTIL PGED (inclusive.
+Do NOT include _END at the very end of the file.
+Copy the HEX data after confirming you have selected from PGNM <...> PGED (pagename to pageend).
+
+7) Go back to the file you want to edit, and find the DDS page in which you want to overwrite the DDS data. Try searching for all instances of DDS | if you haven't mapped it out yet.
+Once you've found the DDS, go just a bit further back in the data to find the similar PGST....PGNM header.
+You will be selecting from PGNM once again and selecting all the way to the matching instance of PGED.
+Paste, which will certainly change the filesize. Do NOT insert, replace.
+You have replaced the DDS page without altering the PGST.... which is the Page Start Number ID.
+
+8) Save. Start the game and cross your fingers.
+
+If it works, congratulations. Do all other edits this way, organizing your files in order to help yourself.
+
+If there are horrible visual artifacts, you saved the wrong format type.
+
+If there is a crash, I'm sorry, but try again. This engine is horrible.
