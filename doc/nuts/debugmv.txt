@@ -8,17 +8,17 @@ t.Mv_Obj_DEBUG <-
 
         if (player.push() )
         {
-		local mvname = BMvTbl.GetMvName(); // GET MV MAIN
-		local mvs = BMvTbl.GetMvStatus();
-		local mvc = mvs.MvCount;
-		local nowpat = mvs.DataPattern;
-		local bst = BtlMvStd.GetBoundStatus();
-		local fls = BtlMvStd.CheckHan6Data();
-		local pat = BMvEff.GetPatternNum();
-		local change_mvname = BMvTbl.ChangeMv_GetMvName(); // GET MV ALT
+			local mvname = BMvTbl.GetMvName(); // GET MV MAIN
+			local mvs = BMvTbl.GetMvStatus();
+			local mvc = mvs.MvCount; // frame
+			local nowpat = mvs.DataPattern; // pattern no
+			local bst = BtlMvStd.GetBoundStatus();
+			local fls = BtlMvStd.CheckHan6Data();
+			local pat = BMvEff.GetPatternNum();
+			local change_mvname = BMvTbl.ChangeMv_GetMvName(); // GET MV ALT
 		
 		
-            BMvEff.AttackInfoString_Set({ word = nowpat.75 });
+            BMvEff.AttackInfoString_Set({ word = nowpat });
             player.pop();
         }
     }

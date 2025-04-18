@@ -73,9 +73,29 @@ X Y Rot? 0 0  0
 
 SPAWN SYSTEM EFFECT
 8, effect
-X, Y, ?, ?, ?, ?
-?, ?, ?, ?, ?, ?
+X, Y, A, B, ?, ?
+?, D, ?, ?, ?, ?
 Effects found in data/effect.HA6, refer to effect.HA6.txt
+
+==== A Bitfield
+1   - Clear when hit / _ObjFlags_EraseParentDamage
+4   - Track parent position / _ObjFlags_ParentMove
+8   - Has hitstop
+16  - X/Y Anchors to middle of screen
+32  - Clear when parent pattern changes / _ObjFlags_EraseParentPatChange
+64  - Doesn't clip to floor / _ObjFlags_NoGround
+128 - X/Y Anchors to floor
+
+==== B Bitfield
+2   - Track parent position
+4   - Clear when Thrown
+64  - Does not freeze on screen freezes / _ObjFlags_MoveTimeStop
+128 - Fixed position on screen / _ObjFlags_NoCamera
+256 - X/Y Anchors to enemy
+512 - X/Y middle of stage
+1024- X/Y middle of stage with P1 Muki
+
+D = Angle
 
 
 

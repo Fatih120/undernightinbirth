@@ -1,3 +1,4 @@
+_ClearFlag_ChangeFrame
 0083FF9C - device or resource busy
 0083FFB4 - invalid argument
 0083FFC8 - no such process
