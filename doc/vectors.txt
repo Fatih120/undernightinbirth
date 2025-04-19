@@ -61,9 +61,9 @@
 60 . Standing Light Pushback
 61 . Standing Medium Pushback
 62 . Standing Heavy Pushback
-63 . Standing Pushback, Inwards Pose
-64 . Standing Harder Pushback, Inwards Pose
-65 . Standing Harder Pushback, Inwards Pose, Further
+63 . Standing Light Pushback, Inwards
+64 . Standing Medium Pushback, Inwards
+65 . Standing Heavy Pushback, Inwards
 66 . Crouching Light Pushback
 67 . Crouching Medium Pushback
 68 . Crouching Heavy Pushback
@@ -71,7 +71,7 @@
 70 . Standing Pushback with Slide
 71 . Standing Harder Pushback with Slide
 72 . Standing Harder Pushback with Slide, Farther
-73 . Standing Pushback with Slide, Sideways Pose
+73 . Standing Pushback with Slide, Inwards
 74 .
 75 .
 76 . Medium Crouching Pushback with Slide
