@@ -25,13 +25,13 @@
 024 - 
 025 -
 026 - 
-027 - Air Recovery? - GUkemi_0
+027 - Generic Recovery? - GUkemi_0
 028 - 
 029 - 
 030 - Neutral/Forward Recovery Stand-up - GUkemi_N
 031 - Backwards Recovery Stand-Up - GUkemi_B
 032 - Air Recovery - DUkemi_0
-033 - Back Recovery (Air) - GUkemi_4
+033 - Backwards Air Recovery - GUkemi_4
 034 - 
 035 - Jumping Forward
 036 - Jumping Neutral

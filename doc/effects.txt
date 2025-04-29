@@ -5,6 +5,10 @@ For example, if you wanted bit flags #4 and #8 simultaneously on Effect 1, simpl
 
 NONE
 0
+UNKNOWN?
+2 3 5 7 10 11 12 13 ???
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 SPAWN PATTERN
 1, patternID
@@ -31,6 +35,7 @@ X, Y, A, B,  ,
 
 D = Angle
 
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 SET OPPONENT STATE
 4, patternID
@@ -47,29 +52,20 @@ V = Vector
 U > 0 = Untech Time
 F = Set Pattern Frame #
 
-//UNK 2
-//UNK 3
-//UNK 4
-//UNK 5
-
-
-
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 MODIFY ATTACKER
-6 A
-? ? ? ? ? ?
-? ? ? ? ? ?
+6, A
+X, Y, ? ? ? ?
+?, ?, ? ? ? ?
 
+X and Y will translate by a certain amount
 A = Type:
   1 - Screen Shake
   12 - Translation
-  255 - System Finalize Signal, for startup/round-end animations
-X Y Rot? 0 0  0
-0 0 0    0 1? 0
-  255 - Designate End-of-Pattern (For things like Victory, Startup Patterns)
+  255 - Designate End-of-Pattern (A system signal for things like Victory, Startup Patterns that will call UI elements [victory message])
 
-
-//TODO UNK 7
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 SPAWN SYSTEM EFFECT
 8, effect
@@ -97,29 +93,43 @@ Effects found in data/effect.HA6, refer to effect.HA6.txt
 
 D = Angle
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 PLAY SFX
 9, Y
 X, 0 0 0 0 0
 0, 0 0 0 0 0
 X = ID
-Y = Filepath (x_se_list.txt)
+Y = Filepath (check character's x_se_list.txt)
 (Refer to se/normal_se_list.txt)
 
-//TODO UNK 10
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
-//TODO UNK 11
-
-//TODO UNK 12
-
-//TODO UNK 13
-
-SET OPPONENT TRANSFORM
+SET OPPONENT CAPTURE STATE
 14, patternID
-X, Y, ROT 0 ? 0
-0, 0, 0   0 0 0
+X, Y, D, T, V, F
+P, 0, 0, 0, 0, 0
 
+The opponent will NOT animate by default. If not successfully released (throw release), UNI2 will crash.
+patternID = Opponent will take on this pattern. Typically in the 300 damage series
+D = Angle
+T = 0 don't animate (for keyframing throw anims) 1 animate (releasing/play pattern+vector)
+V = Vector ID (optional)
+
+F = Animation Frame # within patternID (which frame to set enemy to if T=0?)
+P = Position Transfer?
+  1 - Attacker to Enemy
+  2 - Enemy to Attacker
+
+(forgot where this one goes i saw yuzu do it(?))
+A = Anchor Type:
+  0 - Default, X/Y is relative to attacker origin
+  1 - Relative to Special Box 10's top-left value
+  2 - Relative to Special Box 11's top-left value
+  3 - Relative to Special Box 12's top-left value
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 SPAWN PATTERN (RELATIVE OFFSET)
-101, Offset+- (see Eff1)
+101, Pattern (Relative +-)
+(see Effect Type 1)
