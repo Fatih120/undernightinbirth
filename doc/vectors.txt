@@ -38,21 +38,21 @@
 37 . Like 35?
 38 . Stumbles Backwards + Fall, Normal
 39 . Like 38? (Natural?)
-40 . Spikes down 45Deg and bounces once with effect, meant for Aerial
+40 . Slams down 45Deg and bounces once
 41 . Like 40, 15Deg
 42 . Like 40, Vertical Spike
 43 . Like 40?
 44 . ------
 45 . Cubic Aerial Horizontal Shove before Vertical fall
 46 . Like 45, almost Fullscreen
-47 . Incredibly High Vertical Launch
+47 . Incredibly High Vertical Launch (on ground its an angled wallbounce??)
 48 . Like 42?
 49 . Like 42? Diff Angle?
 50 . Crouching Sliding Pushback
 51 . Crouching Sliding Pushback, Further
 52 . Crouching Sliding Pushback, Even Further
 53 . ------
-54 . Knocked Back with little lift
+54 . Aerial knockback, some horizontal distance
 55 . Launched 45Deg linearly before falling, wallbounce
 56 . Like 55, some hitstun? Goes shorter, no WB
 57 . Like 56, larger angle
@@ -200,7 +200,7 @@
 201. Stumble Backwards with Pushback
 202. Immediate Falling into Face-Down
 203. Aerial Spike Knockdown
-204. Aerial Spike with Vertical Bounce
+204. Aerial Spike with high Vertical Bounce
 205. Crouching Shove Stumble Backwards (No Anim?)
 206. Like 204 with Miniscule Movement(?)
 207. Blocking Standing Medium Pushback
@@ -278,6 +278,6 @@
 286. (Elt 6C) ground head hit
 287. (Wag 6B) 
 288. (Mika FF) 
-289. No Bounce Cost
+289. Vertical Spike + Bounce, No Bounce Cost
 
 >270 is OUT OF BOUNDS / Crash
