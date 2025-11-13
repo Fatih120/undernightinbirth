@@ -49,4 +49,6 @@ That should be all. Open your game and check to see your new cool song that's re
 022 = Kaguya
 023 = Kuon
 024 = Phonon
+025 = Ogre
+026 = Izumi
 ```
