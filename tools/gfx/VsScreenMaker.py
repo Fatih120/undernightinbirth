@@ -25,8 +25,7 @@ def process_dds_file(input_file):
         f.write(dds_baked)
 
     print(f"vs screen pat saved as: {output_file}")
-    print(f"make sure your DDS was BC3 DX10+\n")
-    nput('press enter to close\n')
+    input(f"make sure your DDS was BC3 DX10+\n")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -37,6 +36,7 @@ if __name__ == "__main__":
     input_file = sys.argv[1]
     if not os.path.exists(input_file):
         print(f"Error: File '{input_file}' not found.")
+        input('press enter to close\n')
         sys.exit(1)
 
     process_dds_file(input_file)

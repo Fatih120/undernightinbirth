@@ -95,7 +95,7 @@
 94 . Fullscreen Horizontal Blowback, Wallbounces Back Halfway
 95 . Fullscreen Angled Blowback, Wallbounces Back Nearly Fullscreen
 96 . Fullscreen Rolling Tumble, Bounces Once
-97 . ------
+97 . Fast Far Horizontal Knockback (1.32)
 98 . 20Deg Linear Spike
 99 . Larger Angle Lift, bounces once
 100. Crouching Sliding Backwards Tumble, No Effect
@@ -180,8 +180,8 @@
 181. short aerial guard pushback
 182. blocking guard pushback
 183. crouching guard pushback
-184. standing guard
-185. guard
+184. standing guard (more +)
+185. crouching guard (more +)
 186. standing guard
 187. crouching guard
 
@@ -235,7 +235,7 @@
 236. Like 236, slumps to ground
 237. Slow Spinning Small Launch, Light Wallbounce
 238. High Vertical Launch Slightly Backwards
-239. Like 238, slightly more momentum
+239. Like 238, slightly more momentum (Untechable?)
 240. Immediately laying on ground, face-up
 241. Like 240, face-down
 242. Like 240, alt, on side
@@ -279,5 +279,29 @@
 287. (Wag 6B) 
 288. (Mika FF) 
 289. Vertical Spike + Bounce, No Bounce Cost
+290. Straight Horizontal Knockback Wallbounce, No Bounce Cost (1.32 for 290+)
+291. Same as 290?
+292. Very Soft Aerial Knockback
+293. Darken + Aerial Freeze before Knockback
+294. Same as 293, Longer Freeze (Super)
+295. Small Diagonal Spinning Launch
+296. Short/Medium High Curved Launch
+297. Large Blocking Standing Pushback
+298. Large Blocking Crouching Pushback
+299. Large Blocking Aerial Pushback
+300. Short Inwards Pushback
+301. Knockback Slump
+302.
+303.
+304.
+305.
+306. Launch with IMMEDIATE Bounce effect?
+307. Strong Fast Curving Launch, Wallbounce
+308. Std Block
+309. Cro Block
+310. Std Block
+311. Cro Block
+312. Aerial Falling Block
+
 
 >270 is OUT OF BOUNDS / Crash
