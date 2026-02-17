@@ -18,7 +18,7 @@ https://github.com/Fatih120/undernightinbirth/assets/18276369/c48ec7f8-b4d9-47eb
 
 ## Video Series
 
-[![PRIMER](https://img.youtube.com/vi/uV6T4MC23zo/maxresdefault.jpg)](https://www.youtube.com/watch?v=uV6T4MC23zo&list=PL28iAGlfgcCXCme17jHTZQDqbEAgG7Igx)
+[![PRIMER](https://thumbnails.odycdn.com/optimize/s:390:220/quality:85/plain/https://thumbs.odycdn.com/945685ecd67e627d1fb86b7b92d9b35a.webp)](https://odysee.com/@Fatih:e/UNI2-Modding-Primer_uV6T4MC23zo:5)
 
 # Primer on Modding UNI2
 
